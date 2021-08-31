@@ -4,7 +4,7 @@ var initConfigDefine = {
     'start': 'yes',
     'auto_like': 'yes',
     'auto_subscribe': 'yes',
-    'account': '',
+    'account': window.YTaccounts,
     'data': [],
     'keyapi': 'youtube_b17ed4461a38b6ddf4d5d4c2878e24df',
     'ipserver': '',
@@ -14,8 +14,8 @@ var initConfigDefine = {
     'autoremovecache': 'yes',
     'timechangeemail': 120,
     'search_bing': 'no',
-    'search_google': 'no',
+    'search_google': 'yes',
     'website': window.YTwebsite,
     'videos': window.YTvideos,
     'comments': window.YTcomments
-}
+};
