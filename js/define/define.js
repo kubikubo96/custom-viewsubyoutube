@@ -15,7 +15,7 @@ var initConfigDefine = {
     'timechangeemail': 120,
     'search_bing': 'no',
     'search_google': 'no',
-    'website': websites,
-    'videos': videos,
-    'comments': comments
+    'website': window.YTwebsite,
+    'videos': window.YTvideos,
+    'comments': window.YTcomments
 }

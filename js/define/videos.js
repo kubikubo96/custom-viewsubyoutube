@@ -1,4 +1,4 @@
-var videos = [
+window.YTvideos = [
   { id: 'bryYEtMWCA8', title: 'Chàng Rể Vô Song - Tập 1 - (Chương 1 - 20) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: '900', time_sub: '300' },
   { id: 'nVAAzuJsGrA', title: 'Chàng Rể Vô Song - Tập 2 - (Chương 21 - 40) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: '900', time_sub: '500' },
   { id: 'FIyS5QZb0iI', title: 'Chàng Rể Vô Song - Tập 3 - (Chương 41 - 60) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: '900', time_sub: '500' },

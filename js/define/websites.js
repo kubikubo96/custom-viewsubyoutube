@@ -1,4 +1,4 @@
-var websites = [
+window.YTwebsites = [
   'https://dantri.com.vn/',
   'https://www.youtube.com/',
   'https://vnexpress.net/',
