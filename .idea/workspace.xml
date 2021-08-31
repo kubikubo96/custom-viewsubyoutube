@@ -5,11 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/background/background.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/background/background.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/content/content.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/content/content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/define/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/define/comments.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/define/define.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/define/define.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/define/videos.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/define/videos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/define/websites.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/define/websites.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/popup/popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popup/popup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +57,7 @@
       <workItem from="1627903279830" duration="2306000" />
       <workItem from="1630431132475" duration="5649000" />
       <workItem from="1630436894179" duration="607000" />
-      <workItem from="1630438661121" duration="2176000" />
+      <workItem from="1630438661121" duration="11158000" />
     </task>
     <servers />
   </component>
@@ -75,10 +73,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="636" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1630438661827" />
-    <state x="646" y="241" width="758" height="568" key="find.popup" timestamp="1630436784958">
+    <state x="646" y="241" width="758" height="568" key="find.popup" timestamp="1630449149231">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="646" y="241" width="758" height="568" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1630436784958" />
+    <state x="646" y="241" width="758" height="568" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1630449149231" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1630440910306">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

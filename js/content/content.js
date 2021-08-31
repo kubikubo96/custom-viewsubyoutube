@@ -37,10 +37,9 @@ jQuery(document).ready(function ($) {
     //Get Account
     chrome.storage.sync.get('config', function (result) {
         config = result.config;
-        console.log("START: chrome.storage.sync content.js/40");
-        console.log("config:");
+        console.log("chrome.storage.sync content.js/40");
+        console.log("initConfigDefine:");
         console.log(config);
-        console.log("START: chrome.storage.sync content.js/40");
         if (config.start == 'yes') {
             aDomain = initConfigDefine.website;
 
@@ -226,8 +225,11 @@ jQuery(document).ready(function ($) {
 
             //Google
             if (sDomain == sGo && config.search_google == 'yes') {
+                //@todo @custom search google
+                console.log("Start: Search Google content.js/230");
                 flagRundom = false;
                 var checkSearch = getUrlParameter('q');
+                console.log("checkSearch:" + checkSearch);
                 if (checkSearch == undefined) {
                     var check = random_item([1, 2, 1]);
                     if (check == 1) {
@@ -245,7 +247,7 @@ jQuery(document).ready(function ($) {
                             var aTitle = document.title.split(' - ');
                             sTitle = aTitle[0];
                         }
-
+                        console.log("sTitle:" + sTitle);
                         if (sTitle == undefined || sTitle == '') {
                             window.location.href = 'https://' + sGo + '/';
                         }
@@ -259,7 +261,7 @@ jQuery(document).ready(function ($) {
                                     }
                                 });
                             }
-
+                            console.log("sVideoID:" + sVideoID);
                             if (sVideoID != '') {
                                 autoScrollBrowser();
 
@@ -271,9 +273,22 @@ jQuery(document).ready(function ($) {
                                     var flag = false;
 
                                     //Tab Tất Cả
-                                    if ($(".y8AWGd a").length) {
+                                    /*if ($(".y8AWGd a").length) {
                                         $(".y8AWGd a").each(function (index, value) {
                                             var idVideoGet = youtube_parser($(this).attr('href'));
+                                            console.log("Tab Tất Cả idVideoGet:" + idVideoGet);
+                                            if (idVideoGet != false && idVideoGet == sVideoID) {
+                                                flag = true;
+                                                $(this)[0].click();
+                                                return;
+                                            }
+                                        });
+                                    }*/
+                                    //@todo @custom search videos google
+                                    if($('#search a').length) {
+                                        $("#search a").each(function () {
+                                            var idVideoGet = youtube_parser($(this).attr('href'));
+                                            console.log("Tab Tất Cả idVideoGet:" + idVideoGet);
                                             if (idVideoGet != false && idVideoGet == sVideoID) {
                                                 flag = true;
                                                 $(this)[0].click();
@@ -286,6 +301,7 @@ jQuery(document).ready(function ($) {
                                     if ($(".yuRUbf > a").length) {
                                         $(".yuRUbf > a").each(function (index, value) {
                                             var idVideoGet = youtube_parser($(this).attr('href'));
+                                            console.log("Tab Video idVideoGet:" + idVideoGet);
                                             if (idVideoGet != false && idVideoGet == sVideoID) {
                                                 flag = true;
                                                 $(this)[0].click();
@@ -294,9 +310,11 @@ jQuery(document).ready(function ($) {
                                         });
                                     }
 
+                                    //Tab other
                                     if ($("#rso .rc .r > a").length) {
                                         $("#rso .rc .r > a").each(function (index, value) {
                                             var idVideoGet = youtube_parser($(this).attr('href'));
+                                            console.log("Tab other idVideoGet:" + idVideoGet);
                                             if (idVideoGet != false && idVideoGet == sVideoID) {
                                                 flag = true;
                                                 $(this)[0].click();
@@ -334,6 +352,7 @@ jQuery(document).ready(function ($) {
                         }
                     }, 1500);
                 }
+                console.log("End: Search Google content.js/339");
             }
 
             //Bing
@@ -445,6 +464,12 @@ jQuery(document).ready(function ($) {
                         }, 2500);
                     }
                 }
+            }
+
+            // @todo @custom Redirect Link Nếu không phải login google, search google, search bing, youtube
+            if(sDomain != sAc && sDomain != sYB && sDomain != sGo && sDomain != sBi) {
+                console.log("@todo @custom Redirect Link Nếu không phải login google, search google, search bing, youtube");
+                autoRedrectRandomLink();
             }
         }
     });
@@ -954,6 +979,8 @@ jQuery(document).ready(function ($) {
                                         });
 
                                         chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+                                            console.log("View lần n:");
+                                            console.log(message);
                                             if (message.task == "getInfoVideoResult") {
                                                 if (message.status == 'success') {
                                                     aVideoID = message.data;
@@ -962,23 +989,34 @@ jQuery(document).ready(function ($) {
                                         });
 
                                         setTimeout(function () {
+                                            console.log("View lần n:");
+                                            console.log("aVideoID:" + aVideoID);
                                             if (aVideoID == '') {
+                                                console.log("after: if (aVideoID == '') {");
                                                 initConfig.views = 1;
                                                 chrome.storage.sync.set({
                                                     config: initConfig
                                                 });
+                                                console.log("after: chrome.storage.sync.set({");
 
+                                                console.log(random_item(aDomain));
+                                                console.log("start: RELOAD PAGE");
                                                 window.location.href = random_item(aDomain);
+                                                console.log("end: RELOAD PAGE");
                                             } else {
                                                 var flagCheck = false;
                                                 $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
                                                     var idVideo = youtube_parser($(this).attr('href'));
+                                                    console.log("View lần n:");
+                                                    console.log("idVideo:" + idVideo);
+                                                    console.log("sVideoID:" + sVideoID);
                                                     if (idVideo != false && idVideo != sVideoID) {
                                                         if ($.inArray(idVideo, aVideoID) !== -1) {
                                                             flagCheck = true;
 
                                                             $(this)[0].click();
 
+                                                            console.log("SUCCESS VIEW N");
                                                             viewXem();
 
                                                             return false;
@@ -987,12 +1025,17 @@ jQuery(document).ready(function ($) {
                                                 });
 
                                                 setTimeout(function () {
+                                                    console.log("View lần n:");
+                                                    console.log("flagCheck:" + flagCheck);
                                                     if (flagCheck == false) {
                                                         initConfig.views = 1;
                                                         chrome.storage.sync.set({
                                                             config: initConfig
                                                         });
 
+                                                        console.log("RELOAD PAGE");
+                                                        console.log(aDomain);
+                                                        console.log(random_item(aDomain));
                                                         window.location.href = random_item(aDomain);
                                                     }
                                                 }, 10000);
@@ -1038,8 +1081,9 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    //Auto RedrectRandomLink
+    //Auto Redirect RandomLink
     function autoRedrectRandomLink(lbl = '', sClass = '') {
+        console.log("autoRedrectRandomLink");
         var counter = randomIntFromRange(10, 40);
 
         if (counter > 10) {
