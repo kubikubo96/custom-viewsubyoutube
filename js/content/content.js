@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-    var aDomain = [];
+    var aDomain = initConfigDefine.website;
     var config = '';
 
     var sYB = 'www.youtube.com';
@@ -37,9 +37,12 @@ jQuery(document).ready(function ($) {
     //Get Account
     chrome.storage.sync.get('config', function (result) {
         config = result.config;
-        console.log("START: ");
+        console.log("START: chrome.storage.sync content.js/40");
+        console.log("config:");
+        console.log(config);
+        console.log("START: chrome.storage.sync content.js/40");
         if (config.start == 'yes') {
-            aDomain = config.website;
+            aDomain = initConfigDefine.website;
 
             var flagLogin = false;
             var flagRundom = true;
@@ -222,7 +225,7 @@ jQuery(document).ready(function ($) {
             }
 
             //Google
-            if (sDomain == sGo && config.user_pro == true && config.search_google == 'yes') {
+            if (sDomain == sGo && config.search_google == 'yes') {
                 flagRundom = false;
                 var checkSearch = getUrlParameter('q');
                 if (checkSearch == undefined) {
@@ -334,7 +337,7 @@ jQuery(document).ready(function ($) {
             }
 
             //Bing
-            if (sDomain == sBi && config.user_pro == true && config.search_bing == 'yes') {
+            if (sDomain == sBi && config.search_bing == 'yes') {
                 flagRundom = false;
                 var checkSearch = getUrlParameter('q');
                 if (checkSearch == undefined) {
@@ -441,18 +444,6 @@ jQuery(document).ready(function ($) {
                             }, 1500);
                         }, 2500);
                     }
-                }
-            }
-
-            if (flagRundom == true) {
-                if (config.user_pro == false) {
-                    if (sDomain == sBi || sDomain == sGo) {
-                        autoRedrectRandomLink('Bản Tool Pro mới hỗ trợ tìm kiếm Google và Bing. Tự động chuyển hướng trang sau: ', 'error');
-                    } else {
-                        autoRedrectRandomLink();
-                    }
-                } else {
-                    autoRedrectRandomLink();
                 }
             }
         }
@@ -1236,7 +1227,7 @@ jQuery(document).ready(function ($) {
                 return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
             }
         }
-    };
+    }
 
     //Get ID Video from url
     function youtube_parser(url) {

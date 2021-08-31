@@ -1,4 +1,4 @@
-window.YTvideos = [
+window.YTcomments = [
   "Cảm ơn b", "Hay lắm", "truyện hay", "thanks ad", "nghe ok", "Cảm ơn b nhé", "Giọng hay lắm ad", "đã xem", "like", "yêu rồi nha", "tạm dc",
   "đã thích", "thích phết", "like", "cảm ơ nhé", "thích phết", "THANKS A! A ĐỌC HAY LÉM", "Tập mới đâu rồi bạn", "Hay", "Ra tiếp anh ơi", "Ủng hộ Tùng",
   "xíu em đi like máy tập củ cho ah", "Nghe rồi giờ nghe lại vẫn hay", "Ủng hộ anh", "Giọng nhanh , rõ ràng, cảm xúc ", "Thaks nhìu",

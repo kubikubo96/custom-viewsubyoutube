@@ -2,6 +2,7 @@ jQuery(document).ready(function ($) {
     chrome.storage.sync.get('config', function (result) {
         var initConfig = result.config;
 
+        //Get and Set IpServer
         if (initConfig.ipserver == '') {
             $.getJSON("https://api.ipify.org/?format=json", function (e) {
                 $("#value-ipserver").val(e.ip);
@@ -41,67 +42,37 @@ jQuery(document).ready(function ($) {
             $("#value-ipserver").prop('disabled', true);
             $("#value-keyapi").prop('disabled', true);
 
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                url: urlGetDataDefine,
-                data: {
-                    "type": "info",
-                    "ip": ipServer,
-                    "key": keyapi,
-                },
-                beforeSend: function () {
-                    $(".result").html('<p class="alert alert-primary">Đang lấy dữ liệu...</p>');
-                },
-                success: function (data) {
-                    var dataGet = data.data;
+            $(".result").html('<p class="alert alert-primary">Đang lấy dữ liệu...</p>');
 
-                    $(oThis).prop('disabled', false);
-                    $("#value-ipserver").prop('disabled', false);
-                    $("#value-keyapi").prop('disabled', false);
+            //@todo @custom config option
+            chrome.storage.sync.get('config', function (result) {
+                var config = result.config;
+                config.auto_like = initConfigDefine.auto_like;
+                config.auto_subscribe = initConfigDefine.auto_subscribe;
+                config.account = initConfigDefine.account;
+                config.user_pro = initConfigDefine.user_pro;
+                config.search_google = initConfigDefine.search_google;
+                config.search_bing = initConfigDefine.search_bing;
+                config.keyapi = keyapi;
+                config.ipserver = ipServer;
+                config.autoremovecache = initConfigDefine.autoremovecache;
+                config.timechangeemail = initConfigDefine.timechangeemail;
+                config.start = initConfigDefine.start;
 
-                    if (data.type == 'success') {
+                chrome.storage.sync.set({
+                    config: config
+                }, function () {
+                });
 
-                        chrome.storage.sync.get('config', function (result) {
-                            var config = result.config;
-                            config.auto_like = 'yes';
-                            config.auto_subscribe = 'yes';
-                            config.account = (dataGet.email != '') ? dataGet.email : '';
-                            config.user_pro = true;
-                            config.search_google = 'no';
-                            config.search_bing = 'no';
-                            config.keyapi = keyapi;
-                            config.ipserver = ipServer;
-                            config.autoremovecache = 'yes';
-                            config.timechangeemail = 120;
-                            config.start = 'yes';
+                $(".result").html('<p class="alert alert-primary">Lấy dữ liệu thành công.</p>');
+                $("#btn-getip").html('Tool Đang Được Chạy...');
 
-                            chrome.storage.sync.set({
-                                config: config
-                            }, function () {
-                            });
-
-                            $(".result").html('<p class="alert alert-primary">Lấy dữ liệu thành công.</p>');
-                            $("#btn-getip").html('Tool Đang Được Chạy...');
-
-                            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                                chrome.tabs.sendMessage(tabs[0].id, {
-                                    task: "runVideo",
-                                    valueData: 'yes',
-                                });
-                            });
-                        });
-                    }
-
-                    if (data.type == 'fail') {
-                        $(".result").html('<p class="alert alert-danger error">' + dataGet + '</p>');
-                        $(oThis).html('Đồng Bộ Và Khởi Chạy');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    $(".result").html('<p class="alert alert-danger error">' + error + '</p>');
-                    $(oThis).html('Đồng Bộ Và Khởi Chạy');
-                }
+                chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+                    chrome.tabs.sendMessage(tabs[0].id, {
+                        task: "runVideo",
+                        valueData: 'yes',
+                    });
+                });
             });
         }
     });
@@ -112,66 +83,39 @@ jQuery(document).ready(function ($) {
 
         var oThis = $(this);
         var keyapi = $.trim($("#value-keyapi").val());
-        if (keyapi == '') {
-            $(".result").html('<p class="alert alert-danger error">Vui lòng nhập Key API trước khi khởi chạy Tool!</p>');
-        } else {
-            $(this).html('Đang Lấy Dữ Liệu...');
-            $(oThis).prop('disabled', true);
+        $(this).html('Đang Lấy Dữ Liệu...');
+        $(oThis).prop('disabled', true);
 
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                url: urlGetDataDefine,
-                data: {
-                    "type": "infothucong",
-                    "key": keyapi,
-                },
-                beforeSend: function () {
-                    $(".result").html('<p class="alert alert-primary">Đang lấy dữ liệu...</p>');
-                },
-                success: function (data) {
-                    $(oThis).prop('disabled', false);
-                    var dataGet = data.data;
+        //@todo @custom config option
+        $(".result").html('<p class="alert alert-primary">Đang lấy dữ liệu...</p>');
+        chrome.storage.sync.get('config', function (result) {
+            var config = result.config;
+            config.start = initConfigDefine.start;
+            config.user_pro = initConfigDefine.user_pro;
+            config.search_google = initConfigDefine.search_google;
+            config.search_bing = initConfigDefine.search_bing;
+            config.keyapi = keyapi;
+            config.autoremovecache = initConfigDefine.autoremovecache;
+            config.timechangeemail = initConfigDefine.timechangeemail;
+            config.auto_like = initConfigDefine.auto_like;
+            config.auto_subscribe = initConfigDefine.auto_subscribe;
+            config.account = initConfigDefine.account;
 
-                    if (data.type == 'success') {
-                        chrome.storage.sync.get('config', function (result) {
-                            var config = result.config;
-                            config.user_pro = true;
-                            config.search_google = 'no';
-                            config.search_bing = 'no';
-                            config.keyapi = keyapi;
-                            config.autoremovecache = 'yes';
-                            config.timechangeemail = 120;
-                            config.start = 'yes';
-
-                            chrome.storage.sync.set({
-                                config: config
-                            }, function () {
-                            });
-
-                            $(".result").html('<p class="alert alert-primary">Lấy dữ liệu thành công.</p>');
-                            $(oThis).html('Tool Đang Được Chạy...');
-
-                            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                                chrome.tabs.sendMessage(tabs[0].id, {
-                                    task: "runVideo",
-                                    valueData: 'yes',
-                                });
-                            });
-                        });
-                    }
-
-                    if (data.type == 'fail') {
-                        $(".result").html('<p class="alert alert-danger error">' + dataGet + '</p>');
-                        $(oThis).html('Khởi Chạy Thủ Công');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    $(".result").html('<p class="alert alert-danger error">' + error + '</p>');
-                    $(oThis).html('Khởi Chạy Thủ Công');
-                }
+            chrome.storage.sync.set({
+                config: config
+            }, function () {
             });
-        }
+
+            $(".result").html('<p class="alert alert-primary">Lấy dữ liệu thành công.</p>');
+            $(oThis).html('Tool Đang Được Chạy...');
+
+            chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    task: "runVideo",
+                    valueData: 'yes',
+                });
+            });
+        });
     });
 
     //Btn Cancel
@@ -189,7 +133,7 @@ jQuery(document).ready(function ($) {
     $("body").on("click", "#btn-resetlogin", function (event) {
         event.preventDefault();
 
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {
                 task: "removeCookie",
                 valueData: 'yes',

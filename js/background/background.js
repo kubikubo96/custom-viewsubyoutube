@@ -30,41 +30,18 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'setDisabledEmailResult';
 
-                            $.ajax({
-                                type: 'post',
-                                dataType: 'json',
-                                url: urlGetDataDefine,
-                                data: {
-                                    'type': 'disableemail',
-                                    'email': message.email,
-                                    'vps': result.config.ipserver,
-                                    'key': result.config.keyapi,
-                                },
-                                success: function (data) {
-                                    var dataGet = data.data;
-                                    if (data.type == 'success') {
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            status: 'success',
-                                            data: dataGet
-                                        });
-                                    }
+                            //@todo @custom handle export email die
+                            var emailDied = {
+                                'type': 'disableemail',
+                                'email': message.email,
+                                'vps': result.config.ipserver,
+                                'key': result.config.keyapi,
+                            };
 
-                                    if (data.type == 'error') {
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            status: 'error',
-                                            data: dataGet
-                                        });
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    chrome.tabs.sendMessage(tabCurrent, {
-                                        task: sTask,
-                                        value: error,
-                                        status: 'fail'
-                                    });
-                                }
+                            chrome.tabs.sendMessage(tabCurrent, {
+                                task: sTask,
+                                status: 'success',
+                                data: emailDied
                             });
                         });
                     }
@@ -99,39 +76,11 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                     if (nTime == nTitleGet || flag == true) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getDataVideoCommentResult';
-
-                            $.ajax({
-                                type: 'post',
-                                dataType: 'json',
-                                url: urlGetDataDefine,
-                                data: {
-                                    "type": "comment",
-                                    "key": result.config.keyapi,
-                                    "video": sVideo,
-                                },
-                                success: function (data) {
-                                    var dataGet = data.data;
-                                    if (data.type == 'success') {
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            status: 'success',
-                                            data: dataGet
-                                        });
-                                    } else {
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            status: 'success',
-                                            data: initConfigDefine.comments[Math.floor(Math.random() * initConfigDefine.comments.length)]
-                                        });
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    chrome.tabs.sendMessage(tabCurrent, {
-                                        task: sTask,
-                                        status: 'success',
-                                        data: initConfigDefine.comments[Math.floor(Math.random() * initConfigDefine.comments.length)]
-                                    });
-                                }
+                            //@todo @custom Get data comment video
+                            chrome.tabs.sendMessage(tabCurrent, {
+                                task: sTask,
+                                status: 'success',
+                                data: random_item(initConfigDefine.comments)
                             });
                         });
                     }
@@ -140,7 +89,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         });
     }
 
-    //Get data video @custom
+    //@todo @custom Get data video
     if (message.task == "getDataVideo") {
         var nTime = parseInt(message.time);
 
@@ -161,119 +110,57 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         }
                     }
 
+                    //@todo @custom call api to get value define
                     if (nTime == nTitleGet || flag == true) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getDataVideoResult';
-                            var config = result.config;
+                            //@todo @custom call api to get value define
+                            chrome.storage.sync.get('config', function () {
+                                var initConfig = initConfigDefine;
+                                var videoUse = random_item(initConfigDefine.videos);
+                                window.TTvideoUse = videoUse;
+                                var sVideoID = videoUse.id;
+                                var sTitle = videoUse.title;
+                                var duration = videoUse.time;         //Thoi gian xem
+                                var nTimeSub = videoUse.time_sub;     //Thoi gian sub
 
-                            if (config.keyapi != '' && config.keyapi != null) {
-                                //@custom call api to get value define
-                                chrome.storage.sync.get('config', function () {
-                                    var initConfig = initConfigDefine;
-                                    var videoUse = initConfigDefine.videos[Math.floor(Math.random() * initConfigDefine.videos.length)];
-                                    var sVideoID = videoUse.id;
-                                    var sTitle = videoUse.title;
-                                    var duration = videoUse.time;         //Thoi gian xem
-                                    var nTimeSub = videoUse.time_sub;     //Thoi gian sub
+                                var flag = false;
+                                if (initConfig.data != '') {
+                                    $.each(initConfig.data, function (key, val) {
+                                        if (val.chromeTab == tabCurrent) {
+                                            flag = true;
 
-                                    initConfig.user_pro = true;
-                                    initConfig.search_bing = 'no';
-                                    initConfig.search_google = 'no';
-                                    initConfig.autoremovecache = 'yes';
-                                    initConfig.timechangeemail = 'yes';
-                                    initConfig.views = 1;
+                                            initConfig.data[key].videoID = sVideoID;
+                                            initConfig.data[key].videoTitle = sTitle;
+                                            initConfig.data[key].duration = duration;
+                                            initConfig.data[key].timeSub = nTimeSub;
+                                            initConfig.data[key].chromeTab = tabCurrent;
+                                        }
+                                    });
+                                }
 
-                                    var flag = false;
-                                    if (initConfig.data != '') {
-                                        $.each(initConfig.data, function (key, val) {
-                                            if (val.chromeTab == tabCurrent) {
-                                                flag = true;
-
-                                                initConfig.data[key].videoID = sVideoID;
-                                                initConfig.data[key].videoTitle = sTitle;
-                                                initConfig.data[key].duration = duration;
-                                                initConfig.data[key].timeSub = nTimeSub;
-                                                initConfig.data[key].chromeTab = tabCurrent;
-                                            }
+                                setTimeout(function () {
+                                    if (flag == false) {
+                                        initConfig.data.push({
+                                            videoID: sVideoID,
+                                            videoTitle: sTitle,
+                                            duration: duration,
+                                            timeSub: nTimeSub,
+                                            chromeTab: tabCurrent,
                                         });
                                     }
 
-                                    setTimeout(function () {
-                                        if (flag == false) {
-                                            initConfig.data.push({
-                                                videoID: sVideoID,
-                                                videoTitle: sTitle,
-                                                duration: duration,
-                                                timeSub: nTimeSub,
-                                                chromeTab: tabCurrent,
-                                            });
-                                        }
+                                    chrome.storage.sync.set({
+                                        config: initConfig
+                                    });
 
-                                        chrome.storage.sync.set({
-                                            config: initConfig
-                                        });
-
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            value: sTitle,
-                                            status: 'success',
-                                        });
-                                    }, 1000);
-                                });
-                            } else {
-                                chrome.storage.sync.get('config', function () {
-                                    var initConfig = initConfigDefine;
-                                    var videoUse = initConfigDefine.videos[Math.floor(Math.random() * initConfigDefine.videos.length)];
-                                    var sVideoID = videoUse.id;
-                                    var sTitle = videoUse.title;
-                                    var duration = videoUse.time;         //Thoi gian xem
-                                    var nTimeSub = videoUse.time_sub;     //Thoi gian sub
-
-                                    initConfig.user_pro = true;
-                                    initConfig.search_bing = 'no';
-                                    initConfig.search_google = 'no';
-                                    initConfig.autoremovecache = 'yes';
-                                    initConfig.timechangeemail = 'yes';
-                                    initConfig.views = 1;
-
-                                    var flag = false;
-                                    if (initConfig.data != '') {
-                                        $.each(initConfig.data, function (key, val) {
-                                            if (val.chromeTab == tabCurrent) {
-                                                flag = true;
-
-                                                initConfig.data[key].videoID = sVideoID;
-                                                initConfig.data[key].videoTitle = sTitle;
-                                                initConfig.data[key].duration = duration;
-                                                initConfig.data[key].timeSub = nTimeSub;
-                                                initConfig.data[key].chromeTab = tabCurrent;
-                                            }
-                                        });
-                                    }
-
-                                    setTimeout(function () {
-                                        if (flag == false) {
-                                            initConfig.data.push({
-                                                videoID: sVideoID,
-                                                videoTitle: sTitle,
-                                                duration: duration,
-                                                timeSub: nTimeSub,
-                                                chromeTab: tabCurrent,
-                                            });
-                                        }
-
-                                        chrome.storage.sync.set({
-                                            config: initConfig
-                                        });
-
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            value: sTitle,
-                                            status: 'success',
-                                        });
-                                    }, 1000);
-                                });
-                            }
+                                    chrome.tabs.sendMessage(tabCurrent, {
+                                        task: sTask,
+                                        value: sTitle,
+                                        status: 'success',
+                                    });
+                                }, 1000);
+                            });
                         });
                     }
                 }
@@ -305,38 +192,12 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                     if (nTime == nTitleGet || flag == true) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getInfoVideoResult';
-                            var config = result.config;
 
-                            $.ajax({
-                                type: 'post',
-                                dataType: 'json',
-                                url: urlGetDataDefine,
-                                data: {
-                                    "type": "infovideo",
-                                    "key": config.keyapi,
-                                    "videoid": message.videoID
-                                },
-                                success: function (data) {
-                                    if (data.type == 'success') {
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            status: 'success',
-                                            data: data.data
-                                        });
-                                    } else {
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            status: 'error',
-                                        });
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    chrome.tabs.sendMessage(tabCurrent, {
-                                        task: sTask,
-                                        value: error,
-                                        status: 'error'
-                                    });
-                                }
+                            //@todo @custom getInfoVideoResult
+                            chrome.tabs.sendMessage(tabCurrent, {
+                                task: sTask,
+                                status: 'success',
+                                data: window.TTvideoUse.id
                             });
                         });
                     }
@@ -369,39 +230,18 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                     if (nTime == nTitleGet || flag == true) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getInfoVideoDetailResult';
-                            var config = result.config;
 
-                            $.ajax({
-                                type: 'post',
-                                dataType: 'json',
-                                url: urlGetDataDefine,
-                                data: {
-                                    "type": "infovideodetail",
-                                    "key": config.keyapi,
-                                    "videoid": message.videoID
-                                },
-                                success: function (data) {
-                                    if (data.type == 'success') {
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            status: 'success',
-                                            data: data.data
-                                        });
-                                    } else {
-                                        chrome.tabs.sendMessage(tabCurrent, {
-                                            task: sTask,
-                                            status: 'success',
-                                            data: data.data
-                                        });
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    chrome.tabs.sendMessage(tabCurrent, {
-                                        task: sTask,
-                                        status: 'success',
-                                        data: data.data
-                                    });
-                                }
+                            //@todo @custom getInfoVideoDetailResult
+                            //aDataVideo.time ,aDataVideo.time_sub;
+                            var timeInfoDetail = {
+                                time: window.time_view,
+                                time_sub: window.time_sub,
+                            };
+
+                            chrome.tabs.sendMessage(tabCurrent, {
+                                task: sTask,
+                                status: 'success',
+                                data: timeInfoDetail
                             });
                         });
                     }
@@ -431,7 +271,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                     }
 
                     if (nTime == nTitleGet || flag == true) {
-                        var callback = function () { };
+                        var callback = function () {
+                        };
                         var millisecondsPerWeek = 1000 * 60 * 60 * 24 * 7;
                         var oneWeekAgo = (new Date()).getTime() - millisecondsPerWeek;
                         chrome.browsingData.remove({
@@ -457,3 +298,27 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         });
     }
 });
+
+//Random Array
+function random_item(items) {
+    return items[Math.floor(Math.random() * items.length)];
+}
+
+function getUrlParameter(sParam, sUrl = '') {
+    if (sUrl != '') {
+        var sPageURL = sUrl;
+    } else {
+        var sPageURL = window.location.search.substring(1);
+    }
+    var sURLVariables = sPageURL.split('&');
+    var sParameterName;
+    var i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
