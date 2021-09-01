@@ -43,7 +43,7 @@ let comments = [
     "xíu em đi like máy tập củ cho ah", "Nghe rồi giờ nghe lại vẫn hay", "Ủng hộ anh", "Giọng nhanh , rõ ràng, cảm xúc ", "Thaks nhìu",
     "Mình nghe nhiều người đọc chuyện rồi mà nghe anh này đọc cảm thấy tiết tấu quá tuyệt vời.", "Giọng khá hay, đọc rõ",
     "Nghe lại thấy dọng a vẫn hay phết..a mà kể thêm truyện ma thì hay biết mấy", "A đọc truyện kiểu giống nhất niệm vĩnh hằng đi a..vừa vui vữa đã",
-    "Nghe rồi giờ nghe lại...vẫn hay", "Nay đem Hắc Tây Du ra nghe lạ", "Giờ nghe lại ủng hộ bác ha", "Nếu ko chắc nửa tháng mới được nghe 1 tập của bác mất",
+    "Nghe rồi giờ nghe lại...vẫn hay", "Giờ nghe lại ủng hộ bác ha", "Nếu ko chắc nửa tháng mới được nghe 1 tập của bác mất",
     "Nghe lại vẫn hay", "Bây h nghe lại thì ký ức những ngày vui vẻ của thất công tử", "Giọng MC hay", "Hay quá bạn ơi", "mong bạn ra nhiều truyện",
     "Thật sự cảm động vì tình cảm của từng nhân vật", "Truyện hay thật", "truyện rất hay. cảm ơn MC. rất mong MC đọc", "a đọc vẫn hay nhất",
     "Giọng đọc to,rõ và truyền cảm.", "Bạn đọc hay lắm nhưng chèn nhạc nhỏ thôi nhé. Thanks", "Bộ này mà đc chuyển thể lên phim thì tuyệt vời",
@@ -115,12 +115,16 @@ let websites = [
     'https://www.youtube.com/',
     'https://www.youtube.com/',
     'https://www.youtube.com/',
+    'https://www.youtube.com/',
     'https://www.google.com/',
     'https://www.google.com/',
     'https://www.google.com/',
+    'https://www.bing.com/',
+    'https://www.bing.com/',
+    'https://www.bing.com/',
 ]
 
-websNews = random_arr(websNews, 10);
+websNews = random_arr(websNews, 20);
 websites = websites.concat(websNews);
 comments = random_arr(comments, 20);
 
@@ -135,9 +139,9 @@ var initConfigDefine = {
     'pause': 'yes',
     'autoremovecache': 'yes',
     'timechangeemail': 120,
-    'search_bing': 'no',
+    'search_bing': 'yes',
     'search_google': 'yes',
-    'account': '',
+    'account': window.dfAccounts,
     'time_view': dnt,
     'time_sub': dnts,
     'websites': websites,
