@@ -44,20 +44,20 @@ jQuery(document).ready(function ($) {
 
             $(".result").html('<p class="alert alert-primary">Đang lấy dữ liệu...</p>');
 
-            //@todo @custom config option
+            //@todo custom  config option
             chrome.storage.sync.get('config', function (result) {
                 var config = result.config;
-                config.auto_like = initConfigDefine.auto_like;
-                config.auto_subscribe = initConfigDefine.auto_subscribe;
-                config.account = initConfigDefine.account;
-                config.user_pro = initConfigDefine.user_pro;
-                config.search_google = initConfigDefine.search_google;
-                config.search_bing = initConfigDefine.search_bing;
+                config.start = "yes";
+                config.auto_like = config.auto_like;
+                config.auto_subscribe = config.auto_subscribe;
+                config.auto_comment = config.auto_comment;
+                config.account = config.account;
+                config.search_google = config.search_google;
+                config.search_bing = config.search_bing;
                 config.keyapi = keyapi;
                 config.ipserver = ipServer;
-                config.autoremovecache = initConfigDefine.autoremovecache;
-                config.timechangeemail = initConfigDefine.timechangeemail;
-                config.start = initConfigDefine.start;
+                config.autoremovecache = config.autoremovecache;
+                config.timechangeemail = config.timechangeemail;
 
                 chrome.storage.sync.set({
                     config: config
@@ -67,7 +67,7 @@ jQuery(document).ready(function ($) {
                 $(".result").html('<p class="alert alert-primary">Lấy dữ liệu thành công.</p>');
                 $("#btn-getip").html('Tool Đang Được Chạy...');
 
-                chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.sendMessage(tabs[0].id, {
                         task: "runVideo",
                         valueData: 'yes',
@@ -86,20 +86,20 @@ jQuery(document).ready(function ($) {
         $(this).html('Đang Lấy Dữ Liệu...');
         $(oThis).prop('disabled', true);
 
-        //@todo @custom config option
+        //@todo custom  config option
         $(".result").html('<p class="alert alert-primary">Đang lấy dữ liệu...</p>');
         chrome.storage.sync.get('config', function (result) {
             var config = result.config;
-            config.start = initConfigDefine.start;
-            config.user_pro = initConfigDefine.user_pro;
-            config.search_google = initConfigDefine.search_google;
-            config.search_bing = initConfigDefine.search_bing;
+            config.start = 'yes';
+            config.search_google = config.search_google;
+            config.search_bing = config.search_bing;
             config.keyapi = keyapi;
-            config.autoremovecache = initConfigDefine.autoremovecache;
-            config.timechangeemail = initConfigDefine.timechangeemail;
-            config.auto_like = initConfigDefine.auto_like;
-            config.auto_subscribe = initConfigDefine.auto_subscribe;
-            config.account = initConfigDefine.account;
+            config.autoremovecache = config.autoremovecache;
+            config.timechangeemail = config.timechangeemail;
+            config.auto_like = config.auto_like;
+            config.auto_subscribe = config.auto_subscribe;
+            config.auto_comment = config.auto_comment;
+            config.account = config.account;
 
             chrome.storage.sync.set({
                 config: config
@@ -109,7 +109,7 @@ jQuery(document).ready(function ($) {
             $(".result").html('<p class="alert alert-primary">Lấy dữ liệu thành công.</p>');
             $(oThis).html('Tool Đang Được Chạy...');
 
-            chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.sendMessage(tabs[0].id, {
                     task: "runVideo",
                     valueData: 'yes',
@@ -133,7 +133,7 @@ jQuery(document).ready(function ($) {
     $("body").on("click", "#btn-resetlogin", function (event) {
         event.preventDefault();
 
-        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {
                 task: "removeCookie",
                 valueData: 'yes',

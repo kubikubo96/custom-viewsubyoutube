@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-    var aDomain = initConfigDefine.website;
+    var aDomain = initConfigDefine.websites;
     var config = '';
 
     var sYB = 'www.youtube.com';
@@ -37,11 +37,12 @@ jQuery(document).ready(function ($) {
     //Get Account
     chrome.storage.sync.get('config', function (result) {
         config = result.config;
-        console.log("chrome.storage.sync content.js/40");
-        console.log("initConfigDefine:");
+        console.log("Get Account In chrome.storage.sync content.js/40");
+        console.log("config:");
         console.log(config);
-        if (config.start == 'yes') {
-            aDomain = initConfigDefine.website;
+        console.log("*******************");
+        if (config.start == "yes") {
+            aDomain = initConfigDefine.websites;
 
             var flagLogin = false;
             var flagRundom = true;
@@ -55,17 +56,15 @@ jQuery(document).ready(function ($) {
                 var flag = false;
 
                 var sAccount = random_item(config.account.split(/\r?\n/));
+                console.log("Get Account");
+                console.log("sAccount:" + sAccount);
+                console.log("flag:" + flag);
+                console.log("************************");
                 if (sAccount != '') {
                     var aAccount = sAccount.split('|');
                     var sEmail = $.trim(aAccount[0]);
                     var sPassWord = $.trim(aAccount[1]);
                     var sEmailRecovery = $.trim(aAccount[2]);
-                    console.log("Start: In chrome.storage.sync.get First");
-                    console.log(aAccount);
-                    console.log("sEmail:" + sEmail);
-                    console.log("sPassWord:" + sPassWord);
-                    console.log("sEmailRecovery:" + sEmailRecovery);
-                    console.log("End: In chrome.storage.sync.get First");
                     if (sEmail != '' && sPassWord != '') {
                         flag = true;
                         chrome.storage.sync.get('config', function (result) {
@@ -77,6 +76,7 @@ jQuery(document).ready(function ($) {
                             });
                         });
 
+                        console.log("Run fun auToLoginAccount");
                         auToLoginAccount(sEmail, sPassWord, sEmailRecovery);
                     }
                 }
@@ -88,6 +88,8 @@ jQuery(document).ready(function ($) {
 
             //Youtube
             if (sDomain == sYB) {
+                console.log("IN DOMAIN YOUTUBE");
+                console.log("*****************");
                 flagRundom = false;
                 var checkHome = true;
 
@@ -117,6 +119,8 @@ jQuery(document).ready(function ($) {
 
                 /*================= START Find video =================*/
                 var checkSearch = getUrlParameter('search_query');
+                console.log("Start find video in YOUTUBE");
+                console.log("***********************");
                 if (checkSearch != undefined && checkSearch != '') {
                     checkHome = false;
 
@@ -178,6 +182,8 @@ jQuery(document).ready(function ($) {
                         flagLogin = true;
 
                         if (config.autoremovecache == 'yes') {
+                            console.log("In clear cache trình duyệt");
+                            console.log("***********************");
                             $('p.extension-show-info').remove();
                             var sHtml = '<p class="extension-show-info">Đang xóa cache trình duyệt...</p>';
                             $(sHtml).appendTo('body');
@@ -225,8 +231,8 @@ jQuery(document).ready(function ($) {
 
             //Google
             if (sDomain == sGo && config.search_google == 'yes') {
-                //@todo @custom search google
-                console.log("Start: Search Google content.js/230");
+                //@todo custom  search google
+                console.log("IN Domain Google");
                 flagRundom = false;
                 var checkSearch = getUrlParameter('q');
                 console.log("checkSearch:" + checkSearch);
@@ -284,8 +290,11 @@ jQuery(document).ready(function ($) {
                                             }
                                         });
                                     }*/
-                                    //@todo @custom search videos google
-                                    if($('#search a').length) {
+                                    console.log("Start find video in Google");
+                                    console.log("***********************");
+                                    //@todo custom  search videos google
+                                    //Tab Tất Cả
+                                    if ($('#search a').length) {
                                         $("#search a").each(function () {
                                             var idVideoGet = youtube_parser($(this).attr('href'));
                                             console.log("Tab Tất Cả idVideoGet:" + idVideoGet);
@@ -352,7 +361,6 @@ jQuery(document).ready(function ($) {
                         }
                     }, 1500);
                 }
-                console.log("End: Search Google content.js/339");
             }
 
             //Bing
@@ -466,9 +474,7 @@ jQuery(document).ready(function ($) {
                 }
             }
 
-            // @todo @custom Redirect Link Nếu không phải login google, search google, search bing, youtube
-            if(sDomain != sAc && sDomain != sYB && sDomain != sGo && sDomain != sBi) {
-                console.log("@todo @custom Redirect Link Nếu không phải login google, search google, search bing, youtube");
+            if (flagRundom == true) {
                 autoRedrectRandomLink();
             }
         }
@@ -476,6 +482,9 @@ jQuery(document).ready(function ($) {
 
     //Auto search
     function autoSearchData(sDomain = '') {
+        console.log("In Fun autoSearchData");
+        console.log("sDomain:" + sDomain);
+        console.log("*********************");
         $('p.extension-show-info').remove();
         var sHtml = '<p class="extension-show-info">Đang lấy video để xem...</p>';
         $(sHtml).appendTo('body');
@@ -571,8 +580,12 @@ jQuery(document).ready(function ($) {
 
     //Login account
     function auToLoginAccount(sEmail = '', sPassWord = '', sEmailRecovery = '') {
+        console.log("In Fun auToLoginAccount");
+        console.log("Email: " + sEmail);
+        console.log("PassWord: " + sPassWord);
+        console.log("EmailRecovery: " + sEmailRecovery);
+        console.log("***************");
         var flagCheck = false;
-
         $('p.extension-show-info').remove();
         var sHtml = '<p class="extension-show-info">' +
             '- Email: ' + sEmail + '<br>' +
@@ -702,6 +715,13 @@ jQuery(document).ready(function ($) {
 
     //AuToLoginAccountChange
     function auToLoginAccountChange(sEmail = '', sPassWord = '', sEmailRecovery = '', checkLinkCurrent = '') {
+        console.log("In Fun auToLoginAccountChange");
+        console.log("Email: " + sEmail);
+        console.log("PassWord: " + sPassWord);
+        console.log("EmailRecovery: " + sEmailRecovery);
+        console.log("checkLinkCurrent: " + checkLinkCurrent);
+        console.log("***************");
+
         var nTimeChangeAccount = 0;
 
         $('p.extension-show-info error').remove();
@@ -740,6 +760,9 @@ jQuery(document).ready(function ($) {
 
     //send Email Disabled
     function sendEmailDisabled(sEmail = '') {
+        console.log("In Fun sendEmailDisabled");
+        console.log("Email:" + sEmail);
+        console.log("********************");
         //Remove Email In Chrome
         chrome.storage.sync.get('config', function (result) {
             var initConfig = result.config;
@@ -780,6 +803,8 @@ jQuery(document).ready(function ($) {
 
     //View videos
     function viewXem(nDuration = '') {
+        console.log("In Fun viewXem");
+        console.log("******************");
         if (readCookie('vtyoutubeaccounts') == null) {
             createCookie('vtyoutubeaccounts', 'yes', config.timechangeemail);
         } else {
@@ -797,6 +822,8 @@ jQuery(document).ready(function ($) {
 
                         //Xem Video Lan 2 trở đi
                         if (nDuration == '') {
+                            console.log("Xem Video Lần 2 trở đi");
+                            console.log("******************");
                             if (sVideoID != false && sVideoID != '') {
                                 var date = new Date();
                                 var seconds = Math.round(date.getTime() / 1000);
@@ -828,13 +855,10 @@ jQuery(document).ready(function ($) {
                             //Xem Video Lan 1
                             if (initConfig.account != '') {
 
-                                console.log("In Fun viewXem Xem Video Lan 1");
-                                console.log("Start: In Fun viewXem => autoLike");
+                                console.log("Start: Xem Video Lần 1");
                                 autoLike();
-                                console.log("End: In Fun viewXem => autoLike");
-                                console.log("=================================================================");
-                                console.log("*                    *                                          *");
-                                console.log("=================================================================");
+                                console.log("Run autoLike in Fun viewXem");
+                                console.log('*************************');
 
                                 if (sVideoID != false && sVideoID != '') {
                                     $.each(initConfig.data, function (key, val) {
@@ -845,30 +869,28 @@ jQuery(document).ready(function ($) {
                                 }
 
                                 setTimeout(function () {
-                                    console.log("Start:In Fun viewXem => autoSubscribe");
-                                    console.log(nTimeSub);
+                                    console.log("Run autoSubscribe in Fun viewXem");
+                                    console.log("timesub:" + nTimeSub);
+                                    console.log("******************");
                                     autoSubscribe(nTimeSub);
-                                    console.log("End:In Fun viewXem => autoSubscribe");
 
                                 }, 2500);
-                                console.log("=================================================================");
-                                console.log("*                    *                                          *");
-                                console.log("=================================================================");
-
 
                                 setTimeout(function () {
-                                    console.log("Start:In Fun viewXem => getComment");
+                                    console.log("Run getComment in Fun viewXem");
+                                    console.log("******************");
                                     getComment();
-                                    console.log("End:In Fun viewXem => getComment");
                                 }, randomIntFromRange(60000, 130000));
-                                console.log("=================================================================");
-                                console.log("*                    *                                          *");
-                                console.log("=================================================================");
+
+                                console.log("End: Xem Video Lần 1");
+                                console.log("******************");
                             }
                         }
 
                         //Play Video
                         setTimeout(function () {
+                            console.log("Play Video");
+                            console.log("******************");
                             var aLabel = ['Phát (k)', 'Play (k)'];
                             var sLabel = $("button.ytp-play-button").attr("aria-label");
 
@@ -886,50 +908,41 @@ jQuery(document).ready(function ($) {
                                     nDuration = aDataVideo.time;
 
                                     if (initConfig.account != '') {
-                                        console.log("Start:In Fun viewXem => autoSubscribe");
                                         if (aDataVideo.time_sub > 0) {
                                             nTimeSub = aDataVideo.time_sub;
                                         }
-                                        console.log(nTimeSub);
+                                        console.log("Run autoSubscribe in Fun viewXem");
+                                        console.log("timesub:" + nTimeSub);
+                                        console.log("******************");
                                         autoSubscribe(nTimeSub);
-                                        console.log("Start:In Fun viewXem => autoSubscribe");
 
 
-                                        console.log("=================================================================");
-                                        console.log("*                    *                                          *");
-                                        console.log("=================================================================");
-
-
-                                        console.log("Start:In Fun viewXem => autoLike");
+                                        console.log("Run autoLike in Fun viewXem");
+                                        console.log("******************");
                                         autoLike();
-                                        console.log("End:In Fun viewXem => autoLike");
-
-
-                                        console.log("=================================================================");
-                                        console.log("*                    *                                          *");
-                                        console.log("=================================================================");
 
 
                                         setTimeout(function () {
-                                            console.log("Start:In Fun viewXem => autoComment");
-                                            autoComment(random_item(initConfigDefine.comments));
-                                            console.log("End:In Fun viewXem => autoComment");
-
+                                            if (initConfigDefine.auto_comment == "yes") {
+                                                console.log("Run autoComment in Fun viewXem");
+                                                console.log("comment:" + initConfigDefine.comment);
+                                                console.log("*********************");
+                                                autoComment(initConfigDefine.comment);
+                                            }
                                         }, randomIntFromRange(60000, 130000));
                                     }
                                 }
                             }
 
-                            console.log("=================================================================");
-                            console.log("*                    *                                          *");
-                            console.log("=================================================================");
-
-                            console.log("Start:In Fun viewXem => autoScrollBrowser");
+                            console.log("run autoScrollBrowser in viewXem");
+                            console.log("******************");
                             autoScrollBrowser();
-                            console.log("End:In Fun viewXem => autoScrollBrowser");
 
-                            if (nDuration > 0) {
-                            } else {
+                            //run new page nếu hết thời gian xem
+                            if (nDuration <= 0) {
+                                console.log("Redirect trang khi hết thời gian xem => in Fun viewxem");
+                                console.log("nDuration:" + nDuration);
+                                console.log("******************");
                                 window.location.href = random_item(aDomain);
                             }
 
@@ -979,8 +992,6 @@ jQuery(document).ready(function ($) {
                                         });
 
                                         chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-                                            console.log("View lần n:");
-                                            console.log(message);
                                             if (message.task == "getInfoVideoResult") {
                                                 if (message.status == 'success') {
                                                     aVideoID = message.data;
@@ -989,34 +1000,24 @@ jQuery(document).ready(function ($) {
                                         });
 
                                         setTimeout(function () {
-                                            console.log("View lần n:");
-                                            console.log("aVideoID:" + aVideoID);
                                             if (aVideoID == '') {
-                                                console.log("after: if (aVideoID == '') {");
                                                 initConfig.views = 1;
                                                 chrome.storage.sync.set({
                                                     config: initConfig
                                                 });
-                                                console.log("after: chrome.storage.sync.set({");
-
-                                                console.log(random_item(aDomain));
-                                                console.log("start: RELOAD PAGE");
                                                 window.location.href = random_item(aDomain);
-                                                console.log("end: RELOAD PAGE");
                                             } else {
                                                 var flagCheck = false;
                                                 $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
                                                     var idVideo = youtube_parser($(this).attr('href'));
-                                                    console.log("View lần n:");
-                                                    console.log("idVideo:" + idVideo);
-                                                    console.log("sVideoID:" + sVideoID);
                                                     if (idVideo != false && idVideo != sVideoID) {
                                                         if ($.inArray(idVideo, aVideoID) !== -1) {
                                                             flagCheck = true;
 
                                                             $(this)[0].click();
 
-                                                            console.log("SUCCESS VIEW N");
+                                                            console.log("Run View lần tiếp theo");
+                                                            console.log("******************");
                                                             viewXem();
 
                                                             return false;
@@ -1025,17 +1026,12 @@ jQuery(document).ready(function ($) {
                                                 });
 
                                                 setTimeout(function () {
-                                                    console.log("View lần n:");
-                                                    console.log("flagCheck:" + flagCheck);
                                                     if (flagCheck == false) {
                                                         initConfig.views = 1;
                                                         chrome.storage.sync.set({
                                                             config: initConfig
                                                         });
 
-                                                        console.log("RELOAD PAGE");
-                                                        console.log(aDomain);
-                                                        console.log(random_item(aDomain));
                                                         window.location.href = random_item(aDomain);
                                                     }
                                                 }, 10000);
@@ -1060,9 +1056,9 @@ jQuery(document).ready(function ($) {
 
     //Auto Subscrible
     function autoSubscribe(timeSub = 70) {
-        console.log("Start: In fun autoSubscribe");
-        console.log(timeSub);
-        console.log("End: In fun autoSubscribe");
+        console.log("In fun autoSubscribe");
+        console.log("timeSub:" + timeSub);
+        console.log("******************");
         var timeSub = parseInt(timeSub) + randomIntFromRange(0, 60);
         var attr = $("#meta-contents #subscribe-button #notification-preference-button").attr('hidden');
         if (typeof attr !== typeof undefined && attr !== false) {
@@ -1083,7 +1079,10 @@ jQuery(document).ready(function ($) {
 
     //Auto Redirect RandomLink
     function autoRedrectRandomLink(lbl = '', sClass = '') {
-        console.log("autoRedrectRandomLink");
+        console.log("In fun autoRedrectRandomLink");
+        console.log(lbl);
+        console.log(sClass);
+        console.log("******************");
         var counter = randomIntFromRange(10, 40);
 
         if (counter > 10) {
@@ -1119,7 +1118,8 @@ jQuery(document).ready(function ($) {
 
     //Get Comment
     function getComment() {
-        console.log("Start: In Fun getComment");
+        console.log("In  fun getComment");
+        console.log("**************");
         var sVideo = youtube_parser(window.location.href);
         if (sVideo != false) {
             if ($("#header #placeholder-area").length) {
@@ -1137,24 +1137,27 @@ jQuery(document).ready(function ($) {
                     });
 
                     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-                        console.log(message);
                         if (message.task == "getDataVideoCommentResult") {
                             if (message.status == 'success') {
-                                autoComment(message.data);
+                                if (initConfigDefine.auto_comment == 'yes') {
+                                    console.log("Run autoComment In getComment");
+                                    console.log("comment:" + message.data);
+                                    console.log("******************");
+                                    autoComment(message.data);
+                                }
                             }
                         }
                     });
                 }, randomIntFromRange(1500, 2500));
             }
         }
-        console.log("End: In Fun getComment");
     }
 
     //Auto Comment
     function autoComment(sComment) {
-        console.log("Start: In autoComment");
-        console.log(sComment);
-        console.log("End: In autoComment");
+        console.log("In fun autoComment");
+        console.log("comment:" + sComment);
+        console.log("******************");
         if (sComment != '') {
             var sComment = sComment + random_item(['', '.', '..', '...', '!', '!!', '!!!']);
 
@@ -1179,7 +1182,8 @@ jQuery(document).ready(function ($) {
 
     //Auto Like
     function autoLike() {
-        console.log("IN fun autoLike");
+        console.log("In fun autoLike");
+        console.log("*************");
         if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer").length) {
             setTimeout(function () {
                 if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer.style-default-active").length) {
@@ -1198,6 +1202,8 @@ jQuery(document).ready(function ($) {
 
     //Auto Scroll Brower
     function autoScrollBrowser() {
+        console.log("In Fun autoScrollBrowser");
+        console.log("*********************");
         var nTimeScrollBottom = randomIntFromRange(7500, 9000);
         var nTimeScrollTop = randomIntFromRange(7500, 9000);
         var nTimeTotal = nTimeScrollBottom + nTimeScrollTop + randomIntFromRange(2000, 6000);
@@ -1230,6 +1236,7 @@ jQuery(document).ready(function ($) {
 
     //Random Home YT
     function randomHomeYT() {
+        console.log("In Fun randomHomeYT");
         if ($("ytd-rich-item-renderer.style-scope").length) {
             var nItem = randomIntFromRange(1, $("ytd-rich-item-renderer.style-scope").length);
             var flag = true;

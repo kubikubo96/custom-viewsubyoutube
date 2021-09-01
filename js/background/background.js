@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'setDisabledEmailResult';
 
-                            //@todo @custom handle export email die
+                            //@todo custom  handle export email die
                             var emailDied = {
                                 'type': 'disableemail',
                                 'email': message.email,
@@ -76,11 +76,11 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                     if (nTime == nTitleGet || flag == true) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getDataVideoCommentResult';
-                            //@todo @custom Get data comment video
+                            //@todo custom  Get data comment video
                             chrome.tabs.sendMessage(tabCurrent, {
                                 task: sTask,
                                 status: 'success',
-                                data: random_item(initConfigDefine.comments)
+                                data: result.config.comment
                             });
                         });
                     }
@@ -89,7 +89,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         });
     }
 
-    //@todo @custom Get data video
+    //@todo custom  Get data video
     if (message.task == "getDataVideo") {
         var nTime = parseInt(message.time);
 
@@ -110,14 +110,15 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         }
                     }
 
-                    //@todo @custom call api to get value define
+                    //@todo custom  call api to get value define
                     if (nTime == nTitleGet || flag == true) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getDataVideoResult';
-                            //@todo @custom call api to get value define
+                            //@todo custom  call api to get value define
                             chrome.storage.sync.get('config', function () {
-                                var initConfig = initConfigDefine;
-                                var videoUse = random_item(initConfigDefine.videos);
+                                var initConfig = result.config;
+                                initConfig.start = "yes";
+                                var videoUse = initConfig.video;
                                 var sVideoID = videoUse.id;
                                 var sTitle = videoUse.title;
                                 var duration = videoUse.time;         //Thoi gian xem
@@ -192,8 +193,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getInfoVideoResult';
 
-                            //@todo @custom getInfoVideoResult
-                            var videoUse = random_item(initConfigDefine.videos);
+                            //@todo custom  getInfoVideoResult
+                            var videoUse = result.config.video;
                             chrome.tabs.sendMessage(tabCurrent, {
                                 task: sTask,
                                 status: 'success',
@@ -231,11 +232,9 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getInfoVideoDetailResult';
 
-                            //@todo @custom getInfoVideoDetailResult
-                            //aDataVideo.time ,aDataVideo.time_sub;
                             var timeInfoDetail = {
-                                time: initConfigDefine.time_view,
-                                time_sub: initConfigDefine.time_sub,
+                                time: result.config.time_view,
+                                time_sub: result.config.time_sub,
                             };
 
                             chrome.tabs.sendMessage(tabCurrent, {

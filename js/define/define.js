@@ -1,40 +1,40 @@
-let dn_time = '900';
-let dn_time_sub = '500';
+let dnt = '900'; //Thời gian xem videos
+let dnts = '500'; //Thời gian sub videos
 let videos = [
-    { id: 'bryYEtMWCA8', title: 'Chàng Rể Vô Song - Tập 1 - (Chương 1 - 20) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'nVAAzuJsGrA', title: 'Chàng Rể Vô Song - Tập 2 - (Chương 21 - 40) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'FIyS5QZb0iI', title: 'Chàng Rể Vô Song - Tập 3 - (Chương 41 - 60) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'LzwXqwjo0_M', title: 'Chàng Rể Vô Song - Tập 4 - (Chương 61 - 80) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'J_cZIg665G4', title: 'Chàng Rể Vô Song - Tập 5 - (Chương 81 - 100) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'fb_imS5U4wE', title: 'Chàng Rể Vô Song - Tập 6 - (Chương 101 - 120) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'M-sjiJiq364', title: 'Chàng Rể Vô Song - Tập 7 - (Chương 121 - 140) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'wF9Q1h-I2NA', title: 'Chàng Rể Vô Song - Tập 8 - (Chương 141 - 160) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'nVAAzuJsGrA', title: 'Chàng Rể Vô Song - Tập 9 - (Chương 161 - 180) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'bzvw5yboGZE', title: 'Chàng Rể Vô Song - Tập 10 - (Chương 181 - 200) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'IMKx_heOQfA', title: 'Chàng Rể Vô Song - Tập 11 - (Chương 201 - 220) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'Zeot9-uUucs', title: 'Chàng Rể Vô Song - Tập 12 - (Chương 221 - 240) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'KC8nkk5FPGQ', title: '[FULL] Anh Là Của Nợ Của Em |  Truyện ngôn tình ngược - (Siêu Phẩm) của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'z32CQdQvVdg', title: 'Chồng Phản Bội | tâm sự đau đớn của người vợ khi chồng phản bội + Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'wLdibDT2tTc', title: 'Truyện Mất Rồi Xin Đừng Tìm - Tập 1 | Truyện Ngôn Tình Hay Nhất Năm 2021 của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'XzOIx-L7Jm4', title: 'Truyện Mất Rồi Xin Đừng Tìm - Tập 2 | Truyện Ngôn Tình Hay Nhất Năm 2021 của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'u4uSILq26TI', title: 'Truyện Mất Rồi Xin Đừng Tìm - Tập 3 | Truyện Ngôn Tình Hay Nhất Năm 2021 của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'mIP8kXcMudk', title: 'Truyện Mất Rồi Xin Đừng Tìm - Tập 4 | Truyện Ngôn Tình Hay Nhất Năm 2021 của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'k2t3z6GQO9w', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 1 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'm30REL-B8ds', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 2 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'mFy4S6WAtqk', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 3 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'zikqVk4XiU8', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 4 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'UdEAv9wD3lQ', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 5 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: '-zMZLJqckTY', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 6 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'm3kvdrR-3dU', title: 'Mua Mạng Vợ Nhỏ - Tập 1 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'sIZNvq2QdW8', title: 'Mua Mạng Vợ Nhỏ - Tập 2 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'yPstrxy7FLA', title: 'Mua Mạng Vợ Nhỏ - Tập 3 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: '6AzlINPJlzE', title: 'Mua Mạng Vợ Nhỏ - Tập 4 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'DM0FyhsQOxg', title: 'Mua Mạng Vợ Nhỏ - Tập 5 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'oFSont4gEzI', title: 'Mua Mạng Vợ Nhỏ - Tập 6 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'YMkP_Bzdyqg', title: 'Mua Mạng Vợ Nhỏ - Tập 7 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'Mf4bvqzcHpY', title: 'Mua Mạng Vợ Nhỏ - Tập 8 | Truyện Ngôn Tình của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'NZLXMzVF2go', title: 'Thần Cấp Ở Rể - Tập 1 - (Chương 1 - 20) | Siêu Phẩm Truyện Ngôn Tình Huyền Huyễn Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
-    { id: 'HAEHlr_bP1Y', title: 'Thần Cấp Ở Rể - Tập 2 - (Chương 21 - 40) | Siêu Phẩm Truyện Ngôn Tình Huyền Huyễn Hay Nhất của Akuradio', time: dn_time, time_sub: dn_time_sub },
+    { id: 'bryYEtMWCA8', title: 'Chàng Rể Vô Song - Tập 1 - (Chương 1 - 20) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'nVAAzuJsGrA', title: 'Chàng Rể Vô Song - Tập 2 - (Chương 21 - 40) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'FIyS5QZb0iI', title: 'Chàng Rể Vô Song - Tập 3 - (Chương 41 - 60) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'LzwXqwjo0_M', title: 'Chàng Rể Vô Song - Tập 4 - (Chương 61 - 80) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'J_cZIg665G4', title: 'Chàng Rể Vô Song - Tập 5 - (Chương 81 - 100) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'fb_imS5U4wE', title: 'Chàng Rể Vô Song - Tập 6 - (Chương 101 - 120) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'M-sjiJiq364', title: 'Chàng Rể Vô Song - Tập 7 - (Chương 121 - 140) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'wF9Q1h-I2NA', title: 'Chàng Rể Vô Song - Tập 8 - (Chương 141 - 160) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'nVAAzuJsGrA', title: 'Chàng Rể Vô Song - Tập 9 - (Chương 161 - 180) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'bzvw5yboGZE', title: 'Chàng Rể Vô Song - Tập 10 - (Chương 181 - 200) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'IMKx_heOQfA', title: 'Chàng Rể Vô Song - Tập 11 - (Chương 201 - 220) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'Zeot9-uUucs', title: 'Chàng Rể Vô Song - Tập 12 - (Chương 221 - 240) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'KC8nkk5FPGQ', title: '[FULL] Anh Là Của Nợ Của Em |  Truyện ngôn tình ngược - (Siêu Phẩm) của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'z32CQdQvVdg', title: 'Chồng Phản Bội | tâm sự đau đớn của người vợ khi chồng phản bội + Akuradio', time: dnt, time_sub: dnts },
+    { id: 'wLdibDT2tTc', title: 'Truyện Mất Rồi Xin Đừng Tìm - Tập 1 | Truyện Ngôn Tình Hay Nhất Năm 2021 của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'XzOIx-L7Jm4', title: 'Truyện Mất Rồi Xin Đừng Tìm - Tập 2 | Truyện Ngôn Tình Hay Nhất Năm 2021 của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'u4uSILq26TI', title: 'Truyện Mất Rồi Xin Đừng Tìm - Tập 3 | Truyện Ngôn Tình Hay Nhất Năm 2021 của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'mIP8kXcMudk', title: 'Truyện Mất Rồi Xin Đừng Tìm - Tập 4 | Truyện Ngôn Tình Hay Nhất Năm 2021 của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'k2t3z6GQO9w', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 1 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'm30REL-B8ds', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 2 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'mFy4S6WAtqk', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 3 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'zikqVk4XiU8', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 4 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'UdEAv9wD3lQ', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 5 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: '-zMZLJqckTY', title: 'Truyện Vợ Anh Là Mẹ Đơn Thân - Tập 6 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'm3kvdrR-3dU', title: 'Mua Mạng Vợ Nhỏ - Tập 1 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'sIZNvq2QdW8', title: 'Mua Mạng Vợ Nhỏ - Tập 2 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'yPstrxy7FLA', title: 'Mua Mạng Vợ Nhỏ - Tập 3 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: '6AzlINPJlzE', title: 'Mua Mạng Vợ Nhỏ - Tập 4 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'DM0FyhsQOxg', title: 'Mua Mạng Vợ Nhỏ - Tập 5 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'oFSont4gEzI', title: 'Mua Mạng Vợ Nhỏ - Tập 6 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'YMkP_Bzdyqg', title: 'Mua Mạng Vợ Nhỏ - Tập 7 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'Mf4bvqzcHpY', title: 'Mua Mạng Vợ Nhỏ - Tập 8 | Truyện Ngôn Tình của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'NZLXMzVF2go', title: 'Thần Cấp Ở Rể - Tập 1 - (Chương 1 - 20) | Siêu Phẩm Truyện Ngôn Tình Huyền Huyễn Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
+    { id: 'HAEHlr_bP1Y', title: 'Thần Cấp Ở Rể - Tập 2 - (Chương 21 - 40) | Siêu Phẩm Truyện Ngôn Tình Huyền Huyễn Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
 ];
 
 let comments = [
@@ -57,42 +57,7 @@ let comments = [
     "Truyện mới đầu đã thấy lộn xộn phết", "Đoc rât la hay   câu truyên cung hay"
 ];
 
-let websites = [
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
+let websNews = [
     'https://dantri.com.vn/',
     'https://vnexpress.net/',
     'https://vietnamnet.vn/',
@@ -146,44 +111,58 @@ let websites = [
     'https://baoquocte.vn/giai-tri'
 ];
 
-websites = getRandom(websites, 5);
-videos = getRandom(videos, 5);
-comments = getRandom(comments, 5);
+let websites = [
+    'https://www.youtube.com/',
+    'https://www.youtube.com/',
+    'https://www.youtube.com/',
+    'https://www.google.com/',
+    'https://www.google.com/',
+    'https://www.google.com/',
+]
+
+websNews = random_arr(websNews, 5);
+websites = websites.concat(websNews);
+video = random_item(videos);
+comment = random_item(comments);
 
 var initConfigDefine = {
     'start': 'yes',
     'auto_like': 'yes',
     'auto_subscribe': 'yes',
-    'account': window.YTaccounts,
+    'auto_comment': 'no',
     'data': [],
     'keyapi': 'youtube_b17ed4461a38b6ddf4d5d4c2878e24df',
     'ipserver': '',
-    'user_pro': true,
     'views': 1,
     'pause': 'yes',
     'autoremovecache': 'yes',
     'timechangeemail': 120,
     'search_bing': 'no',
     'search_google': 'yes',
-    'time_view': dn_time,
-    'time_sub': dn_time_sub,
-    'website': websites,
-    'videos': videos,
-    'comments': comments
+    'account': '',
+    'time_view': dnt,
+    'time_sub': dnts,
+    'websites': websites,
+    'video': video,
+    'comment': comment
 };
 
-//lấy 1 mảng con random từ 1 mảng lớn
-function getRandom(arr, n) {
-    let result = new Array(n),
-        len = arr.length,
-        taken = new Array(len);
-    if (n > len) {
-        n = len;
+//lấy random 1 phần tử từ mảng
+function random_item(items) {
+    return items[Math.floor(Math.random() * items.length)];
+}
+
+//lấy 1 mảng con n phần tử random từ mảng lớn
+function random_arr(arr, n) {
+    var newArr = [];
+    if (n > arr.length)
+        n = arr.length
+    for (let i = 0; i < arr.length; i++) {
+        let item = arr[Math.floor(Math.random() * arr.length)];
+        if (!newArr.includes(item))
+            newArr.push(item);
+        if (newArr.length == n)
+            return newArr;
     }
-    while (n--) {
-        let x = Math.floor(Math.random() * len);
-        result[n] = arr[x in taken ? taken[x] : x];
-        taken[x] = --len in taken ? taken[len] : len;
-    }
-    return result;
+    return newArr;
 }
