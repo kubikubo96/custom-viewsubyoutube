@@ -1109,12 +1109,57 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    //Action Phóng to videos
-    function actionZoom() {
-
+    //Action Phóng to video hoặc full màn hình
+    function actionZoomOrFull() {
+        if (random_yes_no() == 'yes') {
+            if (random_yes_no(5, 5) == 'yes') {
+                //phóng to video
+            } else {
+                //bật full màn hình
+            }
+        }
     }
 
-    //Action 
+    //Action hiển thị thêm phần mô tả
+    function actionShowMoreDes(timeASM = 280) {
+        if (random_yes_no() == 'yes') {
+
+        }
+    }
+
+    //Action sort comment
+    function actionSortComment(timeASC = 230) {
+        if (random_yes_no() == 'yes') {
+
+        }
+    }
+
+    //Action auto next video
+    function actionAutoNextVideo(timeANV = 350) {
+        if (random_yes_no() == 'yes') {
+
+        }
+    }
+
+    //Action button next video
+    function actionClicktoNext(timeCTN = 600) { //600s
+        if (random_yes_no(2, 8) == 'yes') {
+
+        }
+    }
+    //Action disable, enable sound
+    function actionSound(timeASd = 130) {
+        if (random_yes_no() == 'yes') {
+
+        }
+    }
+
+    //Action suggest, đề xuất video
+    function actionSuggest(timeASt = 400) {
+        if (random_yes_no() == 'yes') {
+
+        }
+    }
 
     //Action Pause xem video and another action when pause video
     function actionPause(timeP = 100) {// 100 <=> 100
