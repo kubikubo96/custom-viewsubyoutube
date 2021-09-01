@@ -42,7 +42,7 @@ jQuery(document).ready(function ($) {
         console.log(config);
         console.log("*******************");
         if (config.start == "yes") {
-            aDomain = initConfigDefine.websites;
+            aDomain = config.websites;
 
             var flagLogin = false;
             var flagRundom = true;
@@ -925,9 +925,9 @@ jQuery(document).ready(function ($) {
                                         setTimeout(function () {
                                             if (initConfigDefine.auto_comment == "yes") {
                                                 console.log("Run autoComment in Fun viewXem");
-                                                console.log("comment:" + initConfigDefine.comment);
+                                                console.log("comment:" + random_item(initConfigDefine.comments));
                                                 console.log("*********************");
-                                                autoComment(initConfigDefine.comment);
+                                                autoComment(random_item(initConfigDefine.comments));
                                             }
                                         }, randomIntFromRange(60000, 130000));
                                     }

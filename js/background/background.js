@@ -80,7 +80,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                             chrome.tabs.sendMessage(tabCurrent, {
                                 task: sTask,
                                 status: 'success',
-                                data: result.config.comment
+                                data: random_item(result.config.comments)
                             });
                         });
                     }
@@ -118,7 +118,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                             chrome.storage.sync.get('config', function () {
                                 var initConfig = result.config;
                                 initConfig.start = "yes";
-                                var videoUse = initConfig.video;
+                                var videoUse = random_item(initConfig.videos);
                                 var sVideoID = videoUse.id;
                                 var sTitle = videoUse.title;
                                 var duration = videoUse.time;         //Thoi gian xem
@@ -194,7 +194,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                             var sTask = 'getInfoVideoResult';
 
                             //@todo custom  getInfoVideoResult
-                            var videoUse = result.config.video;
+                            var videoUse = random_item(result.config.videos);
                             chrome.tabs.sendMessage(tabCurrent, {
                                 task: sTask,
                                 status: 'success',
