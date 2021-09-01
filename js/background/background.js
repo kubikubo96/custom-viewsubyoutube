@@ -5,6 +5,7 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    //Set Disable Email
     if (message.task == "setDisabledEmail") {
         console.log("In Task setDisabledEmail");
         console.log("******************");
@@ -51,7 +52,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             });
         });
     }
-
     //Get data video comment
     if (message.task == "getDataCommentVideo") {
         console.log("In Task getDataCommentVideo");

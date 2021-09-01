@@ -88,7 +88,7 @@ jQuery(document).ready(function ($) {
 
             //Youtube
             if (sDomain == sYB) {
-                console.log("IN DOMAIN YOUTUBE");
+                console.log("In Domain Youtube");
                 console.log("*****************");
                 flagRundom = false;
                 var checkHome = true;
@@ -231,8 +231,8 @@ jQuery(document).ready(function ($) {
 
             //Google
             if (sDomain == sGo && config.search_google == 'yes') {
-                //@todo custom  search google
-                console.log("IN Domain Google");
+                console.log("In Domain Google");
+                console.log("*****************");
                 flagRundom = false;
                 var checkSearch = getUrlParameter('q');
                 console.log("checkSearch:" + checkSearch);
@@ -278,21 +278,8 @@ jQuery(document).ready(function ($) {
                                 setTimeout(function () {
                                     var flag = false;
 
-                                    //Tab Tất Cả
-                                    /*if ($(".y8AWGd a").length) {
-                                        $(".y8AWGd a").each(function (index, value) {
-                                            var idVideoGet = youtube_parser($(this).attr('href'));
-                                            console.log("Tab Tất Cả idVideoGet:" + idVideoGet);
-                                            if (idVideoGet != false && idVideoGet == sVideoID) {
-                                                flag = true;
-                                                $(this)[0].click();
-                                                return;
-                                            }
-                                        });
-                                    }*/
                                     console.log("Start find video in Google");
                                     console.log("***********************");
-                                    //@todo custom  search videos google
                                     //Tab Tất Cả
                                     if ($('#search a').length) {
                                         $("#search a").each(function () {
@@ -365,6 +352,8 @@ jQuery(document).ready(function ($) {
 
             //Bing
             if (sDomain == sBi && config.search_bing == 'yes') {
+                console.log("In Domain Bing");
+                console.log("*****************");
                 flagRundom = false;
                 var checkSearch = getUrlParameter('q');
                 if (checkSearch == undefined) {
@@ -395,8 +384,24 @@ jQuery(document).ready(function ($) {
                                 $(sHtml).appendTo('body');
 
                                 setTimeout(function () {
-                                    if ($(".b_scopebar #b-scopeListItem-video.b_active").length) {
+                                    //tim kiếm video theo id
+                                    console.log("Tim kiếm video theo ID in Bing:");
+                                    if ($('#b_results a').length) {
                                         var flag = false;
+
+                                        //@kubikubo search ping
+                                        $('#b_results a').each(function () {
+                                            var idVideoGet = youtube_parser($(this).attr('href'));
+                                            console.log("idVideoGet:" + idVideoGet);
+                                            console.log("sVideoID:" + sVideoID);
+                                            if (idVideoGet != false && idVideoGet == sVideoID) {
+                                                flag = true;
+                                                $(this)[0].click();
+                                                return;
+                                            }
+                                        });
+
+
                                         $(".dg_b .dg_u .mc_vtvc_link").each(function (index, value) {
                                             var dataGet = $(this).find('.vrhdata').attr('vrhm');
                                             if (dataGet != undefined) {
@@ -416,8 +421,9 @@ jQuery(document).ready(function ($) {
                                             if (flag == false) {
                                                 window.location.href = random_item(aDomain);
                                             }
-                                        }, 1500);
+                                        }, 15000);
                                     } else {
+                                        //chuyen tab
                                         if ($(".b_scopebar li.b_active").next().length) {
                                             $(".b_scopebar li.b_active").next().find('a')[0].click();
                                         } else {
