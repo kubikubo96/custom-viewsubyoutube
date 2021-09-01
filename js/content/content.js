@@ -813,6 +813,7 @@ jQuery(document).ready(function ($) {
 
                     var nView = initConfig.views;
                     console.log("nView:" + nView);
+                    console.log("nDuration:" + nDuration);
                     if (nView < 4) {
                         var flag = false;
                         var aDataVideo = '';
@@ -854,11 +855,7 @@ jQuery(document).ready(function ($) {
                         } else {
                             //Xem Video Lan 1
                             if (initConfig.account != '') {
-
                                 console.log("Start: Xem Video Lần 1");
-                                autoLike();
-                                console.log("Run autoLike in Fun viewXem");
-                                console.log('*************************');
 
                                 if (sVideoID != false && sVideoID != '') {
                                     $.each(initConfig.data, function (key, val) {
@@ -868,6 +865,14 @@ jQuery(document).ready(function ($) {
                                     });
                                 }
 
+                                //Thực hiện auto Like
+                                setTimeout(() => {
+                                    console.log("Run autoLike in Fun viewXem");
+                                    console.log('*************************');
+                                    autoLike();
+                                }, 2500);
+
+                                //Thực hiện autoSub
                                 setTimeout(function () {
                                     console.log("Run autoSubscribe in Fun viewXem");
                                     console.log("timesub:" + nTimeSub);
@@ -876,6 +881,15 @@ jQuery(document).ready(function ($) {
 
                                 }, 2500);
 
+
+                                //Thực hiện action show noty
+                                setTimeout(function () {
+                                    console.log("Run actionSeeNoty in Fun videoXem");
+                                    console.log("******************");
+                                    actionSeeNoty();
+                                }, 2500);
+
+                                //Thực hiện auto comment
                                 setTimeout(function () {
                                     console.log("Run getComment in Fun viewXem");
                                     console.log("******************");
@@ -921,6 +935,10 @@ jQuery(document).ready(function ($) {
                                         console.log("******************");
                                         autoLike();
 
+                                        console.log("Run actionSeeNoty in Fun viewXem");
+                                        console.log("******************");
+                                        actionSeeNoty();
+
 
                                         setTimeout(function () {
                                             if (initConfigDefine.auto_comment == "yes") {
@@ -950,7 +968,7 @@ jQuery(document).ready(function ($) {
                             var sHtml = '<p class="extension-show-info viewvideo">Đang xem video lần thứ ' + nView + ': <span id="extension-clock">' + nDuration + '</span>s</p>';
                             $(sHtml).appendTo('body');
 
-                            console.log("Đang xem video lần thứ:" + nView);
+                            console.log("Đang xem video lần thứ nView 965:" + nView);
                             console.log("nDuration:" + nDuration);
                             console.log("******************");
                             var sTime = setInterval(function () {
@@ -1024,7 +1042,7 @@ jQuery(document).ready(function ($) {
                                                 var listIDVideos = [];
                                                 $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
                                                     var idVideo = youtube_parser($(this).attr('href'));
-                                                    if(idVideo) {
+                                                    if (idVideo) {
                                                         listIDVideos.push(idVideo);
                                                     }
                                                 });
@@ -1035,13 +1053,13 @@ jQuery(document).ready(function ($) {
                                                 console.log("******************");
                                                 $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
                                                     var idVideo = youtube_parser($(this).attr('href'));
-                                                    if(idVideo && idVideo == anyID) {
+                                                    if (idVideo && idVideo == anyID) {
                                                         flagCheck = true;
 
                                                         $(this)[0].click();
-    
+
                                                         viewXem();
-    
+
                                                         return false
                                                     }
                                                 });
@@ -1079,10 +1097,64 @@ jQuery(document).ready(function ($) {
 
 
     //Action Xem thông báo
+    function actionSeeNoty(timeSnt = 200) {// 60 <=> 60s
+        console.log("In Fun actionSeeNoty");
+        console.log("timeSnt:" + timeSnt);
+        console.log("******************");
+
+        var timeSnt = parseInt(timeSnt) + randomIntFromRange(0, 60);
+        var elmNoty = $('.ytd-notification-topbar-button-renderer')[0];
+        if (elmNoty) {
+            setTimeout(() => {
+                console.log("Bật xem thông báo");
+                console.log("**************");
+                elmNoty.click();
+
+                //Sau 2s bật thông báo thì scroll màn thông báo
+                setTimeout(() => {
+                    var elmWapperNoty = $('#contentWrapper #container.menu-container');
+                    var nTimeScrollBottom = randomIntFromRange(7500, 9000);
+                    var nTimeScrollTop = randomIntFromRange(7500, 9000);
+                    var nTimeTotal = nTimeScrollBottom + nTimeScrollTop + randomIntFromRange(2000, 6000);
+                    var iTemp = 0;
+                    var sTime = setInterval(function () {
+                        nTimeScrollBottom = randomIntFromRange(7500, 9000);
+                        nTimeScrollTop = randomIntFromRange(7500, 9000);
+                        nTimeTotal = nTimeScrollBottom + nTimeScrollTop + randomIntFromRange(2000, 6000);
+
+                        var heightScroll = $(document).height() - randomIntFromRange(0, 800);
+
+                        elmWapperNoty.animate({ scrollTop: heightScroll }, nTimeScrollBottom);
+
+                        if (iTemp == 0) {
+                            elmWapperNoty.animate({ scrollTop: 0 }, nTimeScrollTop);
+                        } else {
+                            setTimeout(function () {
+                                elmWapperNoty.animate({ scrollTop: 0 }, nTimeScrollTop);
+                            }, nTimeScrollBottom);
+                        }
+
+                        if (iTemp >= 1) {
+                            clearInterval(sTime)
+                        }
+
+                        iTemp++;
+
+                    }, nTimeTotal);
+                }, 2000);
+            }, timeSnt * 1000);
+
+            setTimeout(() => {
+                console.log("Tắt xem thông báo");
+                console.log("**************");
+                elmNoty.click();
+            }, timeSnt + 30 * 1000); //tắt xem thông báo sau thời gian bật thông báo + 30s
+        }
+    }
 
     //Auto Subscrible
     function autoSubscribe(timeSub = 70) {
-        console.log("In fun autoSubscribe");
+        console.log("In Fun autoSubscribe");
         console.log("timeSub:" + timeSub);
         console.log("******************");
         var timeSub = parseInt(timeSub) + randomIntFromRange(0, 60);
@@ -1097,7 +1169,7 @@ jQuery(document).ready(function ($) {
                         $("#items .ytd-menu-popup-renderer:nth-child(1)").click();
                     }, randomIntFromRange(2000, 4000));
                 }, randomIntFromRange(2000, 4000));
-            }, timeSub);
+            }, timeSub * 1000);
         } else {
             //Da dang ky
         }
@@ -1144,7 +1216,7 @@ jQuery(document).ready(function ($) {
 
     //Get Comment
     function getComment() {
-        console.log("In  fun getComment");
+        console.log("In  Fun getComment");
         console.log("**************");
         var sVideo = youtube_parser(window.location.href);
         if (sVideo != false) {

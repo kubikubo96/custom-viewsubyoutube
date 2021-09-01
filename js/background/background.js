@@ -6,6 +6,8 @@ chrome.runtime.onInstalled.addListener(function () {
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.task == "setDisabledEmail") {
+        console.log("In Task setDisabledEmail");
+        console.log("******************");
         var nTime = parseInt(message.time);
 
         chrome.tabs.query({}, function (tabs) {
@@ -52,6 +54,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
     //Get data video comment
     if (message.task == "getDataCommentVideo") {
+        console.log("In Task getDataCommentVideo");
+        console.log("******************");
         var nTime = parseInt(message.time);
         var sVideo = message.video;
 
@@ -91,6 +95,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
     //@todo custom  Get data video
     if (message.task == "getDataVideo") {
+        console.log("In Task getDataVideo");
+        console.log("******************");
         var nTime = parseInt(message.time);
 
         chrome.tabs.query({}, function (tabs) {
@@ -170,6 +176,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
     //Get info video
     if (message.task == "getInfoVideo") {
+        console.log("In Task getInfoVideo");
+        console.log("******************");
         var nTime = parseInt(message.time);
 
         chrome.tabs.query({}, function (tabs) {
@@ -209,6 +217,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
     //getInfoVideoDetail
     if (message.task == "getInfoVideoDetail") {
+        console.log("In Task getInfoVideoDetail");
+        console.log("*********************");
         var nTime = parseInt(message.time);
 
         chrome.tabs.query({}, function (tabs) {
@@ -236,7 +246,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                                 time: randomIntFromRange(100, 200),
                                 time_sub: randomIntFromRange(120, 180),
                             };
-
+                            console.log("sendMessage => timeViewAny");
+                            console.log("*********************");
                             chrome.tabs.sendMessage(tabCurrent, {
                                 task: sTask,
                                 status: 'success',
@@ -251,6 +262,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
     //clearAllCache
     if (message.task == "clearAllCache") {
+        console.log("In Task clearAllCache");
+        console.log("*********************");
         var nTime = parseInt(message.time);
 
         chrome.tabs.query({}, function (tabs) {
