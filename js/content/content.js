@@ -1361,7 +1361,6 @@ jQuery(document).ready(function ($) {
                         if (message.task == "getDataVideoCommentResult") {
                             if (message.status == 'success') {
                                 console.log("Run autoComment In getComment");
-                                console.log("comment:" + message.data);
                                 console.log("******************");
                                 autoComment(message.data);
                             }
