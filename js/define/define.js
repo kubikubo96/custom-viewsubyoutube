@@ -57,30 +57,71 @@ let comments = [
     "Truyện mới đầu đã thấy lộn xộn phết", "Đoc rât la hay   câu truyên cung hay"
 ];
 
-let websites = [
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.google.com/',
+let websNews = [
     'https://dantri.com.vn/',
     'https://vnexpress.net/',
     'https://vietnamnet.vn/',
     'https://laodong.vn/',
     'https://baomoi.com/',
     'https://cafebiz.vn/',
+    'https://cafebiz.vn/vi-mo.chn',
+    'https://cafebiz.vn/cau-chuyen-kinh-doanh.chn',
+    'https://cafebiz.vn/cong-nghe.chn',
+    'https://cafebiz.vn/song.chn',
     'https://ncov.moh.gov.vn/',
+    'https://ncov.moh.gov.vn/vi/web/guest/dong-thoi-gian',
+    'https://ncov.moh.gov.vn/vi/web/guest/tin-tuc',
+    'https://ncov.moh.gov.vn/vi/web/guest/video',
+    'https://ncov.moh.gov.vn/vi/web/guest/-ieu-can-biet',
+    'https://ncov.moh.gov.vn/vi/web/guest/khuyen-cao',
     'https://www.24h.com.vn/',
+    'https://www.24h.com.vn/bong-da-c48.html',
+    'https://www.24h.com.vn/lich-thi-dau-bong-da-c287.html',
+    'https://www.24h.com.vn/video-ban-thang-c297.html',
+    'https://www.24h.com.vn/bong-da/lich-thi-dau-bong-da-hom-nay-moi-nhat-c48a364371.html',
+    'https://www.24h.com.vn/bang-xep-hang-bong-da-c295.html',
+    'https://www.24h.com.vn/video-highlight-c953.html',
+    'https://www.24h.com.vn/bong-da-ngoai-hang-anh-c149.html',
+    'https://www.24h.com.vn/tin-tuc-o-to-c332.html',
     'https://laodong.vn/thoi-su/',
+    'https://laodong.vn/cong-doan/',
+    'https://laodong.vn/the-gioi/',
+    'https://laodong.vn/phap-luat/',
+    'https://laodong.vn/kinh-te/',
+    'https://laodong.vn/tien-te-dau-tu/',
+    'https://laodong.vn/van-hoa-giai-tri/',
+    'https://laodong.vn/bat-dong-san/',
+    'https://laodong.vn/xe/',
+    'https://laodong.vn/tam-long-vang/',
     'https://thanhnien.vn/thoi-su/',
+    'https://thanhnien.vn/thoi-su/chinh-tri/',
+    'https://thanhnien.vn/thoi-su/phap-luat/',
+    'https://thanhnien.vn/thoi-su/dan-sinh/',
+    'https://thanhnien.vn/thoi-su/lao-dong-viec-lam/',
+    'https://thanhnien.vn/thoi-su/quyen-duoc-biet/',
+    'https://thanhnien.vn/thoi-su/phong-su-dieu-tra/',
+    'https://thanhnien.vn/thoi-su/quoc-phong/',
+    'https://thanhnien.vn/thoi-su/vuot-qua-covid-19/',
     'https://baoquocte.vn/',
+    'https://baoquocte.vn/bien-dong-247',
+    'https://baoquocte.vn/kinh-te',
+    'https://baoquocte.vn/nguoi-viet',
+    'https://baoquocte.vn/van-hoa',
+    'https://baoquocte.vn/xa-hoi',
+    'https://baoquocte.vn/giai-tri'
 ];
 
+let websites = [
+    'https://www.youtube.com/',
+    'https://www.youtube.com/',
+    'https://www.youtube.com/',
+    'https://www.google.com/',
+    'https://www.google.com/',
+    'https://www.google.com/',
+]
+
+websNews = random_arr(websNews, 10);
+websites = websites.concat(websNews);
 comments = random_arr(comments, 20);
 
 var initConfigDefine = {
