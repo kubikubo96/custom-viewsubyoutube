@@ -38,7 +38,7 @@ jQuery(document).ready(function ($) {
     chrome.storage.sync.get('config', function (result) {
         config = result.config;
         console.log("Get Account In chrome.storage.sync content.js/40");
-        console.log("config:");
+        console.log("ConfigDefine:");
         console.log(config);
         console.log("*******************");
         if (config.start == "yes") {
@@ -804,7 +804,6 @@ jQuery(document).ready(function ($) {
     //View videos
     function viewXem(nDuration = '') {
         console.log("In Fun viewXem");
-        console.log("******************");
         if (readCookie('vtyoutubeaccounts') == null) {
             createCookie('vtyoutubeaccounts', 'yes', config.timechangeemail);
         } else {
@@ -813,7 +812,7 @@ jQuery(document).ready(function ($) {
                     var initConfig = result.config;
 
                     var nView = initConfig.views;
-
+                    console.log("nView:" + nView);
                     if (nView < 4) {
                         var flag = false;
                         var aDataVideo = '';
@@ -823,6 +822,7 @@ jQuery(document).ready(function ($) {
                         //Xem Video Lan 2 trở đi
                         if (nDuration == '') {
                             console.log("Xem Video Lần 2 trở đi");
+                            console.log("sVideoID:" + sVideoID);
                             console.log("******************");
                             if (sVideoID != false && sVideoID != '') {
                                 var date = new Date();
@@ -950,6 +950,9 @@ jQuery(document).ready(function ($) {
                             var sHtml = '<p class="extension-show-info viewvideo">Đang xem video lần thứ ' + nView + ': <span id="extension-clock">' + nDuration + '</span>s</p>';
                             $(sHtml).appendTo('body');
 
+                            console.log("Đang xem video lần thứ:" + nView);
+                            console.log("nDuration:" + nDuration);
+                            console.log("******************");
                             var sTime = setInterval(function () {
                                 nDuration--;
 
@@ -975,6 +978,9 @@ jQuery(document).ready(function ($) {
                                             config: initConfig
                                         });
 
+                                        console.log("Đang tìm video lần:" + nView);
+                                        console.log("nDuration:" + nDuration);
+                                        console.log("******************");
                                         $('p.extension-show-info').remove();
                                         var sHtml = '<p class="extension-show-info">Đang tìm video lần ' + iView + '</p>';
                                         $(sHtml).appendTo('body');
@@ -992,6 +998,10 @@ jQuery(document).ready(function ($) {
                                         });
 
                                         chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+                                            console.log("Get Data In Task getInfoVideoResult:");
+                                            console.log("message:");
+                                            console.log(message);
+                                            console.log("******************");
                                             if (message.task == "getInfoVideoResult") {
                                                 if (message.status == 'success') {
                                                     aVideoID = message.data;
@@ -1000,6 +1010,8 @@ jQuery(document).ready(function ($) {
                                         });
 
                                         setTimeout(function () {
+                                            console.log("aVideoID:" + aVideoID);
+                                            console.log("******************");
                                             if (aVideoID == '') {
                                                 initConfig.views = 1;
                                                 chrome.storage.sync.set({
@@ -1008,24 +1020,35 @@ jQuery(document).ready(function ($) {
                                                 window.location.href = random_item(aDomain);
                                             } else {
                                                 var flagCheck = false;
+                                                //@todo Xử lý tìm xem 1 video bất kỳ trong danh sách đề xuất 
+                                                var listIDVideos = [];
                                                 $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
                                                     var idVideo = youtube_parser($(this).attr('href'));
-                                                    if (idVideo != false && idVideo != sVideoID) {
-                                                        if ($.inArray(idVideo, aVideoID) !== -1) {
-                                                            flagCheck = true;
+                                                    if(idVideo) {
+                                                        listIDVideos.push(idVideo);
+                                                    }
+                                                });
+                                                console.log("listIDVideos:");
+                                                console.log(listIDVideos);
+                                                var anyID = random_item(listIDVideos);
+                                                console.log("anyID:" + anyID);
+                                                console.log("******************");
+                                                $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
+                                                    var idVideo = youtube_parser($(this).attr('href'));
+                                                    if(idVideo && idVideo == anyID) {
+                                                        flagCheck = true;
 
-                                                            $(this)[0].click();
-
-                                                            console.log("Run View lần tiếp theo");
-                                                            console.log("******************");
-                                                            viewXem();
-
-                                                            return false;
-                                                        }
+                                                        $(this)[0].click();
+    
+                                                        viewXem();
+    
+                                                        return false
                                                     }
                                                 });
 
                                                 setTimeout(function () {
+                                                    console.log("flagCheck:" + flagCheck);
+                                                    console.log("******************");
                                                     if (flagCheck == false) {
                                                         initConfig.views = 1;
                                                         chrome.storage.sync.set({
