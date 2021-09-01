@@ -1097,7 +1097,7 @@ jQuery(document).ready(function ($) {
 
 
     //Action Xem thông báo
-    function actionSeeNoty(timeSnt = 200) {// 60 <=> 60s
+    function actionSeeNoty(timeSnt = 200) {// 200 <=> 200s
         console.log("In Fun actionSeeNoty");
         console.log("timeSnt:" + timeSnt);
         console.log("******************");
@@ -1108,6 +1108,11 @@ jQuery(document).ready(function ($) {
             setTimeout(() => {
                 console.log("Bật xem thông báo");
                 console.log("**************");
+
+                $('p.extension-show-comment').remove();
+                var sHtml = '<p class="extension-show-comment"><strong>Bật xem thông báo</strong> ' + "" + '</p>';
+                $(sHtml).appendTo('body');
+
                 elmNoty.click();
 
                 //Sau 2s bật thông báo thì scroll màn thông báo
@@ -1147,8 +1152,18 @@ jQuery(document).ready(function ($) {
             setTimeout(() => {
                 console.log("Tắt xem thông báo");
                 console.log("**************");
+
+                $('p.extension-show-comment').remove();
+                var sHtml = '<p class="extension-show-comment"><strong>Tắt xem thông báo</strong> ' + "" + '</p>';
+                $(sHtml).appendTo('body');
+
+
+                setTimeout(() => {
+                    $('p.extension-show-comment').remove();
+                }, randomIntFromRange(800, 2000));
+
                 elmNoty.click();
-            }, timeSnt + 30 * 1000); //tắt xem thông báo sau thời gian bật thông báo + 30s
+            }, (timeSnt + 30) * 1000); //tắt xem thông báo sau thời gian bật thông báo + 30s
         }
     }
 
@@ -1273,7 +1288,9 @@ jQuery(document).ready(function ($) {
 
             setTimeout(function () {
                 $("#comment-dialog #commentbox #submit-button").click();
-                $('p.extension-show-comment').remove();
+                setTimeout(() => {
+                    $('p.extension-show-comment').remove();
+                }, randomIntFromRange(800, 2000));
             }, randomIntFromRange(800, 2000));
         }
     }
