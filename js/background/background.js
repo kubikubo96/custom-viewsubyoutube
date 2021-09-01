@@ -232,15 +232,15 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getInfoVideoDetailResult';
 
-                            var timeInfoDetail = {
-                                time: result.config.time_view,
-                                time_sub: result.config.time_sub,
+                            var timeViewAny = {
+                                time: randomIntFromRange(100, 200),
+                                time_sub: randomIntFromRange(120, 180),
                             };
 
                             chrome.tabs.sendMessage(tabCurrent, {
                                 task: sTask,
                                 status: 'success',
-                                data: timeInfoDetail
+                                data: timeViewAny
                             });
                         });
                     }
@@ -303,6 +303,7 @@ function random_item(items) {
     return items[Math.floor(Math.random() * items.length)];
 }
 
+// Get UrlParameter
 function getUrlParameter(sParam, sUrl = '') {
     if (sUrl != '') {
         var sPageURL = sUrl;
@@ -321,3 +322,8 @@ function getUrlParameter(sParam, sUrl = '') {
         }
     }
 };
+
+//Random range Minmax
+function randomIntFromRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}

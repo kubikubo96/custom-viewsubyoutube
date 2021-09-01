@@ -1077,6 +1077,9 @@ jQuery(document).ready(function ($) {
         }
     }
 
+
+    //Action Xem thông báo
+
     //Auto Subscrible
     function autoSubscribe(timeSub = 70) {
         console.log("In fun autoSubscribe");
