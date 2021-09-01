@@ -1,5 +1,5 @@
-let dnt = '100'; //Thời gian xem videos
-let dnts = '50'; //Thời gian sub videos
+let dnt = '900'; //Thời gian xem videos
+let dnts = '500'; //Thời gian sub videos
 let videos = [
     { id: 'bryYEtMWCA8', title: 'Chàng Rể Vô Song - Tập 1 - (Chương 1 - 20) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
     { id: 'nVAAzuJsGrA', title: 'Chàng Rể Vô Song - Tập 2 - (Chương 21 - 40) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
