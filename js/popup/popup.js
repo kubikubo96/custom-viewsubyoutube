@@ -47,17 +47,8 @@ jQuery(document).ready(function ($) {
             //@todo custom  config option
             chrome.storage.sync.get('config', function (result) {
                 var config = result.config;
-                config.start = "yes";
-                config.auto_like = config.auto_like;
-                config.auto_subscribe = config.auto_subscribe;
-                config.auto_comment = config.auto_comment;
-                config.account = config.account;
-                config.search_google = config.search_google;
-                config.search_bing = config.search_bing;
                 config.keyapi = keyapi;
                 config.ipserver = ipServer;
-                config.autoremovecache = config.autoremovecache;
-                config.timechangeemail = config.timechangeemail;
 
                 chrome.storage.sync.set({
                     config: config
@@ -90,17 +81,7 @@ jQuery(document).ready(function ($) {
         $(".result").html('<p class="alert alert-primary">Đang lấy dữ liệu...</p>');
         chrome.storage.sync.get('config', function (result) {
             var config = result.config;
-            config.start = 'yes';
-            config.search_google = config.search_google;
-            config.search_bing = config.search_bing;
             config.keyapi = keyapi;
-            config.autoremovecache = config.autoremovecache;
-            config.timechangeemail = config.timechangeemail;
-            config.auto_like = config.auto_like;
-            config.auto_subscribe = config.auto_subscribe;
-            config.auto_comment = config.auto_comment;
-            config.account = config.account;
-
             chrome.storage.sync.set({
                 config: config
             }, function () {

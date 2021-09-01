@@ -123,7 +123,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                             //@todo custom  call api to get value define
                             chrome.storage.sync.get('config', function () {
                                 var initConfig = result.config;
-                                initConfig.start = "yes";
                                 var videoUse = random_item(initConfig.videos);
                                 var sVideoID = videoUse.id;
                                 var sTitle = videoUse.title;

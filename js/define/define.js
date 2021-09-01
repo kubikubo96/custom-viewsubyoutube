@@ -128,7 +128,6 @@ var initConfigDefine = {
     'start': 'yes',
     'auto_like': 'yes',
     'auto_subscribe': 'yes',
-    'auto_comment': 'no',
     'data': [],
     'keyapi': 'youtube_b17ed4461a38b6ddf4d5d4c2878e24df',
     'ipserver': '',

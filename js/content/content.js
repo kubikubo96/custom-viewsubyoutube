@@ -865,14 +865,14 @@ jQuery(document).ready(function ($) {
                                     });
                                 }
 
-                                //Thực hiện auto Like
+                                //Thực hiện autoLike
                                 setTimeout(() => {
                                     console.log("Run autoLike in Fun viewXem");
                                     console.log('*************************');
                                     autoLike();
                                 }, 2500);
 
-                                //Thực hiện autoSub
+                                //Thực hiện autoSubscribe
                                 setTimeout(function () {
                                     console.log("Run autoSubscribe in Fun viewXem");
                                     console.log("timesub:" + nTimeSub);
@@ -881,20 +881,27 @@ jQuery(document).ready(function ($) {
 
                                 }, 2500);
 
+                                //Thực hiện getComment
+                                setTimeout(function () {
+                                    console.log("Run getComment in Fun viewXem");
+                                    console.log("******************");
+                                    getComment();
+                                }, randomIntFromRange(60000, 130000));
 
-                                //Thực hiện action show noty
+
+                                //Thực hiện actionSeeNoty
                                 setTimeout(function () {
                                     console.log("Run actionSeeNoty in Fun videoXem");
                                     console.log("******************");
                                     actionSeeNoty();
                                 }, 2500);
 
-                                //Thực hiện auto comment
+                                //Thực hiện actionPause
                                 setTimeout(function () {
-                                    console.log("Run getComment in Fun viewXem");
+                                    console.log("Run actionPause in Fun videoXem");
                                     console.log("******************");
-                                    getComment();
-                                }, randomIntFromRange(60000, 130000));
+                                    actionPause();
+                                }, 2500);
 
                                 console.log("End: Xem Video Lần 1");
                                 console.log("******************");
@@ -939,14 +946,15 @@ jQuery(document).ready(function ($) {
                                         console.log("******************");
                                         actionSeeNoty();
 
+                                        console.log("Run actionPause in Fun viewXem");
+                                        console.log("******************");
+                                        actionPause();
 
                                         setTimeout(function () {
-                                            if (initConfigDefine.auto_comment == "yes") {
-                                                console.log("Run autoComment in Fun viewXem");
-                                                console.log("comment:" + random_item(initConfigDefine.comments));
-                                                console.log("*********************");
-                                                autoComment(random_item(initConfigDefine.comments));
-                                            }
+                                            console.log("Run autoComment in Fun viewXem");
+                                            console.log("comment:" + random_item(initConfigDefine.comments));
+                                            console.log("*********************");
+                                            autoComment(random_item(initConfigDefine.comments));
                                         }, randomIntFromRange(60000, 130000));
                                     }
                                 }
@@ -1095,75 +1103,169 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    //Action Phóng to videos
+    function actionZoom() {
+
+    }
+
+    //Action 
+
+    //Action Pause xem video and another action when pause video
+    function actionPause(timeP = 100) {// 100 <=> 100
+        if (random_yes_no() == 'yes') {
+            console.log("In Fun actionPause");
+            console.log("timeP:" + timeP);
+            console.log("******************");
+            var timeP = parseInt(timeP) + randomIntFromRange(0, 60);
+            setTimeout(() => {
+
+                $('p.extension-show-comment').remove();
+                var sHtml = '<p class="extension-show-comment"><strong>Dừng video để thực hiện các action</strong> ' + "" + '</p>';
+                $(sHtml).appendTo('body');
+
+                console.log("PAUSE Video");
+                //pause videos
+                if ($('video.html5-main-video')) {
+                    $('video.html5-main-video').click();
+                }
+
+                setTimeout(() => {
+                    console.log("CLICKED settings");
+                    //click settings
+                    $('.ytp-button.ytp-settings-button')[0].click();
+                    var elmOpSettings = $('.ytp-popup.ytp-settings-menu .ytp-panel-menu .ytp-menuitem');
+                    console.log("elmOpSettings.length: " + elmOpSettings.length);
+
+                    //click vào chất lượng videos
+                    if (elmOpSettings.length > 0) {
+                        elmOpSettings.each(function () {
+                            if ($(this).find('.ytp-menuitem-label') && $(this).find('.ytp-menuitem-label').text().trim() == 'Chất lượng') {
+                                $(this)[0].click();
+                                return false;
+                            }
+                        });
+
+                        //click chọn chất lượng videos
+                        setTimeout(() => {
+                            elmOpQl = $('.ytp-popup.ytp-settings-menu .ytp-menuitem');
+                            console.log("elmOpQl:");
+                            console.log(elmOpQl);
+
+                            var arrQuality = [];
+                            if (elmOpQl && elmOpQl.length > 0) {
+                                elmOpQl.each(function () {
+                                    switch ($(this).text().trim()) {
+                                        case '144p':
+                                            arrQuality.push('240p');
+                                            break;
+                                        case '240p':
+                                            arrQuality.push('360p');
+                                            break;
+                                        case '360p':
+                                            arrQuality.push('480p');
+                                            break;
+                                        case '720p':
+                                            arrQuality.push('720p');
+                                            break;
+                                        default:
+                                            arrQuality.push('144p');
+                                            break;
+                                    }
+                                });
+
+                                var oneQuality = random_item(arrQuality);
+                                elmOpQl.each(function () {
+                                    if ($(this).text().trim() == oneQuality) {
+                                        $(this)[0].click();
+                                        return false;
+                                    }
+                                });
+                            }
+                        }, 2500);
+
+                        setTimeout(() => {
+                            //tiếp tục phát video
+                            if ($('video.html5-main-video')) {
+                                $('video.html5-main-video').click();
+                            }
+                            $('p.extension-show-comment').remove();
+                        }, 10000);
+                    }
+                }, 2500);
+            }, timeP * 1000);
+        }
+    }
 
     //Action Xem thông báo
     function actionSeeNoty(timeSnt = 200) {// 200 <=> 200s
-        console.log("In Fun actionSeeNoty");
-        console.log("timeSnt:" + timeSnt);
-        console.log("******************");
+        if (random_yes_no() == 'yes') {
+            console.log("In Fun actionSeeNoty");
+            console.log("timeSnt:" + timeSnt);
+            console.log("******************");
 
-        var timeSnt = parseInt(timeSnt) + randomIntFromRange(0, 60);
-        var elmNoty = $('.ytd-notification-topbar-button-renderer')[0];
-        if (elmNoty) {
-            setTimeout(() => {
-                console.log("Bật xem thông báo");
-                console.log("**************");
-
-                $('p.extension-show-comment').remove();
-                var sHtml = '<p class="extension-show-comment"><strong>Bật xem thông báo</strong> ' + "" + '</p>';
-                $(sHtml).appendTo('body');
-
-                elmNoty.click();
-
-                //Sau 2s bật thông báo thì scroll màn thông báo
+            var timeSnt = parseInt(timeSnt) + randomIntFromRange(0, 60);
+            var elmNoty = $('.ytd-notification-topbar-button-renderer')[0];
+            if (elmNoty) {
                 setTimeout(() => {
-                    var elmWapperNoty = $('#contentWrapper #container.menu-container');
-                    var nTimeScrollBottom = randomIntFromRange(7500, 9000);
-                    var nTimeScrollTop = randomIntFromRange(7500, 9000);
-                    var nTimeTotal = nTimeScrollBottom + nTimeScrollTop + randomIntFromRange(2000, 6000);
-                    var iTemp = 0;
-                    var sTime = setInterval(function () {
-                        nTimeScrollBottom = randomIntFromRange(7500, 9000);
-                        nTimeScrollTop = randomIntFromRange(7500, 9000);
-                        nTimeTotal = nTimeScrollBottom + nTimeScrollTop + randomIntFromRange(2000, 6000);
+                    console.log("Bật xem thông báo");
+                    console.log("**************");
 
-                        var heightScroll = $(document).height() - randomIntFromRange(0, 800);
-
-                        elmWapperNoty.animate({ scrollTop: heightScroll }, nTimeScrollBottom);
-
-                        if (iTemp == 0) {
-                            elmWapperNoty.animate({ scrollTop: 0 }, nTimeScrollTop);
-                        } else {
-                            setTimeout(function () {
-                                elmWapperNoty.animate({ scrollTop: 0 }, nTimeScrollTop);
-                            }, nTimeScrollBottom);
-                        }
-
-                        if (iTemp >= 1) {
-                            clearInterval(sTime)
-                        }
-
-                        iTemp++;
-
-                    }, nTimeTotal);
-                }, 2000);
-            }, timeSnt * 1000);
-
-            setTimeout(() => {
-                console.log("Tắt xem thông báo");
-                console.log("**************");
-
-                $('p.extension-show-comment').remove();
-                var sHtml = '<p class="extension-show-comment"><strong>Tắt xem thông báo</strong> ' + "" + '</p>';
-                $(sHtml).appendTo('body');
-
-
-                setTimeout(() => {
                     $('p.extension-show-comment').remove();
-                }, randomIntFromRange(800, 2000));
+                    var sHtml = '<p class="extension-show-comment"><strong>Bật xem thông báo</strong> ' + "" + '</p>';
+                    $(sHtml).appendTo('body');
 
-                elmNoty.click();
-            }, (timeSnt + 30) * 1000); //tắt xem thông báo sau thời gian bật thông báo + 30s
+                    elmNoty.click();
+
+                    //Sau 2s bật thông báo thì scroll màn thông báo
+                    setTimeout(() => {
+                        var elmWapperNoty = $('#contentWrapper #container.menu-container');
+                        var nTimeScrollBottom = randomIntFromRange(7500, 9000);
+                        var nTimeScrollTop = randomIntFromRange(7500, 9000);
+                        var nTimeTotal = nTimeScrollBottom + nTimeScrollTop + randomIntFromRange(2000, 6000);
+                        var iTemp = 0;
+                        var sTime = setInterval(function () {
+                            nTimeScrollBottom = randomIntFromRange(7500, 9000);
+                            nTimeScrollTop = randomIntFromRange(7500, 9000);
+                            nTimeTotal = nTimeScrollBottom + nTimeScrollTop + randomIntFromRange(2000, 6000);
+
+                            var heightScroll = $(document).height() - randomIntFromRange(0, 800);
+
+                            elmWapperNoty.animate({ scrollTop: heightScroll }, nTimeScrollBottom);
+
+                            if (iTemp == 0) {
+                                elmWapperNoty.animate({ scrollTop: 0 }, nTimeScrollTop);
+                            } else {
+                                setTimeout(function () {
+                                    elmWapperNoty.animate({ scrollTop: 0 }, nTimeScrollTop);
+                                }, nTimeScrollBottom);
+                            }
+
+                            if (iTemp >= 1) {
+                                clearInterval(sTime)
+                            }
+
+                            iTemp++;
+
+                        }, nTimeTotal);
+                    }, 2000);
+                }, timeSnt * 1000);
+
+                setTimeout(() => {
+                    console.log("Tắt xem thông báo");
+                    console.log("**************");
+
+                    $('p.extension-show-comment').remove();
+                    var sHtml = '<p class="extension-show-comment"><strong>Tắt xem thông báo</strong> ' + "" + '</p>';
+                    $(sHtml).appendTo('body');
+
+
+                    setTimeout(() => {
+                        $('p.extension-show-comment').remove();
+                    }, randomIntFromRange(800, 2000));
+
+                    elmNoty.click();
+                }, (timeSnt + 30) * 1000); //tắt xem thông báo sau thời gian bật thông báo + 30s
+            }
         }
     }
 
@@ -1252,12 +1354,10 @@ jQuery(document).ready(function ($) {
                     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         if (message.task == "getDataVideoCommentResult") {
                             if (message.status == 'success') {
-                                if (initConfigDefine.auto_comment == 'yes') {
-                                    console.log("Run autoComment In getComment");
-                                    console.log("comment:" + message.data);
-                                    console.log("******************");
-                                    autoComment(message.data);
-                                }
+                                console.log("Run autoComment In getComment");
+                                console.log("comment:" + message.data);
+                                console.log("******************");
+                                autoComment(message.data);
                             }
                         }
                     });
@@ -1268,50 +1368,55 @@ jQuery(document).ready(function ($) {
 
     //Auto Comment
     function autoComment(sComment) {
-        console.log("In fun autoComment");
-        console.log("comment:" + sComment);
-        console.log("******************");
-        if (sComment != '') {
-            var sComment = sComment + random_item(['', '.', '..', '...', '!', '!!', '!!!']);
+        if (random_yes_no() == 'yes') {
+            console.log("In fun autoComment");
+            console.log("comment:" + sComment);
+            console.log("******************");
 
-            $('p.extension-show-comment').remove();
-            var sHtml = '<p class="extension-show-comment"><strong>Nội dung bình luận:</strong> ' + sComment + '</p>';
-            $(sHtml).appendTo('body');
+            if (sComment != '') {
+                var sComment = sComment + random_item(['', '.', '..', '...', '!', '!!', '!!!']);
 
-            document.querySelector('#simplebox-placeholder').click();
-            $("#comment-dialog #commentbox #contenteditable-root").html(sComment);
+                $('p.extension-show-comment').remove();
+                var sHtml = '<p class="extension-show-comment"><strong>Nội dung bình luận:</strong> ' + sComment + '</p>';
+                $(sHtml).appendTo('body');
 
-            $("#comment-dialog #commentbox .ytd-commentbox.style-primary").removeAttr('disabled');
-            $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").attr('tabindex', 0);
-            $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").attr('aria-disabled', false);
-            $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").removeAttr('style');
+                document.querySelector('#simplebox-placeholder').click();
+                $("#comment-dialog #commentbox #contenteditable-root").html(sComment);
 
-            setTimeout(function () {
-                $("#comment-dialog #commentbox #submit-button").click();
-                setTimeout(() => {
-                    $('p.extension-show-comment').remove();
+                $("#comment-dialog #commentbox .ytd-commentbox.style-primary").removeAttr('disabled');
+                $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").attr('tabindex', 0);
+                $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").attr('aria-disabled', false);
+                $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").removeAttr('style');
+
+                setTimeout(function () {
+                    $("#comment-dialog #commentbox #submit-button").click();
+                    setTimeout(() => {
+                        $('p.extension-show-comment').remove();
+                    }, randomIntFromRange(800, 2000));
                 }, randomIntFromRange(800, 2000));
-            }, randomIntFromRange(800, 2000));
+            }
         }
     }
 
     //Auto Like
     function autoLike() {
-        console.log("In fun autoLike");
-        console.log("*************");
-        if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer").length) {
-            setTimeout(function () {
-                if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer.style-default-active").length) {
-                    //Da like or Dislike
-                } else {
-                    var check = random_item([1, 2, 1, 1]);
-                    if (check == 1) {
-                        $("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer:nth-child(1) a")[0].click();
+        if (random_yes_no(5, 5) == 'yes') {
+            console.log("In fun autoLike");
+            console.log("*************");
+            if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer").length) {
+                setTimeout(function () {
+                    if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer.style-default-active").length) {
+                        //Da like or Dislike
                     } else {
-                        $("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer:nth-child(2) a")[0].click();
+                        var check = random_yes_no(7, 3);
+                        if (check == 'yes') {
+                            $("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer:nth-child(1) a")[0].click();
+                        } else {
+                            $("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer:nth-child(2) a")[0].click();
+                        }
                     }
-                }
-            }, randomIntFromRange(18000, 55000));
+                }, randomIntFromRange(100, 200) * 1000);
+            }
         }
     }
 
@@ -1416,6 +1521,18 @@ jQuery(document).ready(function ($) {
     //Random range Minmax
     function randomIntFromRange(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    //Random Yes = 3, No = 7
+    function random_yes_no(yes = 3, no = 7) {
+        arrYesNO = [];
+        for (let i = 0; i < yes; i++) {
+            arrYesNO.push('yes');
+        }
+        for (let j = 0; j < no; j++) {
+            arrYesNO.push('no');
+        }
+        return random_item(arrYesNO);
     }
 
     //Create Cookie
