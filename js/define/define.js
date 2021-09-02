@@ -132,7 +132,7 @@ let websites = [
     'https://www.bing.com/',
 ]
 
-websNews = random_arr(websNews, 20);
+websNews = random_arr(websNews, 10);
 websites = websites.concat(websNews);
 comments = random_arr(comments, 15);
 
