@@ -999,6 +999,14 @@ jQuery(document).ready(function ($) {
                                 window.location.href = random_item(aDomain);
                             }
 
+                            var minTScroll = (nDuration - 500) > 0 ? (nDuration - 500) : 100;
+                            var maxTScroll = (nDuration - 300) > minTScroll ? (nDuration - 300) : 200;
+                            setTimeout(() => {
+                                console.log("run autoScrollBrowser Lần 2 in viewXem");
+                                console.log("******************");
+                                autoScrollBrowser();
+                            }, randomIntFromRange(minTScroll, maxTScroll));
+
                             $('p.extension-show-info').remove();
                             var sHtml = '<p class="extension-show-info viewvideo">Đang xem video lần thứ ' + nView + ': <span id="extension-clock">' + nDuration + '</span>s</p>';
                             $(sHtml).appendTo('body');
