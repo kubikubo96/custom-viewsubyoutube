@@ -37,10 +37,12 @@ jQuery(document).ready(function ($) {
     //Get Account
     chrome.storage.sync.get('config', function (result) {
         config = result.config;
-        console.log("Get Account In chrome.storage.sync content.js/40");
-        console.log("ConfigDefine:");
+        console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
+        console.log("          Get Account In chrome.storage.sync content      🏍");
+
+        console.log("🏍   ConfigDefine:                                        🏍");
         console.log(config);
-        console.log("*******************");
+        console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
         if (config.start == "yes") {
             aDomain = config.websites;
 
@@ -56,10 +58,10 @@ jQuery(document).ready(function ($) {
                 var flag = false;
 
                 var sAccount = random_item(config.account.split(/\r?\n/));
-                console.log("Get Account");
-                console.log("sAccount:" + sAccount);
-                console.log("flag:" + flag);
-                console.log("************************");
+                console.log("DOING  <==> Get Account");
+                console.log("sAccount:");
+                console.log(sAccount);
+                console.log("*********************");
                 if (sAccount != '') {
                     var aAccount = sAccount.split('|');
                     var sEmail = $.trim(aAccount[0]);
@@ -76,12 +78,15 @@ jQuery(document).ready(function ($) {
                             });
                         });
 
-                        console.log("Run fun auToLoginAccount");
+                        console.log("Run fun auToLoginAccount AFTER Get Account");
+                        console.log("********************************");
                         auToLoginAccount(sEmail, sPassWord, sEmailRecovery);
                     }
                 }
 
                 if (flag == false) {
+                    console.log("DOING  <==> Go to Google Page");
+                    console.log("*********************");
                     window.location.href = 'https://' + sGo;
                 }
             }
@@ -111,6 +116,8 @@ jQuery(document).ready(function ($) {
                                 nDuration = 300;
                             }
 
+                            console.log("Run Fun viewXem when Domain == Youtube");
+                            console.log("*********************");
                             viewXem(parseInt(nDuration) + parseInt(randomIntFromRange(10, 50)));
                         }
                     }, randomIntFromRange(4000, 7000));
@@ -232,7 +239,7 @@ jQuery(document).ready(function ($) {
             //Google
             if (sDomain == sGo && config.search_google == 'yes') {
                 console.log("In Domain Google");
-                console.log("*****************");
+                console.log("*******************");
                 flagRundom = false;
                 var checkSearch = getUrlParameter('q');
                 console.log("checkSearch:" + checkSearch);
@@ -245,6 +252,8 @@ jQuery(document).ready(function ($) {
                     }
                 } else {
                     setTimeout(function () {
+                        console.log("Start Find Video In Google");
+                        console.log("*********************");
                         var sTitle = $('input.gLFyf').val();
                         if (sTitle == undefined) { sTitle = $('.tsf-p #lst-ib').val(); }
                         if (sTitle == undefined) { sTitle = $('.wQnou input.JSAgYe').val(); }
@@ -278,8 +287,6 @@ jQuery(document).ready(function ($) {
                                 setTimeout(function () {
                                     var flag = false;
 
-                                    console.log("Start find video in Google");
-                                    console.log("***********************");
                                     //Tab Tất Cả
                                     if ($('#search a').length) {
                                         $("#search a").each(function () {
@@ -353,7 +360,7 @@ jQuery(document).ready(function ($) {
             //Bing
             if (sDomain == sBi && config.search_bing == 'yes') {
                 console.log("In Domain Bing");
-                console.log("*****************");
+                console.log("*******************");
                 flagRundom = false;
                 var checkSearch = getUrlParameter('q');
                 if (checkSearch == undefined) {
@@ -364,6 +371,8 @@ jQuery(document).ready(function ($) {
                         autoRedrectRandomLink();
                     }
                 } else {
+                    console.log("Start Find Video in Bing");
+                    console.log("*********************");
                     var checkDetail = getUrlParameter('view');
                     if (checkDetail == undefined) {
                         var sTitle = $('#sb_form #sb_form_q').val();
@@ -490,9 +499,8 @@ jQuery(document).ready(function ($) {
 
     //Auto search
     function autoSearchData(sDomain = '') {
-        console.log("In Fun autoSearchData");
+        console.log("🌳🌳 In Fun autoSearchData");
         console.log("sDomain:" + sDomain);
-        console.log("*********************");
         $('p.extension-show-info').remove();
         var sHtml = '<p class="extension-show-info">Đang lấy video để xem...</p>';
         $(sHtml).appendTo('body');
@@ -588,7 +596,7 @@ jQuery(document).ready(function ($) {
 
     //Login account
     function auToLoginAccount(sEmail = '', sPassWord = '', sEmailRecovery = '') {
-        console.log("In Fun auToLoginAccount");
+        console.log("🌳🌳 In Fun auToLoginAccount");
         console.log("Email: " + sEmail);
         console.log("PassWord: " + sPassWord);
         console.log("EmailRecovery: " + sEmailRecovery);
@@ -723,7 +731,7 @@ jQuery(document).ready(function ($) {
 
     //AuToLoginAccountChange
     function auToLoginAccountChange(sEmail = '', sPassWord = '', sEmailRecovery = '', checkLinkCurrent = '') {
-        console.log("In Fun auToLoginAccountChange");
+        console.log("🌳🌳 In Fun auToLoginAccountChange");
         console.log("Email: " + sEmail);
         console.log("PassWord: " + sPassWord);
         console.log("EmailRecovery: " + sEmailRecovery);
@@ -768,7 +776,7 @@ jQuery(document).ready(function ($) {
 
     //send Email Disabled
     function sendEmailDisabled(sEmail = '') {
-        console.log("In Fun sendEmailDisabled");
+        console.log("🌳🌳 In Fun sendEmailDisabled");
         console.log("Email:" + sEmail);
         console.log("********************");
         //Remove Email In Chrome
@@ -811,7 +819,7 @@ jQuery(document).ready(function ($) {
 
     //View videos
     function viewXem(nDuration = '') {
-        console.log("In Fun viewXem");
+        console.log("🌳🌳 In Fun viewXem");
         if (readCookie('vtyoutubeaccounts') == null) {
             createCookie('vtyoutubeaccounts', 'yes', config.timechangeemail);
         } else {
@@ -883,7 +891,6 @@ jQuery(document).ready(function ($) {
                                 //Thực hiện autoSubscribe
                                 setTimeout(function () {
                                     console.log("Run autoSubscribe in Fun viewXem");
-                                    console.log("timesub:" + nTimeSub);
                                     console.log("******************");
                                     autoSubscribe(nTimeSub);
 
@@ -892,13 +899,14 @@ jQuery(document).ready(function ($) {
                                 //Thực hiện getComment
                                 setTimeout(function () {
                                     console.log("Run getComment in Fun viewXem");
-                                    console.log("******************");
+                                    console.log("*****************");
                                     getComment();
                                 }, randomIntFromRange(60000, 130000));
 
 
                                 //Thực hiện ACTION
                                 setTimeout(function () {
+                                    console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
                                     console.log("Run MANY ACTION in Fun videoXem");
                                     actionSeeNoty();
                                     actionPause();
@@ -908,6 +916,7 @@ jQuery(document).ready(function ($) {
                                     actionAutoNextVideo();
                                     actionClicktoNext();
                                     actionSound();
+                                    console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
                                 }, 2500);
 
                                 console.log("End: Xem Video Lần 1");
@@ -940,15 +949,14 @@ jQuery(document).ready(function ($) {
                                             nTimeSub = aDataVideo.time_sub;
                                         }
                                         console.log("Run autoSubscribe in Fun viewXem");
-                                        console.log("timesub:" + nTimeSub);
-                                        console.log("******************");
                                         autoSubscribe(nTimeSub);
 
 
+                                        console.log("");
                                         console.log("Run autoLike in Fun viewXem");
-                                        console.log("******************");
                                         autoLike();
 
+                                        console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
                                         console.log("Run MANY ACTION in Fun viewXem");
                                         actionSeeNoty();
                                         actionPause();
@@ -958,10 +966,10 @@ jQuery(document).ready(function ($) {
                                         actionAutoNextVideo();
                                         actionClicktoNext();
                                         actionSound();
+                                        console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
 
                                         setTimeout(function () {
                                             console.log("Run autoComment in Fun viewXem");
-                                            console.log("comment:" + random_item(initConfigDefine.comments));
                                             console.log("*********************");
                                             autoComment(random_item(initConfigDefine.comments));
                                         }, randomIntFromRange(60000, 130000));
@@ -975,8 +983,7 @@ jQuery(document).ready(function ($) {
 
                             //run new page nếu hết thời gian xem
                             if (nDuration <= 0) {
-                                console.log("Redirect trang khi hết thời gian xem => in Fun viewxem");
-                                console.log("nDuration:" + nDuration);
+                                console.log("Run new Page khi hết thời gian xem");
                                 console.log("******************");
                                 window.location.href = random_item(aDomain);
                             }
@@ -1115,7 +1122,7 @@ jQuery(document).ready(function ($) {
     //Action Phóng to video hoặc full màn hình
     function actionZoom(timeAZ = 25) {
         if (random_yes_no() == 'yes') {
-            console.log("In Fun actionZoom");
+            console.log("🌳🌳 In Fun actionZoom");
             timeAZ = parseInt(timeAZ) + randomIntFromRange(0, 60);
             console.log("timeAZ:" + timeAZ);
             console.log("******************");
@@ -1130,7 +1137,7 @@ jQuery(document).ready(function ($) {
     //Action hiển thị thêm phần mô tả
     function actionShowMoreDes(timeASM = 280) {
         if (random_yes_no() == 'yes') {
-            console.log("In Fun actionShowMoreDes");
+            console.log("🌳🌳 In Fun actionShowMoreDes");
             timeASM = parseInt(timeASM) + randomIntFromRange(0, 60);
             console.log("timeASM:" + timeASM);
             console.log("******************");
@@ -1150,7 +1157,7 @@ jQuery(document).ready(function ($) {
     //Action sort comment
     function actionSortComment(timeASC = 230) {
         if (random_yes_no() == 'yes') {
-            console.log("In Fun actionSortComment");
+            console.log("🌳🌳 In Fun actionSortComment");
             timeASC = parseInt(timeASC) + randomIntFromRange(0, 60);
             console.log("timeASC:" + timeASC);
             console.log("******************");
@@ -1170,7 +1177,7 @@ jQuery(document).ready(function ($) {
     //Action button auto next video
     function actionAutoNextVideo(timeANV = 350) {
         if (random_yes_no() == 'yes') {
-            console.log("In Fun actionAutoNextVideo");
+            console.log("🌳🌳 In Fun actionAutoNextVideo");
             timeANV = parseInt(timeANV) + randomIntFromRange(0, 60);
             console.log("timeANV:" + timeANV);
             console.log("******************");
@@ -1185,7 +1192,7 @@ jQuery(document).ready(function ($) {
     //Action button next video
     function actionClicktoNext() { //600s
         if (random_yes_no(2, 8) == 'yes') {
-            console.log("In Fun actionClicktoNext");
+            console.log("🌳🌳 In Fun actionClicktoNext");
             var timeCTN = parseInt(initConfigDefine.time_view) - 200;
             timeCTN = parseInt(timeCTN) + randomIntFromRange(0, 60);
             console.log("timeCTN:" + timeCTN);
@@ -1200,7 +1207,7 @@ jQuery(document).ready(function ($) {
     //Action disable, enable sound
     function actionSound(timeASD = 130) {
         if (random_yes_no(2, 8) == 'yes') {
-            console.log("In Fun actionSound");
+            console.log("🌳🌳 In Fun actionSound");
             timeASD = parseInt(timeASD) + randomIntFromRange(0, 60);
             console.log("timeASD:" + timeASD);
             console.log("******************");
@@ -1215,7 +1222,7 @@ jQuery(document).ready(function ($) {
     //Action Pause xem video and another action when pause video
     function actionPause(timeP = 100) {// 100 <=> 100
         if (random_yes_no() == 'yes') {
-            console.log("In Fun actionPause");
+            console.log("🌳🌳 In Fun actionPause");
             console.log("timeP:" + timeP);
             console.log("******************");
             timeP = parseInt(timeP) + randomIntFromRange(0, 60);
@@ -1225,14 +1232,16 @@ jQuery(document).ready(function ($) {
                 var sHtml = '<p class="extension-show-comment"><strong>Dừng video để thực hiện các action</strong> ' + "" + '</p>';
                 $(sHtml).appendTo('body');
 
-                console.log("PAUSE Video");
+                console.log("DOING  <==> PAUSE Video");
+                console.log("***********************");
                 //pause videos
                 if ($('video.html5-main-video')) {
                     $('video.html5-main-video').click();
                 }
 
                 setTimeout(() => {
-                    console.log("CLICKED settings");
+                    console.log("DOING  <==> CLICKED settings");
+                    console.log("***********************");
                     //click settings
                     $('.ytp-button.ytp-settings-button')[0].click();
                     var elmOpSettings = $('.ytp-popup.ytp-settings-menu .ytp-panel-menu .ytp-menuitem');
@@ -1240,6 +1249,8 @@ jQuery(document).ready(function ($) {
 
                     //click vào chất lượng videos
                     if (elmOpSettings.length > 0) {
+                        console.log("DOING  <==> Chọn chất lượng");
+                        console.log("***********************");
                         elmOpSettings.each(function () {
                             if ($(this).find('.ytp-menuitem-label') && $(this).find('.ytp-menuitem-label').text().trim() == 'Chất lượng') {
                                 $(this)[0].click();
@@ -1251,7 +1262,6 @@ jQuery(document).ready(function ($) {
                         setTimeout(() => {
                             elmOpQl = $('.ytp-popup.ytp-settings-menu .ytp-menuitem');
                             console.log("elmOpQl:");
-                            console.log(elmOpQl);
 
                             var arrQuality = [];
                             if (elmOpQl && elmOpQl.length > 0) {
@@ -1286,6 +1296,8 @@ jQuery(document).ready(function ($) {
                         }, 2500);
 
                         setTimeout(() => {
+                            console.log("DOING  <==> Tiếp tục phát");
+                            console.log("***********************");
                             //tiếp tục phát video
                             if ($('video.html5-main-video')) {
                                 $('video.html5-main-video').click();
@@ -1301,7 +1313,7 @@ jQuery(document).ready(function ($) {
     //Action Xem thông báo
     function actionSeeNoty(timeSnt = 200) {// 200 <=> 200s
         if (random_yes_no() == 'yes') {
-            console.log("In Fun actionSeeNoty");
+            console.log("🌳🌳 In Fun actionSeeNoty");
             console.log("timeSnt:" + timeSnt);
             console.log("******************");
 
@@ -1373,7 +1385,7 @@ jQuery(document).ready(function ($) {
 
     //Auto Subscrible
     function autoSubscribe(timeSub = 70) {
-        console.log("In Fun autoSubscribe");
+        console.log("🌳🌳 In Fun autoSubscribe");
         console.log("timeSub:" + timeSub);
         console.log("******************");
         var timeSub = parseInt(timeSub) + randomIntFromRange(0, 60);
@@ -1396,7 +1408,7 @@ jQuery(document).ready(function ($) {
 
     //Auto Redirect RandomLink
     function autoRedrectRandomLink(lbl = '', sClass = '') {
-        console.log("In fun autoRedrectRandomLink");
+        console.log("🌳🌳 In fun autoRedrectRandomLink");
         console.log(lbl);
         console.log(sClass);
         console.log("******************");
@@ -1435,7 +1447,7 @@ jQuery(document).ready(function ($) {
 
     //Get Comment
     function getComment() {
-        console.log("In  Fun getComment");
+        console.log("🌳🌳 In  Fun getComment");
         console.log("**************");
         var sVideo = youtube_parser(window.location.href);
         if (sVideo != false) {
@@ -1470,7 +1482,7 @@ jQuery(document).ready(function ($) {
     //Auto Comment
     function autoComment(sComment) {
         if (random_yes_no() == 'yes') {
-            console.log("In fun autoComment");
+            console.log("🌳🌳 In fun autoComment");
             console.log("comment:" + sComment);
             console.log("******************");
 
@@ -1502,7 +1514,7 @@ jQuery(document).ready(function ($) {
     //Auto Like
     function autoLike() {
         if (random_yes_no(5, 5) == 'yes') {
-            console.log("In fun autoLike");
+            console.log("🌳🌳 In fun autoLike");
             console.log("*************");
             if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer").length) {
                 setTimeout(function () {
@@ -1523,7 +1535,7 @@ jQuery(document).ready(function ($) {
 
     //Auto Scroll Brower
     function autoScrollBrowser() {
-        console.log("In Fun autoScrollBrowser");
+        console.log("🌳🌳 In Fun autoScrollBrowser");
         console.log("*********************");
         var nTimeScrollBottom = randomIntFromRange(7500, 9000);
         var nTimeScrollTop = randomIntFromRange(7500, 9000);
@@ -1557,7 +1569,8 @@ jQuery(document).ready(function ($) {
 
     //Random Home YT
     function randomHomeYT() {
-        console.log("In Fun randomHomeYT");
+        console.log("🌳🌳 In Fun randomHomeYT");
+        console.log('******************');
         if ($("ytd-rich-item-renderer.style-scope").length) {
             var nItem = randomIntFromRange(1, $("ytd-rich-item-renderer.style-scope").length);
             var flag = true;
