@@ -134,7 +134,7 @@ let websites = [
 
 websNews = random_arr(websNews, 20);
 websites = websites.concat(websNews);
-comments = random_arr(comments, 20);
+comments = random_arr(comments, 15);
 
 var initConfigDefine = {
     'start': 'yes',
@@ -153,7 +153,7 @@ var initConfigDefine = {
     'time_view': dnt,
     'time_sub': dnts,
     'websites': websites,
-    'videos': videosTest,
+    'videos': videos,
     'comments': comments
 };
 

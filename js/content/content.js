@@ -392,8 +392,10 @@ jQuery(document).ready(function ($) {
                                         //@kubikubo search ping
                                         $('#b_results a').each(function () {
                                             var idVideoGet = youtube_parser($(this).attr('href'));
-                                            console.log("idVideoGet:" + idVideoGet);
-                                            console.log("sVideoID:" + sVideoID);
+                                            if (idVideoGet == sVideoID) {
+                                                console.log("idVideoGet:" + idVideoGet);
+                                                console.log("sVideoID:" + sVideoID);
+                                            }
                                             if (idVideoGet != false && idVideoGet == sVideoID) {
                                                 flag = true;
                                                 $(this)[0].click();
@@ -895,18 +897,17 @@ jQuery(document).ready(function ($) {
                                 }, randomIntFromRange(60000, 130000));
 
 
-                                //Thực hiện actionSeeNoty
+                                //Thực hiện ACTION
                                 setTimeout(function () {
-                                    console.log("Run actionSeeNoty in Fun videoXem");
-                                    console.log("******************");
+                                    console.log("Run MANY ACTION in Fun videoXem");
                                     actionSeeNoty();
-                                }, 2500);
-
-                                //Thực hiện actionPause
-                                setTimeout(function () {
-                                    console.log("Run actionPause in Fun videoXem");
-                                    console.log("******************");
                                     actionPause();
+                                    actionZoom();
+                                    actionShowMoreDes();
+                                    actionSortComment();
+                                    actionAutoNextVideo();
+                                    actionClicktoNext();
+                                    actionSound();
                                 }, 2500);
 
                                 console.log("End: Xem Video Lần 1");
@@ -948,13 +949,15 @@ jQuery(document).ready(function ($) {
                                         console.log("******************");
                                         autoLike();
 
-                                        console.log("Run actionSeeNoty in Fun viewXem");
-                                        console.log("******************");
+                                        console.log("Run MANY ACTION in Fun viewXem");
                                         actionSeeNoty();
-
-                                        console.log("Run actionPause in Fun viewXem");
-                                        console.log("******************");
                                         actionPause();
+                                        actionZoom();
+                                        actionShowMoreDes();
+                                        actionSortComment();
+                                        actionAutoNextVideo();
+                                        actionClicktoNext();
+                                        actionSound();
 
                                         setTimeout(function () {
                                             console.log("Run autoComment in Fun viewXem");
@@ -1110,54 +1113,102 @@ jQuery(document).ready(function ($) {
     }
 
     //Action Phóng to video hoặc full màn hình
-    function actionZoomOrFull() {
+    function actionZoom(timeAZ = 25) {
         if (random_yes_no() == 'yes') {
-            if (random_yes_no(5, 5) == 'yes') {
-                //phóng to video
-            } else {
-                //bật full màn hình
-            }
+            console.log("In Fun actionZoom");
+            timeAZ = parseInt(timeAZ) + randomIntFromRange(0, 60);
+            console.log("timeAZ:" + timeAZ);
+            console.log("******************");
+            setTimeout(() => {
+                if ($('button.ytp-size-button.ytp-button')[0]) {
+                    $('button.ytp-size-button.ytp-button')[0].click();
+                }
+            }, 25 * 1000);
         }
     }
 
     //Action hiển thị thêm phần mô tả
     function actionShowMoreDes(timeASM = 280) {
         if (random_yes_no() == 'yes') {
-
+            console.log("In Fun actionShowMoreDes");
+            timeASM = parseInt(timeASM) + randomIntFromRange(0, 60);
+            console.log("timeASM:" + timeASM);
+            console.log("******************");
+            setTimeout(() => {
+                if ($('.more-button.style-scope.ytd-video-secondary-info-renderer')[0]) {
+                    $('.more-button.style-scope.ytd-video-secondary-info-renderer')[0].click();
+                }
+                setTimeout(() => {
+                    if ($('.less-button.style-scope.ytd-video-secondary-info-renderer')[0]) {
+                        $('.less-button.style-scope.ytd-video-secondary-info-renderer')[0].click();
+                    }
+                }, 2500);
+            }, timeASM * 1000);
         }
     }
 
     //Action sort comment
     function actionSortComment(timeASC = 230) {
         if (random_yes_no() == 'yes') {
-
+            console.log("In Fun actionSortComment");
+            timeASC = parseInt(timeASC) + randomIntFromRange(0, 60);
+            console.log("timeASC:" + timeASC);
+            console.log("******************");
+            setTimeout(() => {
+                if ($('.dropdown-trigger.style-scope.yt-dropdown-menu')[0]) {
+                    $('.dropdown-trigger.style-scope.yt-dropdown-menu')[0].click();
+                }
+                setTimeout(() => {
+                    if ($('tp-yt-paper-item .style-scope.yt-dropdown-menu')[0]) {
+                        $('tp-yt-paper-item .style-scope.yt-dropdown-menu')[0].click();
+                    }
+                }, 2500);
+            }, timeASC * 1000);
         }
     }
 
     //Action auto next video
     function actionAutoNextVideo(timeANV = 350) {
         if (random_yes_no() == 'yes') {
-
+            console.log("In Fun actionAutoNextVideo");
+            timeANV = parseInt(timeANV) + randomIntFromRange(0, 60);
+            console.log("timeANV:" + timeANV);
+            console.log("******************");
+            setTimeout(() => {
+                if ($('.ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]')[0]) {
+                    $('.ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]')[0].click();
+                }
+            }, timeANV * 1000);
         }
     }
 
     //Action button next video
-    function actionClicktoNext(timeCTN = 600) { //600s
+    function actionClicktoNext() { //600s
         if (random_yes_no(2, 8) == 'yes') {
-
+            console.log("In Fun actionClicktoNext");
+            var timeCTN = parseInt(initConfigDefine.time_view) - 200;
+            timeCTN = parseInt(timeCTN) + randomIntFromRange(0, 60);
+            console.log("timeCTN:" + timeCTN);
+            console.log("******************");
+            setTimeout(() => {
+                if ($('.ytp-next-button.ytp-button')[0]) {
+                    $('.ytp-next-button.ytp-button')[0].click();
+                }
+            }, timeCTN * 1000);
         }
     }
     //Action disable, enable sound
-    function actionSound(timeASd = 130) {
-        if (random_yes_no() == 'yes') {
-
-        }
-    }
-
-    //Action suggest, đề xuất video
-    function actionSuggest(timeASt = 400) {
-        if (random_yes_no() == 'yes') {
-
+    function actionSound(timeASD = 130) {
+        if (random_yes_no(2, 8) == 'yes') {
+            console.log("In Fun actionSound");
+            timeASD = parseInt(timeASD) + randomIntFromRange(0, 60);
+            console.log("timeASD:" + timeASD);
+            console.log("******************");
+            setTimeout(() => {
+                if ($('.ytp-mute-button.ytp-button')[0]) {
+                    $('.ytp-mute-button.ytp-button')[0].click();
+                }
+            }, timeASD * 1000);
         }
     }
 
@@ -1167,7 +1218,7 @@ jQuery(document).ready(function ($) {
             console.log("In Fun actionPause");
             console.log("timeP:" + timeP);
             console.log("******************");
-            var timeP = parseInt(timeP) + randomIntFromRange(0, 60);
+            timeP = parseInt(timeP) + randomIntFromRange(0, 60);
             setTimeout(() => {
 
                 $('p.extension-show-comment').remove();
@@ -1254,7 +1305,7 @@ jQuery(document).ready(function ($) {
             console.log("timeSnt:" + timeSnt);
             console.log("******************");
 
-            var timeSnt = parseInt(timeSnt) + randomIntFromRange(0, 60);
+            timeSnt = parseInt(timeSnt) + randomIntFromRange(0, 60);
             var elmNoty = $('.ytd-notification-topbar-button-renderer')[0];
             if (elmNoty) {
                 setTimeout(() => {
