@@ -127,7 +127,6 @@ jQuery(document).ready(function ($) {
                 /*================= START Find video =================*/
                 var checkSearch = getUrlParameter('search_query');
                 console.log("Start find video in YOUTUBE");
-                console.log("***********************");
                 if (checkSearch != undefined && checkSearch != '') {
                     checkHome = false;
 
@@ -146,10 +145,12 @@ jQuery(document).ready(function ($) {
                         }
 
                         if (sVideoID != '') {
+                            console.log("sVideoID:" + sVideoID);
                             $('p.extension-show-info').remove();
                             var sHtml = '<p class="extension-show-info">Đang tìm Video có ID: ' + sVideoID + '</p>';
                             $(sHtml).appendTo('body');
 
+                            console.log("Run Fun autoScrollBrowser when Find Video");
                             autoScrollBrowser();
 
                             setTimeout(function () {
@@ -158,6 +159,7 @@ jQuery(document).ready(function ($) {
                                     if ($(this).attr('href') != undefined) {
                                         var idVideoGet = youtube_parser($(this).attr('href'));
                                         if (idVideoGet != false && idVideoGet == sVideoID) {
+                                            console.log("idVideoGet == sVideoID");
                                             check = true;
 
                                             $(this).find('.no-transition').click();
@@ -181,6 +183,7 @@ jQuery(document).ready(function ($) {
                     } else {
                         window.location.href = 'https://' + sYB;
                     }
+                    console.log("***********************");
                 }
                 /*================= END Find video =================*/
 
@@ -253,7 +256,6 @@ jQuery(document).ready(function ($) {
                 } else {
                     setTimeout(function () {
                         console.log("Start Find Video In Google");
-                        console.log("*********************");
                         var sTitle = $('input.gLFyf').val();
                         if (sTitle == undefined) { sTitle = $('.tsf-p #lst-ib').val(); }
                         if (sTitle == undefined) { sTitle = $('.wQnou input.JSAgYe').val(); }
@@ -278,6 +280,8 @@ jQuery(document).ready(function ($) {
                             }
                             console.log("sVideoID:" + sVideoID);
                             if (sVideoID != '') {
+
+                                console.log("Run autoScrollBrowser Khi Tìm Video");
                                 autoScrollBrowser();
 
                                 $('p.extension-show-info').remove();
@@ -291,8 +295,8 @@ jQuery(document).ready(function ($) {
                                     if ($('#search a').length) {
                                         $("#search a").each(function () {
                                             var idVideoGet = youtube_parser($(this).attr('href'));
-                                            console.log("Tab Tất Cả idVideoGet:" + idVideoGet);
                                             if (idVideoGet != false && idVideoGet == sVideoID) {
+                                                console.log("idVideoGet == sVideoID");
                                                 flag = true;
                                                 $(this)[0].click();
                                                 return;
@@ -353,6 +357,7 @@ jQuery(document).ready(function ($) {
                                 window.location.href = 'https://' + sGo + '/';
                             }
                         }
+                        console.log("*********************");
                     }, 1500);
                 }
             }
@@ -389,6 +394,7 @@ jQuery(document).ready(function ($) {
 
                             console.log("sVideoID:" + sVideoID);
                             if (sVideoID != '') {
+                                console.log("Run autoScrollBrowser khi tìm video");
                                 autoScrollBrowser();
 
                                 $('p.extension-show-info').remove();
