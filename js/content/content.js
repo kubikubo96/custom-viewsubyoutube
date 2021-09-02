@@ -374,8 +374,10 @@ jQuery(document).ready(function ($) {
                     console.log("Start Find Video in Bing");
                     console.log("*********************");
                     var checkDetail = getUrlParameter('view');
+                    console.log("checkDetail:" + checkDetail);
                     if (checkDetail == undefined) {
                         var sTitle = $('#sb_form #sb_form_q').val();
+                        console.log("sTitle:" + sTitle);
                         if (sTitle != '' && sTitle != undefined) {
                             if (config.data != '') {
                                 $.each(config.data, function (key, val) {
@@ -385,6 +387,7 @@ jQuery(document).ready(function ($) {
                                 });
                             }
 
+                            console.log("sVideoID:" + sVideoID);
                             if (sVideoID != '') {
                                 autoScrollBrowser();
 
@@ -394,7 +397,7 @@ jQuery(document).ready(function ($) {
 
                                 setTimeout(function () {
                                     //tim kiếm video theo id
-                                    console.log("Tim kiếm video theo ID in Bing:");
+                                    console.log("DOING <=> Tìm Video ở Ping:");
                                     if ($('#b_results a').length) {
                                         var flag = false;
 
@@ -441,14 +444,19 @@ jQuery(document).ready(function ($) {
                                             window.location.href = random_item(aDomain);
                                         }
                                     }
+                                    console.log("*********************");
                                 }, randomIntFromRange(8000, 15000));
                             } else {
+                                console.log("DOING <=> Chuyển trang bất kỳ nếu sVideoID = '' ");
                                 window.location.href = random_item(aDomain);
                             }
                         } else {
+                            console.log("DOING <=> Chuyển trang bất kỳ nếu sTitle = '' ");
                             window.location.href = random_item(aDomain);
                         }
                     } else {
+                        console.log("Nếu checkDetail = Undefine ==> Vào đây:");
+                        console.log("*********************");
                         setTimeout(function () {
                             var nDuration = '';
                             var idVideoGet = youtube_parser($("#mm_vdmb_keydata .mmvdp_meta_title_link").attr('href'));
