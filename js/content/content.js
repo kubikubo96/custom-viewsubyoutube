@@ -985,7 +985,7 @@ jQuery(document).ready(function ($) {
                             var sHtml = '<p class="extension-show-info viewvideo">Đang xem video lần thứ ' + nView + ': <span id="extension-clock">' + nDuration + '</span>s</p>';
                             $(sHtml).appendTo('body');
 
-                            console.log("Đang xem video lần thứ nView 965:" + nView);
+                            console.log("Đang xem video lần thứ nView:" + nView);
                             console.log("nDuration:" + nDuration);
                             console.log("******************");
                             var sTime = setInterval(function () {
@@ -1167,7 +1167,7 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    //Action auto next video
+    //Action button auto next video
     function actionAutoNextVideo(timeANV = 350) {
         if (random_yes_no() == 'yes') {
             console.log("In Fun actionAutoNextVideo");
