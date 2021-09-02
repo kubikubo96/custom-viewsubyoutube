@@ -988,7 +988,7 @@ jQuery(document).ready(function ($) {
                                 }
                             }
 
-                            console.log("run autoScrollBrowser in viewXem");
+                            console.log("Run autoScrollBrowser in viewXem");
                             console.log("******************");
                             autoScrollBrowser();
 
@@ -1002,10 +1002,12 @@ jQuery(document).ready(function ($) {
                             var minTScroll = (nDuration - 500) > 0 ? (nDuration - 500) : 100;
                             var maxTScroll = (nDuration - 300) > minTScroll ? (nDuration - 300) : 200;
                             setTimeout(() => {
-                                console.log("run autoScrollBrowser Lần 2 in viewXem");
+                                console.log("Run autoScrollBrowser Lần 2 in viewXem");
+                                console.log("minTScroll:" + minTScroll);
+                                console.log("maxTScroll:" + minTScroll);
                                 console.log("******************");
                                 autoScrollBrowser();
-                            }, randomIntFromRange(minTScroll, maxTScroll));
+                            }, randomIntFromRange(minTScroll, maxTScroll) * 1000);
 
                             $('p.extension-show-info').remove();
                             var sHtml = '<p class="extension-show-info viewvideo">Đang xem video lần thứ ' + nView + ': <span id="extension-clock">' + nDuration + '</span>s</p>';
@@ -1264,12 +1266,10 @@ jQuery(document).ready(function ($) {
                     //click settings
                     $('.ytp-button.ytp-settings-button')[0].click();
                     var elmOpSettings = $('.ytp-popup.ytp-settings-menu .ytp-panel-menu .ytp-menuitem');
-                    console.log("elmOpSettings.length: " + elmOpSettings.length);
 
                     //click vào chất lượng videos
                     if (elmOpSettings.length > 0) {
-                        console.log("DOING  <==> Chọn chất lượng");
-                        console.log("***********************");
+                        console.log("DOING  <==> Chọn chất lượng video");
                         elmOpSettings.each(function () {
                             if ($(this).find('.ytp-menuitem-label') && $(this).find('.ytp-menuitem-label').text().trim() == 'Chất lượng') {
                                 $(this)[0].click();
@@ -1280,7 +1280,6 @@ jQuery(document).ready(function ($) {
                         //click chọn chất lượng videos
                         setTimeout(() => {
                             elmOpQl = $('.ytp-popup.ytp-settings-menu .ytp-menuitem');
-                            console.log("elmOpQl:");
 
                             var arrQuality = [];
                             if (elmOpQl && elmOpQl.length > 0) {
@@ -1305,6 +1304,7 @@ jQuery(document).ready(function ($) {
                                 });
 
                                 var oneQuality = random_item(arrQuality);
+                                console.log("quality:" + oneQuality);
                                 elmOpQl.each(function () {
                                     if ($(this).text().trim() == oneQuality) {
                                         $(this)[0].click();
@@ -1312,6 +1312,7 @@ jQuery(document).ready(function ($) {
                                     }
                                 });
                             }
+                            console.log("***********************");
                         }, 2500);
 
                         setTimeout(() => {
