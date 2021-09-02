@@ -885,8 +885,8 @@ jQuery(document).ready(function ($) {
                         } else {
                             //Xem Video Lan 1
                             if (initConfig.account != '') {
-                                console.log("Start: Xem Video Lần 1");
-
+                                console.log("Xem Video Lần 1:");
+                                console.log('*************************');
                                 if (sVideoID != false && sVideoID != '') {
                                     $.each(initConfig.data, function (key, val) {
                                         if (val.videoID == sVideoID) {
@@ -932,15 +932,12 @@ jQuery(document).ready(function ($) {
                                     actionSound();
                                     console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
                                 }, 2500);
-
-                                console.log("End: Xem Video Lần 1");
-                                console.log("******************");
                             }
                         }
 
                         //Play Video
                         setTimeout(function () {
-                            console.log("Play Video");
+                            console.log("Play Video:");
                             console.log("******************");
                             var aLabel = ['Phát (k)', 'Play (k)'];
                             var sLabel = $("button.ytp-play-button").attr("aria-label");
