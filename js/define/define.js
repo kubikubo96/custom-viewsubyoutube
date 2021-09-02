@@ -1,4 +1,4 @@
-let dnt = '900'; //Thời gian xem videos
+let dnt = '1800'; //Thời gian xem videos
 let dnts = '500'; //Thời gian sub videos
 let videos = [
     { id: 'bryYEtMWCA8', title: 'Chàng Rể Vô Song - Tập 1 - (Chương 1 - 20) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
@@ -37,6 +37,12 @@ let videos = [
     { id: 'HAEHlr_bP1Y', title: 'Thần Cấp Ở Rể - Tập 2 - (Chương 21 - 40) | Siêu Phẩm Truyện Ngôn Tình Huyền Huyễn Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
 ];
 
+let videosTest = [
+    { id: 'OzkPzOhjP_8', title: 'Chống dịch - chung mục tiêu, riêng giải pháp | VTV24', time: dnt, time_sub: dnts },
+    { id: '58-OTKS7ouc', title: 'Tiêu Điểm: Những hiểu lầm về tiêm vắc xin COVID-19 | VTV24', time: dnt, time_sub: dnts },
+    { id: '1MQAXg5FFYc', title: 'Tiêu Điểm Quốc khánh 2/9: Việt Nam - Đoàn kết là sức mạnh | VTV24', time: dnt, time_sub: dnts },
+]
+
 let comments = [
     "Cảm ơn b", "Hay lắm", "truyện hay", "thanks ad", "nghe ok", "Cảm ơn b nhé", "Giọng hay lắm ad", "đã xem", "like", "yêu rồi nha", "tạm dc",
     "đã thích", "thích phết", "like", "cảm ơ nhé", "thích phết", "THANKS A! A ĐỌC HAY LÉM", "Tập mới đâu rồi bạn", "Hay", "Ra tiếp anh ơi", "Ủng hộ Tùng",
@@ -63,6 +69,11 @@ let websNews = [
     'https://vietnamnet.vn/',
     'https://laodong.vn/',
     'https://baomoi.com/',
+    'https://vtvgo.vn/',
+    'https://vtvgo.vn/xem-truc-tuyen-kenh-vtv1-1.html',
+    'https://vtvgo.vn/xem-truc-tuyen-kenh-vtv2-2.html',
+    'https://vtvgo.vn/xem-truc-tuyen-kenh-vtv5-5.html',
+    'https://vtvgo.vn/xem-truc-tuyen-kenh-vtv7-27.html',
     'https://cafebiz.vn/',
     'https://cafebiz.vn/vi-mo.chn',
     'https://cafebiz.vn/cau-chuyen-kinh-doanh.chn',
@@ -115,11 +126,8 @@ let websites = [
     'https://www.youtube.com/',
     'https://www.youtube.com/',
     'https://www.youtube.com/',
-    'https://www.youtube.com/',
     'https://www.google.com/',
     'https://www.google.com/',
-    'https://www.google.com/',
-    'https://www.bing.com/',
     'https://www.bing.com/',
     'https://www.bing.com/',
 ]
@@ -145,7 +153,7 @@ var initConfigDefine = {
     'time_view': dnt,
     'time_sub': dnts,
     'websites': websites,
-    'videos': videos,
+    'videos': videosTest,
     'comments': comments
 };
 
