@@ -1500,14 +1500,15 @@ jQuery(document).ready(function ($) {
 
     //Auto Comment
     function autoComment(sComment) {
+        var commented = false;
         if (random_yes_no() == 'yes') {
             console.log("🌳🌳 In fun autoComment");
-            console.log("comment:" + sComment);
             console.log("******************");
 
             if (sComment != '') {
                 var sComment = sComment + random_item(['', '.', '..', '...', '!', '!!', '!!!']);
-
+                console.log("Nội dung Comment:" + sComment);
+                console.log("******************");
                 $('p.extension-show-comment').remove();
                 var sHtml = '<p class="extension-show-comment"><strong>Nội dung bình luận:</strong> ' + sComment + '</p>';
                 $(sHtml).appendTo('body');
@@ -1521,13 +1522,22 @@ jQuery(document).ready(function ($) {
                 $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").removeAttr('style');
 
                 setTimeout(function () {
+                    console.log("DOING <=> Comment videos");
+                    console.log("******************");
                     $("#comment-dialog #commentbox #submit-button").click();
                     setTimeout(() => {
                         $('p.extension-show-comment').remove();
+                        commented = true;
                     }, randomIntFromRange(800, 2000));
                 }, randomIntFromRange(800, 2000));
             }
         }
+        //Nếu chưa comment và chưa tắt show-comment
+        setTimeout(() => {
+            if (commented == false) {
+                $('p.extension-show-comment').remove();
+            }
+        }, 6000);
     }
 
     //Auto Like
