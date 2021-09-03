@@ -1575,23 +1575,21 @@ jQuery(document).ready(function ($) {
 
     //Auto Like
     function autoLike() {
-        if (random_yes_no(5, 5) == 'yes') {
-            console.log("🌳🌳 In fun autoLike");
-            console.log("*************");
-            if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer").length) {
-                setTimeout(function () {
-                    if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer.style-default-active").length) {
-                        //Da like or Dislike
+        console.log("🌳🌳 In fun autoLike");
+        console.log("*************");
+        if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer").length) {
+            setTimeout(function () {
+                if ($("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer.style-default-active").length) {
+                    //Da like or Dislike
+                } else {
+                    var check = random_yes_no(8, 2);
+                    if (check == 'yes') {
+                        $("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer:nth-child(1) a")[0].click();
                     } else {
-                        var check = random_yes_no(7, 3);
-                        if (check == 'yes') {
-                            $("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer:nth-child(1) a")[0].click();
-                        } else {
-                            $("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer:nth-child(2) a")[0].click();
-                        }
+                        $("#menu-container #top-level-buttons-computed ytd-toggle-button-renderer:nth-child(2) a")[0].click();
                     }
-                }, randomIntFromRange(100, 200) * 1000);
-            }
+                }
+            }, randomIntFromRange(100, 200) * 1000);
         }
     }
 
