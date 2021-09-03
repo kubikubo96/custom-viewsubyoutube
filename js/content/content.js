@@ -665,7 +665,7 @@ jQuery(document).ready(function ($) {
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(8000, 12000));
+                }, randomIntFromRange(3000, 4000));
             }
 
             //Password
@@ -692,7 +692,7 @@ jQuery(document).ready(function ($) {
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(2000, 3000));
+                }, randomIntFromRange(3000, 4000));
             }
 
             //Chon nut: xac nhan email khoi phuc cua bạn
