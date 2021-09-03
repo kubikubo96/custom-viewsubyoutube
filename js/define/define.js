@@ -37,13 +37,6 @@ let videos = [
     { id: 'HAEHlr_bP1Y', title: 'Thần Cấp Ở Rể - Tập 2 - (Chương 21 - 40) | Siêu Phẩm Truyện Ngôn Tình Huyền Huyễn Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
 ];
 
-let videosTest = [
-    { id: '4HsmerHvq00', title: '[TẬP 01] VƯƠNG ĐẠO CHÍ TÔN: Chu Tiên Trấn | Truyện tiên hiệp hay nhất 2021|MC Tiến Phong diễn đọc', time: dnt, time_sub: dnts },
-    { id: '2M0NLqxReW4', title: '[TẬP 02] VƯƠNG ĐẠO CHÍ TÔN: Diễn Xuất | MC Tiến Phong | Truyện tiên hiệp hay nhất 2021', time: dnt, time_sub: dnts },
-    { id: 'j3haLNFUTPU', title: '[TẬP 03] VƯƠNG ĐẠO CHÍ TÔN: Trương Thượng Tiên | MC Tiến Phong | Truyện tiên hiệp hay nhất 2021', time: dnt, time_sub: dnts },
-    { id: '6BjLH8flfY0', title: '[TẬP 04] VƯƠNG ĐẠO CHÍ TÔN: ĐẠI HÔN | MC Tiến Phong | Truyện tiên hiệp hay nhất 2021', time: dnt, time_sub: dnts },
-]
-
 let comments = [
     "Cảm ơn b", "Hay lắm", "truyện hay", "thanks ad", "nghe ok", "Cảm ơn b nhé", "Giọng hay lắm ad", "đã xem", "like", "yêu rồi nha", "tạm dc",
     "đã thích", "thích phết", "like", "cảm ơ nhé", "thích phết", "THANKS A! A ĐỌC HAY LÉM", "Tập mới đâu rồi bạn", "Hay", "Ra tiếp anh ơi", "Ủng hộ Tùng",
