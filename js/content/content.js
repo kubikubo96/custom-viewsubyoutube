@@ -1509,7 +1509,7 @@ jQuery(document).ready(function ($) {
     //Auto Comment
     function autoComment(sComment) {
         var commented = false;
-        if (random_yes_no(10, 0) == 'yes') {
+        if (random_yes_no() == 'yes') {
             console.log("🌳🌳 In fun autoComment");
             console.log("******************");
 
