@@ -147,7 +147,7 @@ var initConfigDefine = {
     'views': 1,
     'pause': 'yes',
     'autoremovecache': 'yes',
-    'timechangeemail': 120,
+    'timechangeemail': 120, //120 phút
     'search_bing': 'yes',
     'search_google': 'yes',
     'emails_error': [],
