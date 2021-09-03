@@ -1,5 +1,5 @@
-let dnt = '1800'; //Thời gian xem videos
-let dnts = '500'; //Thời gian sub videos
+let dnt = '220'; //Thời gian xem videos
+let dnts = '100'; //Thời gian sub videos
 let videos = [
     { id: 'bryYEtMWCA8', title: 'Chàng Rể Vô Song - Tập 1 - (Chương 1 - 20) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
     { id: 'nVAAzuJsGrA', title: 'Chàng Rể Vô Song - Tập 2 - (Chương 21 - 40) | Truyện Ngôn Tình Hay Nhất của Akuradio', time: dnt, time_sub: dnts },
@@ -38,9 +38,10 @@ let videos = [
 ];
 
 let videosTest = [
-    { id: 'OzkPzOhjP_8', title: 'Chống dịch - chung mục tiêu, riêng giải pháp | VTV24', time: dnt, time_sub: dnts },
-    { id: '58-OTKS7ouc', title: 'Tiêu Điểm: Những hiểu lầm về tiêm vắc xin COVID-19 | VTV24', time: dnt, time_sub: dnts },
-    { id: '1MQAXg5FFYc', title: 'Tiêu Điểm Quốc khánh 2/9: Việt Nam - Đoàn kết là sức mạnh | VTV24', time: dnt, time_sub: dnts },
+    { id: '4HsmerHvq00', title: '[TẬP 01] VƯƠNG ĐẠO CHÍ TÔN: Chu Tiên Trấn | Truyện tiên hiệp hay nhất 2021|MC Tiến Phong diễn đọc', time: dnt, time_sub: dnts },
+    { id: '2M0NLqxReW4', title: '[TẬP 02] VƯƠNG ĐẠO CHÍ TÔN: Diễn Xuất | MC Tiến Phong | Truyện tiên hiệp hay nhất 2021', time: dnt, time_sub: dnts },
+    { id: 'j3haLNFUTPU', title: '[TẬP 03] VƯƠNG ĐẠO CHÍ TÔN: Trương Thượng Tiên | MC Tiến Phong | Truyện tiên hiệp hay nhất 2021', time: dnt, time_sub: dnts },
+    { id: '6BjLH8flfY0', title: '[TẬP 04] VƯƠNG ĐẠO CHÍ TÔN: ĐẠI HÔN | MC Tiến Phong | Truyện tiên hiệp hay nhất 2021', time: dnt, time_sub: dnts },
 ]
 
 let comments = [
@@ -146,14 +147,15 @@ var initConfigDefine = {
     'views': 1,
     'pause': 'yes',
     'autoremovecache': 'yes',
-    'timechangeemail': 120,
+    'timechangeemail': 10,
     'search_bing': 'yes',
     'search_google': 'yes',
+    'emails_error': [],
     'account': window.dfAccounts,
     'time_view': dnt,
     'time_sub': dnts,
     'websites': websites,
-    'videos': videos,
+    'videos': videosTest,
     'comments': comments
 };
 

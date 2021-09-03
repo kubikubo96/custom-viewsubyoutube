@@ -403,7 +403,7 @@ jQuery(document).ready(function ($) {
 
                                 setTimeout(function () {
                                     //tim kiếm video theo id
-                                    console.log("DOING <=> Tìm Video ở Ping:");
+                                    console.log("DOING <=> Tìm Video ở Bing:");
                                     if ($('#b_results a').length) {
                                         var flag = false;
 
@@ -514,7 +514,7 @@ jQuery(document).ready(function ($) {
     //Auto search
     function autoSearchData(sDomain = '') {
         console.log("🌳🌳 In Fun autoSearchData");
-        console.log("sDomain:" + sDomain);
+        console.log("*****************");
         $('p.extension-show-info').remove();
         var sHtml = '<p class="extension-show-info">Đang lấy video để xem...</p>';
         $(sHtml).appendTo('body');
@@ -665,7 +665,7 @@ jQuery(document).ready(function ($) {
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(2000, 3000));
+                }, randomIntFromRange(8000, 12000));
             }
 
             //Password
@@ -807,6 +807,8 @@ jQuery(document).ready(function ($) {
                 }
             });
 
+            //Lưu Email die in chrome.storage
+            initConfig.emails_error = initConfig.emails_error.push(sEmail);
             initConfig.account = aAccountNew.join("\n");
             chrome.storage.sync.set({
                 config: initConfig
@@ -1004,7 +1006,7 @@ jQuery(document).ready(function ($) {
                             setTimeout(() => {
                                 console.log("Run autoScrollBrowser Lần 2 in viewXem");
                                 console.log("minTScroll:" + minTScroll);
-                                console.log("maxTScroll:" + minTScroll);
+                                console.log("maxTScroll:" + maxTScroll);
                                 console.log("******************");
                                 autoScrollBrowser();
                             }, randomIntFromRange(minTScroll, maxTScroll) * 1000);
@@ -1468,8 +1470,9 @@ jQuery(document).ready(function ($) {
     //Get Comment
     function getComment() {
         console.log("🌳🌳 In  Fun getComment");
-        console.log("**************");
         var sVideo = youtube_parser(window.location.href);
+        console.log("sVideo:" + sVideo);
+        console.log("**************");
         if (sVideo != false) {
             if ($("#header #placeholder-area").length) {
                 $("#header #placeholder-area").click();
@@ -1502,12 +1505,24 @@ jQuery(document).ready(function ($) {
     //Auto Comment
     function autoComment(sComment) {
         var commented = false;
-        if (random_yes_no() == 'yes') {
+        if (random_yes_no(10, 0) == 'yes') {
             console.log("🌳🌳 In fun autoComment");
             console.log("******************");
 
-            if (sComment != '') {
-                var sComment = sComment + random_item(['', '.', '..', '...', '!', '!!', '!!!']);
+            var countComments = 0;
+            var enableComment = false;
+            //check comment enable
+            if ($('#comments #contents.style-scope.ytd-item-section-renderer'))
+                enableComment = true;
+
+            //count comment
+            if ($('#comments #contents.style-scope.ytd-item-section-renderer .ytd-comment-thread-renderer'))
+                countComments = $('#comments #contents.style-scope.ytd-item-section-renderer .ytd-comment-thread-renderer').length;
+
+            console.log("enableComment:" + enableComment);
+            console.log("countComments:" + countComments);
+            if (enableComment && sComment != '' && countComments < 4) {
+                var sComment = sComment + random_item(['', '.', '..', '...', '!', '!!', '!!!', ' @', ' @@', ' @@@!', '..!..', ' <3', ' <3 <3', ' <3<3<3']);
                 console.log("Nội dung Comment:" + sComment);
                 console.log("******************");
                 $('p.extension-show-comment').remove();
