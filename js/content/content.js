@@ -1514,20 +1514,32 @@ jQuery(document).ready(function ($) {
                 var sHtml = '<p class="extension-show-comment"><strong>Nội dung bình luận:</strong> ' + sComment + '</p>';
                 $(sHtml).appendTo('body');
 
-                document.querySelector('#simplebox-placeholder').click();
-                $("#comment-dialog #commentbox #contenteditable-root").html(sComment);
+                if (document.querySelector('#simplebox-placeholder'))
+                    document.querySelector('#simplebox-placeholder').click();
 
-                $("#comment-dialog #commentbox .ytd-commentbox.style-primary").removeAttr('disabled');
-                $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").attr('tabindex', 0);
-                $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").attr('aria-disabled', false);
-                $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").removeAttr('style');
+                if ($("#comment-dialog #commentbox #contenteditable-root"))
+                    $("#comment-dialog #commentbox #contenteditable-root").html(sComment);
+
+                if ($("#comment-dialog #commentbox .ytd-commentbox.style-primary"))
+                    $("#comment-dialog #commentbox .ytd-commentbox.style-primary").removeAttr('disabled');
+
+                if ($("#comment-dialog #commentbox .ytd-commentbox.style-primary #button"))
+                    $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").attr('tabindex', 0);
+
+                if ($("#comment-dialog #commentbox .ytd-commentbox.style-primary #button"))
+                    $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").attr('aria-disabled', false);
+
+                if ($("#comment-dialog #commentbox .ytd-commentbox.style-primary #button"))
+                    $("#comment-dialog #commentbox .ytd-commentbox.style-primary #button").removeAttr('style');
 
                 setTimeout(function () {
                     console.log("DOING <=> Comment videos");
                     console.log("******************");
-                    $("#comment-dialog #commentbox #submit-button").click();
+                    if ($("#comment-dialog #commentbox #submit-button"))
+                        $("#comment-dialog #commentbox #submit-button").click();
                     setTimeout(() => {
-                        $('p.extension-show-comment').remove();
+                        if ($('p.extension-show-comment'))
+                            $('p.extension-show-comment').remove();
                         commented = true;
                     }, randomIntFromRange(800, 2000));
                 }, randomIntFromRange(800, 2000));
@@ -1536,7 +1548,8 @@ jQuery(document).ready(function ($) {
         //Nếu chưa comment và chưa tắt show-comment
         setTimeout(() => {
             if (commented == false) {
-                $('p.extension-show-comment').remove();
+                if ($('p.extension-show-comment'))
+                    $('p.extension-show-comment').remove();
             }
         }, 6000);
     }
