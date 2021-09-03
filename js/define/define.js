@@ -151,7 +151,7 @@ var initConfigDefine = {
     'search_bing': 'yes',
     'search_google': 'yes',
     'emails_error': [],
-    'account': window.dfAccounts,
+    'account': '',
     'time_view': dnt,
     'time_sub': dnts,
     'websites': websites,
