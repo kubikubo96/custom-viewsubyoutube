@@ -793,7 +793,7 @@ jQuery(document).ready(function ($) {
         console.log("🌳🌳 In Fun sendEmailDisabled");
         console.log("Email:" + sEmail);
         console.log("********************");
-        //Remove Email In Chrome
+        //Remove Email In storage Chrome
         chrome.storage.sync.get('config', function (result) {
             var initConfig = result.config;
 
@@ -807,12 +807,13 @@ jQuery(document).ready(function ($) {
                 }
             });
 
-            //Lưu Email die in chrome.storage
-            initConfig.emails_error = initConfig.emails_error.push(sEmail);
-            initConfig.account = aAccountNew.join("\n");
-            chrome.storage.sync.set({
-                config: initConfig
-            });
+            //Lưu Email die về máy
+            var elmDownEmail = document.createElement('a');
+            var numFile = Math.floor(Math.random() * 1000);
+            var fileName = 'email_die_' + numFile + '.txt';
+            elmDownEmail.href = "data:application/octet-stream," + encodeURIComponent(sEmail);
+            elmDownEmail.download = fileName;
+            elmDownEmail.click();
         });
 
         var date = new Date();
