@@ -87,6 +87,9 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                             };
                             $.ajax(configCall)
                                 .done(function (comments) {
+                                    console.log("Comments Call API:");
+                                    console.log(comments);
+                                    console.log("******************");
                                     if (comments.length > 0) {
                                         chrome.tabs.sendMessage(tabCurrent, {
                                             task: sTask,
@@ -151,7 +154,10 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                             //Get API WebsNews
                             $.ajax(configCallWebsNews)
                                 .done(function (websNews) {
+                                    console.log("Webs New Call API:");
                                     websNewsCall = random_arr(websNews, 10);
+                                    console.log(websNewsCall);
+                                    console.log("*****************************");
                                 })
                             //Get API Video
                             $.ajax(configCallVideos)
@@ -178,7 +184,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                                                 }
                                             });
                                         }
-                                        initConfig.website = initConfigDefine.websites.concat(websNewsCall);
+                                        initConfig.websites = websNewsCall.concat(initConfigDefine.websites);
 
                                         setTimeout(function () {
                                             if (flag == false) {
@@ -207,7 +213,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                                     chrome.tabs.sendMessage(tabCurrent, {
                                         task: sTask,
                                         value: 'Đúng là API Free, Lỗi Hoài à',
-                                        status: 'success',
+                                        status: 'error',
                                     });
                                 })
                         });
