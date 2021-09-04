@@ -988,7 +988,7 @@ jQuery(document).ready(function ($) {
                                         setTimeout(function () {
                                             console.log("Run autoComment in Fun viewXem");
                                             console.log("*********************");
-                                            autoComment(random_item(initConfigDefine.comments));
+                                            autoComment(random_item(aDataVideo.comment));
                                         }, randomIntFromRange(60000, 130000));
                                     }
                                 }

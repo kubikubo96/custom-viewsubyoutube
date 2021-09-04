@@ -102,7 +102,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                                     chrome.tabs.sendMessage(tabCurrent, {
                                         task: sTask,
                                         status: 'success',
-                                        data: "Thanks Ad ạ"
+                                        data: random_item(['Hay', 'đc', 'good', 'ok', 'find', 'like', 'Good', 'Xem', 'Hiểu', '#akuradio'])
                                     });
                                 })
                         });
@@ -291,16 +291,17 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getInfoVideoDetailResult';
 
-                            var timeViewAny = {
+                            var dataVideoDetail = {
                                 time: randomIntFromRange(100, 200),
                                 time_sub: randomIntFromRange(120, 180),
+                                comment: random_item(['Hay', 'đc', 'good', 'ok', 'find', 'like', 'Good', 'Xem', 'Hiểu', '#akuradio'])
                             };
                             console.log("sendMessage => timeViewAny");
                             console.log("*********************");
                             chrome.tabs.sendMessage(tabCurrent, {
                                 task: sTask,
                                 status: 'success',
-                                data: timeViewAny
+                                data: dataVideoDetail
                             });
                         });
                     }
