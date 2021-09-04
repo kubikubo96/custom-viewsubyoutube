@@ -217,7 +217,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                                     chrome.tabs.sendMessage(tabCurrent, {
                                         task: sTask,
                                         value: 'Đúng là API Free, Lỗi Hoài à',
-                                        status: 'error',
+                                        status: 'success',
                                     });
                                 })
                         });
