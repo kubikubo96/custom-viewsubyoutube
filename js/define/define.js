@@ -139,6 +139,7 @@ let websites = [
 websNews = random_arr(websNews, 10);
 websites = websites.concat(websNews);
 comments = random_arr(comments, 15);
+videos = random_arr(videos, 35);
 
 var initConfigDefine = {
     'start': 'yes',
@@ -170,14 +171,14 @@ function random_item(items) {
 //lấy 1 mảng con n phần tử random từ mảng lớn
 function random_arr(arr, n) {
     var newArr = [];
-    if (n > arr.length)
-        n = arr.length
-    for (let i = 0; i < arr.length; i++) {
+    var i = 0;
+    if (n > arr.length) n = arr.length;
+    while (i < n) {
         let item = arr[Math.floor(Math.random() * arr.length)];
-        if (!newArr.includes(item))
+        if (!newArr.includes(item)) {
             newArr.push(item);
-        if (newArr.length == n)
-            return newArr;
+            i++;
+        }
     }
     return newArr;
 }
