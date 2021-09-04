@@ -255,11 +255,10 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                             var sTask = 'getInfoVideoResult';
 
                             //@todo custom  getInfoVideoResult
-                            var videoUse = random_item(result.config.videos);
                             chrome.tabs.sendMessage(tabCurrent, {
                                 task: sTask,
                                 status: 'success',
-                                data: videoUse.id
+                                data: "videoUse.id" // id của video bất kỳ phải
                             });
                         });
                     }
