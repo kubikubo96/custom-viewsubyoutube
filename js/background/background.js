@@ -155,59 +155,63 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                             $.ajax(configCallWebsNews)
                                 .done(function (websNews) {
                                     console.log("Webs New Call API:");
-                                    websNewsCall = random_arr(websNews, 10);
+                                    if (websNews.length > 0) {
+                                        websNewsCall = random_arr(websNews, 10);
+                                    }
                                     console.log(websNewsCall);
                                     console.log("*****************************");
                                 })
                             //Get API Video
                             $.ajax(configCallVideos)
                                 .done(function (videosApi) {
-                                    chrome.storage.sync.get('config', function () {
-                                        var initConfig = result.config;
-                                        var videoUse = random_item(videosApi);
-                                        var sVideoID = videoUse.id;
-                                        var sTitle = videoUse.title;
-                                        var duration = initConfigDefine.time_view;     //Thoi gian xem
-                                        var nTimeSub = initConfigDefine.time_sub;     //Thoi gian sub
+                                    if (videosApi.length > 0) {
+                                        chrome.storage.sync.get('config', function () {
+                                            var initConfig = result.config;
+                                            var videoUse = random_item(videosApi);
+                                            var sVideoID = videoUse.id;
+                                            var sTitle = videoUse.title;
+                                            var duration = initConfigDefine.time_view;     //Thoi gian xem
+                                            var nTimeSub = initConfigDefine.time_sub;     //Thoi gian sub
 
-                                        var flag = false;
-                                        if (initConfig.data != '') {
-                                            $.each(initConfig.data, function (key, val) {
-                                                if (val.chromeTab == tabCurrent) {
-                                                    flag = true;
+                                            var flag = false;
+                                            if (initConfig.data != '') {
+                                                $.each(initConfig.data, function (key, val) {
+                                                    if (val.chromeTab == tabCurrent) {
+                                                        flag = true;
 
-                                                    initConfig.data[key].videoID = sVideoID;
-                                                    initConfig.data[key].videoTitle = sTitle;
-                                                    initConfig.data[key].duration = duration;
-                                                    initConfig.data[key].timeSub = nTimeSub;
-                                                    initConfig.data[key].chromeTab = tabCurrent;
-                                                }
-                                            });
-                                        }
-                                        initConfig.websites = websNewsCall.concat(initConfigDefine.websites);
-
-                                        setTimeout(function () {
-                                            if (flag == false) {
-                                                initConfig.data.push({
-                                                    videoID: sVideoID,
-                                                    videoTitle: sTitle,
-                                                    duration: duration,
-                                                    timeSub: nTimeSub,
-                                                    chromeTab: tabCurrent,
+                                                        initConfig.data[key].videoID = sVideoID;
+                                                        initConfig.data[key].videoTitle = sTitle;
+                                                        initConfig.data[key].duration = duration;
+                                                        initConfig.data[key].timeSub = nTimeSub;
+                                                        initConfig.data[key].chromeTab = tabCurrent;
+                                                    }
                                                 });
                                             }
+                                            initConfig.websites = websNewsCall.concat(initConfigDefine.websites);
 
-                                            chrome.storage.sync.set({
-                                                config: initConfig
-                                            });
+                                            setTimeout(function () {
+                                                if (flag == false) {
+                                                    initConfig.data.push({
+                                                        videoID: sVideoID,
+                                                        videoTitle: sTitle,
+                                                        duration: duration,
+                                                        timeSub: nTimeSub,
+                                                        chromeTab: tabCurrent,
+                                                    });
+                                                }
 
-                                            chrome.tabs.sendMessage(tabCurrent, {
-                                                task: sTask,
-                                                value: sTitle,
-                                                status: 'success',
-                                            });
-                                        }, 1000);
-                                    });
+                                                chrome.storage.sync.set({
+                                                    config: initConfig
+                                                });
+
+                                                chrome.tabs.sendMessage(tabCurrent, {
+                                                    task: sTask,
+                                                    value: sTitle,
+                                                    status: 'success',
+                                                });
+                                            }, 1000);
+                                        });
+                                    }
                                 })
                                 .fail(function () {
                                     chrome.tabs.sendMessage(tabCurrent, {
