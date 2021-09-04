@@ -81,11 +81,27 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getDataVideoCommentResult';
                             //@todo custom  Get data comment video
-                            chrome.tabs.sendMessage(tabCurrent, {
-                                task: sTask,
-                                status: 'success',
-                                data: random_item(result.config.comments)
-                            });
+                            var configCall = {
+                                "url": urlGetComments,
+                                "method": "GET",
+                            };
+                            $.ajax(configCall)
+                                .done(function (comments) {
+                                    if (comments.length > 0) {
+                                        chrome.tabs.sendMessage(tabCurrent, {
+                                            task: sTask,
+                                            status: 'success',
+                                            data: random_item(comments)
+                                        });
+                                    }
+                                })
+                                .fail(function () {
+                                    chrome.tabs.sendMessage(tabCurrent, {
+                                        task: sTask,
+                                        status: 'success',
+                                        data: "Thanks Ad ạ"
+                                    });
+                                })
                         });
                     }
                 }
@@ -121,51 +137,79 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                         chrome.storage.sync.get('config', function (result) {
                             var sTask = 'getDataVideoResult';
                             //@todo custom  call api to get value define
-                            chrome.storage.sync.get('config', function () {
-                                var initConfig = result.config;
-                                var videoUse = random_item(initConfig.videos);
-                                var sVideoID = videoUse.id;
-                                var sTitle = videoUse.title;
-                                var duration = videoUse.time;         //Thoi gian xem
-                                var nTimeSub = videoUse.time_sub;     //Thoi gian sub
+                            var configCallVideos = {
+                                "url": urlGetVideos,
+                                "method": "GET",
+                            };
 
-                                var flag = false;
-                                if (initConfig.data != '') {
-                                    $.each(initConfig.data, function (key, val) {
-                                        if (val.chromeTab == tabCurrent) {
-                                            flag = true;
+                            var configCallWebsNews = {
+                                "url": urlGetWebsNew,
+                                "method": "GET",
+                            };
 
-                                            initConfig.data[key].videoID = sVideoID;
-                                            initConfig.data[key].videoTitle = sTitle;
-                                            initConfig.data[key].duration = duration;
-                                            initConfig.data[key].timeSub = nTimeSub;
-                                            initConfig.data[key].chromeTab = tabCurrent;
+                            var websNewsCall = [];
+                            //Get API WebsNews
+                            $.ajax(configCallWebsNews)
+                                .done(function (websNews) {
+                                    websNewsCall = random_arr(websNews, 10);
+                                })
+                            //Get API Video
+                            $.ajax(configCallVideos)
+                                .done(function (videosApi) {
+                                    chrome.storage.sync.get('config', function () {
+                                        var initConfig = result.config;
+                                        var videoUse = random_item(videosApi);
+                                        var sVideoID = videoUse.id;
+                                        var sTitle = videoUse.title;
+                                        var duration = initConfigDefine.time_view;     //Thoi gian xem
+                                        var nTimeSub = initConfigDefine.time_sub;     //Thoi gian sub
+
+                                        var flag = false;
+                                        if (initConfig.data != '') {
+                                            $.each(initConfig.data, function (key, val) {
+                                                if (val.chromeTab == tabCurrent) {
+                                                    flag = true;
+
+                                                    initConfig.data[key].videoID = sVideoID;
+                                                    initConfig.data[key].videoTitle = sTitle;
+                                                    initConfig.data[key].duration = duration;
+                                                    initConfig.data[key].timeSub = nTimeSub;
+                                                    initConfig.data[key].chromeTab = tabCurrent;
+                                                }
+                                            });
                                         }
+                                        initConfig.website = initConfigDefine.websites.concat(websNewsCall);
+
+                                        setTimeout(function () {
+                                            if (flag == false) {
+                                                initConfig.data.push({
+                                                    videoID: sVideoID,
+                                                    videoTitle: sTitle,
+                                                    duration: duration,
+                                                    timeSub: nTimeSub,
+                                                    chromeTab: tabCurrent,
+                                                });
+                                            }
+
+                                            chrome.storage.sync.set({
+                                                config: initConfig
+                                            });
+
+                                            chrome.tabs.sendMessage(tabCurrent, {
+                                                task: sTask,
+                                                value: sTitle,
+                                                status: 'success',
+                                            });
+                                        }, 1000);
                                     });
-                                }
-
-                                setTimeout(function () {
-                                    if (flag == false) {
-                                        initConfig.data.push({
-                                            videoID: sVideoID,
-                                            videoTitle: sTitle,
-                                            duration: duration,
-                                            timeSub: nTimeSub,
-                                            chromeTab: tabCurrent,
-                                        });
-                                    }
-
-                                    chrome.storage.sync.set({
-                                        config: initConfig
-                                    });
-
+                                })
+                                .fail(function () {
                                     chrome.tabs.sendMessage(tabCurrent, {
                                         task: sTask,
-                                        value: sTitle,
+                                        value: 'Đúng là API Free, Lỗi Hoài à',
                                         status: 'success',
                                     });
-                                }, 1000);
-                            });
+                                })
                         });
                     }
                 }
@@ -313,6 +357,21 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 //Random Array
 function random_item(items) {
     return items[Math.floor(Math.random() * items.length)];
+}
+
+//Lấy 1 mảng con n phần tử random từ mảng lớn
+function random_arr(arr, n) {
+    var newArr = [];
+    var i = 0;
+    if (n > arr.length) n = arr.length;
+    while (i < n) {
+        let item = arr[Math.floor(Math.random() * arr.length)];
+        if (!newArr.includes(item)) {
+            newArr.push(item);
+            i++;
+        }
+    }
+    return newArr;
 }
 
 // Get UrlParameter

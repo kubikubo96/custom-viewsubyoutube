@@ -546,6 +546,9 @@ jQuery(document).ready(function ($) {
         chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             if (message.task == "getDataVideoResult") {
                 if (message.status == 'success') {
+                    console.log("Data Call API:");
+                    console.log(message);
+                    console.log("**************");
                     var sTtitle = message.value;
 
                     $('p.extension-show-info').remove();
