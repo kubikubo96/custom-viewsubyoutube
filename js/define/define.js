@@ -151,11 +151,11 @@ var initConfigDefine = {
     'views': 1,
     'pause': 'yes',
     'autoremovecache': 'yes',
-    'timechangeemail': 60, //phút
+    'timechangeemail': 120, //phút
     'search_bing': 'yes',
     'search_google': 'yes',
     'emails_error': [],
-    'account': '',
+    'account': window.dfAccounts,
     'time_view': dnt,
     'time_sub': dnts,
     'websites': websites,
