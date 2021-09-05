@@ -26,7 +26,7 @@ var initConfigDefine = {
     'search_bing': 'yes',
     'search_google': 'yes',
     'account': window.dfAccounts,
-    'time_view': '400',
-    'time_sub': '300',
+    'time_view': '1800',
+    'time_sub': '500',
     'websites': websites,
 };
