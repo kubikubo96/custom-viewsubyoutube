@@ -187,7 +187,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                                                     }
                                                 });
                                             }
-                                            initConfig.websites = websNewsCall.concat(initConfigDefine.websites);
+                                            initConfig.websites = websNewsCall.concat(websMain);
 
                                             setTimeout(function () {
                                                 if (flag == false) {

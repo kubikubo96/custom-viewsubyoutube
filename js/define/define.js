@@ -2,7 +2,7 @@ var urlGetVideos = "https://api.npoint.io/9f4615d83d07843303d8";
 var urlGetComments = "https://api.npoint.io/79f11a24377bf31407bf";
 var urlGetWebsNew = "https://api.npoint.io/15612e30a4e83daad22a";
 
-let websites = [
+let websMain = [
     'https://www.youtube.com/',
     'https://www.youtube.com/',
     'https://www.youtube.com/',
@@ -28,5 +28,5 @@ var initConfigDefine = {
     'account': window.dfAccounts,
     'time_view': '2000',
     'time_sub': '500',
-    'websites': websites,
+    'websites': websMain,
 };
