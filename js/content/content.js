@@ -95,6 +95,19 @@ jQuery(document).ready(function ($) {
             if (sDomain == sYB) {
                 console.log("In Domain Youtube");
                 console.log("*****************");
+
+                //Nếu chưa login youtube thì chuyển về trang login
+                setTimeout(() => {
+                    console.log("Kiểm tra đăng nhập Youtube:");
+                    console.log(loginYT());
+                    console.log("*************************");
+
+                    if(!loginYT()) {
+                        window.location.href = sLinkLogin;
+                        return false;
+                    }
+                }, 10000);
+
                 flagRundom = false;
                 var checkHome = true;
 
@@ -511,6 +524,16 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    //Check Login Youtube
+    function loginYT() {
+        if($('#avatar-btn #img.yt-img-shadow') && $('#avatar-btn #img.yt-img-shadow').length > 0) {
+            console.log("Đã đăng nhập");
+            console.log("****************");
+            return true;
+        }
+        return false;
+    }
+
     //Auto search
     function autoSearchData(sDomain = '') {
         console.log("🌳🌳 In Fun autoSearchData");
@@ -668,7 +691,7 @@ jQuery(document).ready(function ($) {
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(3000, 4000));
+                }, randomIntFromRange(5000, 7000));
             }
 
             //Password
@@ -695,7 +718,7 @@ jQuery(document).ready(function ($) {
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(3000, 4000));
+                }, randomIntFromRange(5000, 7000));
             }
 
             //Chon nut: xac nhan email khoi phuc cua bạn
@@ -737,13 +760,13 @@ jQuery(document).ready(function ($) {
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(2000, 3000));
+                }, randomIntFromRange(5000, 7000));
             }
 
             if (flagCheck == false) {
                 window.location.href = sLinkLogin;
             }
-        }, randomIntFromRange(3000, 4500));
+        }, randomIntFromRange(5000, 7000));
     }
 
     //AuToLoginAccountChange
@@ -788,7 +811,7 @@ jQuery(document).ready(function ($) {
                     auToLoginAccount(sEmail, sPassWord, sEmailRecovery);
                 }
             }
-        }, 1000);
+        }, 6000);
     }
 
     //send Email Disabled
@@ -1235,6 +1258,7 @@ jQuery(document).ready(function ($) {
             }, timeCTN * 1000);
         }
     }
+
     //Action disable, enable sound
     function actionSound(timeASD = 130) {
         if (random_yes_no(2, 8) == 'yes') {
@@ -1281,7 +1305,7 @@ jQuery(document).ready(function ($) {
                     if (elmOpSettings.length > 0) {
                         console.log("DOING  <==> Chọn chất lượng video");
                         elmOpSettings.each(function () {
-                            if ($(this).find('.ytp-menuitem-label') && $(this).find('.ytp-menuitem-label').text().trim() == 'Chất lượng') {
+                            if ($(this).find('.ytp-menuitem-label') && ($(this).find('.ytp-menuitem-label').text().trim() == 'Chất lượng' || $(this).find('.ytp-menuitem-label').text().trim() == 'Quality')) {
                                 $(this)[0].click();
                                 return false;
                             }
