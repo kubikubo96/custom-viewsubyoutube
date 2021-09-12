@@ -136,6 +136,7 @@ jQuery(document).ready(function ($) {
                 /*================= START Find video =================*/
                 var checkSearch = getUrlParameter('search_query');
                 console.log("Start find video in YOUTUBE");
+                console.log("*********************");
                 if (checkSearch != undefined && checkSearch != '') {
                     checkHome = false;
 
@@ -520,37 +521,6 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    //Check Login Youtube
-    function loginYT() {
-        console.log("Kiểm tra Login:");
-        var elmNotLg = $("#masthead-container #end ytd-button-renderer a");
-        var elmLg = $('#avatar-btn img');
-        var logged = false;
-
-        if (elmNotLg) {
-            if (elmNotLg.length > 0) {
-                logged = false;
-            } else {
-                logged = true;
-            }
-        }
-
-        if (elmLg) {
-            if (elmLg.length > 0) {
-                logged = true;
-            } else {
-                elmLg = false;
-            }
-        }
-
-        console.log("login: " + logged);
-        console.log("*********************");
-        if (logged) {
-            return true;
-        }
-        return false;
-    }
-
     //Auto search
     function autoSearchData(sDomain = '') {
         console.log("🌳🌳 In Fun autoSearchData");
@@ -705,10 +675,12 @@ jQuery(document).ready(function ($) {
                     $(".qhFLie .U26fgb").click(); //BTN Tiep theo
                     $("button.VfPpkd-LgbsSe").click(); //BTN Tiep theo
 
+                    console.log("Run Fun auToLoginAccountChange In auToLoginAccount. TASK : UserName");
+                    console.log("****************************");
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(5000, 7000));
+                }, randomIntFromRange(2000, 3000));
             }
 
             //Password
@@ -732,10 +704,12 @@ jQuery(document).ready(function ($) {
                     $(".qhFLie .U26fgb").click(); //BTN Tiep theo
                     $(".qhFLie button.VfPpkd-LgbsSe").click(); //BTN Tiep theo
 
+                    console.log("Run Fun auToLoginAccountChange In auToLoginAccount. TASK : Password");
+                    console.log("****************************");
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(5000, 7000));
+                }, randomIntFromRange(2000, 3000));
             }
 
             //Chon nut: xac nhan email khoi phuc cua bạn
@@ -777,13 +751,13 @@ jQuery(document).ready(function ($) {
                     auToLoginAccountChange(sEmail, sPassWord, sEmailRecovery, checkLinkCurrent);
 
                     return false;
-                }, randomIntFromRange(5000, 7000));
+                }, randomIntFromRange(2000, 3000));
             }
 
             if (flagCheck == false) {
                 window.location.href = sLinkLogin;
             }
-        }, randomIntFromRange(5000, 7000));
+        }, randomIntFromRange(3000, 4500));
     }
 
     //AuToLoginAccountChange
@@ -828,7 +802,7 @@ jQuery(document).ready(function ($) {
                     auToLoginAccount(sEmail, sPassWord, sEmailRecovery);
                 }
             }
-        }, 6000);
+        }, 1000);
     }
 
     //send Email Disabled
@@ -875,6 +849,37 @@ jQuery(document).ready(function ($) {
                 window.location.href = sLinkLogin;
             }
         });
+    }
+
+    //Check Login Youtube
+    function loginYT() {
+        console.log("Kiểm tra Login:");
+        var elmNotLg = $("#masthead-container #end ytd-button-renderer a");
+        var elmLg = $('#avatar-btn img');
+        var logged = false;
+
+        if (elmNotLg) {
+            if (elmNotLg.length > 0) {
+                logged = false;
+            } else {
+                logged = true;
+            }
+        }
+
+        if (elmLg) {
+            if (elmLg.length > 0) {
+                logged = true;
+            } else {
+                elmLg = false;
+            }
+        }
+
+        console.log("Login: " + logged);
+        console.log("*********************");
+        if (logged) {
+            return true;
+        }
+        return false;
     }
 
     //View videos
@@ -978,6 +983,19 @@ jQuery(document).ready(function ($) {
                                     actionSound();
                                     console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
                                 }, 2500);
+
+                                //Kiểm tra xem đã xem hết video chưa
+                                setTimeout(() => {
+                                    console.log("CHECK PAUSE");
+                                    setInterval(() => {
+                                        var elmPause = $('.ytp-play-button.ytp-button');
+                                        if (elmPause && (elmPause.attr('title') == "Phát lại" || elmPause.attr('title') == "Replay")) {
+                                            console.log("Check Done: TRUE");
+                                            window.location.href = random_item(aDomain);
+                                        }
+                                    }, 1000 * 60 * 5); //5phut check lại 1 lần
+                                    console.log("************");
+                                }, 1000 * 60 * 5); //5phut thì bắt đầu check
                             }
                         }
 
@@ -1030,6 +1048,20 @@ jQuery(document).ready(function ($) {
                                             console.log("*********************");
                                             autoComment(random_item(aDataVideo.comment));
                                         }, randomIntFromRange(60000, 130000));
+
+
+                                        //Kiểm tra xem đã xem hết video chưa
+                                        setTimeout(() => {
+                                            console.log("CHECK PAUSE");
+                                            setInterval(() => {
+                                                var elmPause = $('.ytp-play-button.ytp-button');
+                                                if (elmPause && (elmPause.attr('title') == "Phát lại" || elmPause.attr('title') == "Replay")) {
+                                                    console.log("Check Done: TRUE");
+                                                    window.location.href = random_item(aDomain);
+                                                }
+                                            }, 1000 * 60 * 5); //5phut check lại 1 lần
+                                            console.log("************");
+                                        }, 1000 * 60 * 5); //5phut thì bắt đầu check
                                     }
                                 }
                             }
