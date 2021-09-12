@@ -993,7 +993,7 @@ jQuery(document).ready(function ($) {
                                             console.log("Check Done: TRUE");
                                             window.location.href = random_item(aDomain);
                                         }
-                                    }, 1000 * 60 * 5); //5phut check lại 1 lần
+                                    }, 1000 * 60); //1phut check lại 1 lần
                                     console.log("************");
                                 }, 1000 * 60 * 5); //5phut thì bắt đầu check
                             }
@@ -1059,7 +1059,7 @@ jQuery(document).ready(function ($) {
                                                     console.log("Check Done: TRUE");
                                                     window.location.href = random_item(aDomain);
                                                 }
-                                            }, 1000 * 60 * 5); //5phut check lại 1 lần
+                                            }, 1000 * 60); //1phut check lại 1 lần
                                             console.log("************");
                                         }, 1000 * 60 * 5); //5phut thì bắt đầu check
                                     }
