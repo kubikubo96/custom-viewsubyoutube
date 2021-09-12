@@ -98,15 +98,11 @@ jQuery(document).ready(function ($) {
 
                 //Nếu chưa login youtube thì chuyển về trang login
                 setTimeout(() => {
-                    console.log("Kiểm tra đăng nhập Youtube:");
-                    console.log(loginYT());
-                    console.log("*************************");
-
-                    if(!loginYT()) {
+                    if (!loginYT()) {
                         window.location.href = sLinkLogin;
                         return false;
                     }
-                }, 10000);
+                }, 1000 * 15); //15s
 
                 flagRundom = false;
                 var checkHome = true;
@@ -526,9 +522,30 @@ jQuery(document).ready(function ($) {
 
     //Check Login Youtube
     function loginYT() {
-        if($('#avatar-btn #img.yt-img-shadow') && $('#avatar-btn #img.yt-img-shadow').length > 0) {
-            console.log("Đã đăng nhập");
-            console.log("****************");
+        console.log("Kiểm tra Login:");
+        var elmNotLg = $("#masthead-container #end ytd-button-renderer a");
+        var elmLg = $('#avatar-btn img');
+        var logged = false;
+
+        if (elmNotLg) {
+            if (elmNotLg.length > 0) {
+                logged = false;
+            } else {
+                logged = true;
+            }
+        }
+
+        if (elmLg) {
+            if (elmLg.length > 0) {
+                logged = true;
+            } else {
+                elmLg = false;
+            }
+        }
+
+        console.log("login: " + logged);
+        console.log("*********************");
+        if (logged) {
             return true;
         }
         return false;
