@@ -21,12 +21,12 @@ var initConfigDefine = {
     'ipserver': '',
     'views': 1,
     'pause': 'yes',
-    'autoremovecache': 'yes',
+    'autoremovecache': 'no',
     'timechangeemail': 120, //phút
     'search_bing': 'yes',
     'search_google': 'yes',
     'account': window.dfAccounts,
-    'time_view': '1800',
+    'time_view': '2000',
     'time_sub': '500',
     'websites': websites,
 };
