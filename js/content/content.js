@@ -856,7 +856,7 @@ jQuery(document).ready(function ($) {
         console.log("Kiểm tra Login:");
         var elmNotLg = $("#masthead-container #end ytd-button-renderer a");
         var elmLg = $('#avatar-btn img');
-        var logged = false;
+        var logged = true;
 
         if (elmNotLg) {
             if (elmNotLg.length > 0) {
@@ -876,10 +876,8 @@ jQuery(document).ready(function ($) {
 
         console.log("Login: " + logged);
         console.log("*********************");
-        if (logged) {
-            return true;
-        }
-        return false;
+
+        return logged;
     }
 
     //View videos
@@ -981,21 +979,9 @@ jQuery(document).ready(function ($) {
                                     actionAutoNextVideo();
                                     actionClicktoNext();
                                     actionSound();
+                                    checkViewDone();
                                     console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
                                 }, 2500);
-
-                                //Kiểm tra xem đã xem hết video chưa
-                                setTimeout(() => {
-                                    console.log("CHECK PAUSE");
-                                    setInterval(() => {
-                                        var elmPause = $('.ytp-play-button.ytp-button');
-                                        if (elmPause && (elmPause.attr('title') == "Phát lại" || elmPause.attr('title') == "Replay")) {
-                                            console.log("Check Done: TRUE");
-                                            window.location.href = random_item(aDomain);
-                                        }
-                                    }, 1000 * 60); //1phut check lại 1 lần
-                                    console.log("************");
-                                }, 1000 * 60 * 5); //5phut thì bắt đầu check
                             }
                         }
 
@@ -1025,11 +1011,18 @@ jQuery(document).ready(function ($) {
                                         }
                                         console.log("Run autoSubscribe in Fun viewXem");
                                         autoSubscribe(nTimeSub);
+                                        console.log("*******************");
 
 
-                                        console.log("");
                                         console.log("Run autoLike in Fun viewXem");
                                         autoLike();
+                                        console.log("*******************");
+
+                                        setTimeout(function () {
+                                            console.log("Run autoComment in Fun viewXem");
+                                            console.log("*********************");
+                                            autoComment(random_item(aDataVideo.comment));
+                                        }, randomIntFromRange(60000, 130000));
 
                                         console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
                                         console.log("Run MANY ACTION in Fun viewXem");
@@ -1041,27 +1034,8 @@ jQuery(document).ready(function ($) {
                                         actionAutoNextVideo();
                                         actionClicktoNext();
                                         actionSound();
+                                        checkViewDone();
                                         console.log("🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍🏍");
-
-                                        setTimeout(function () {
-                                            console.log("Run autoComment in Fun viewXem");
-                                            console.log("*********************");
-                                            autoComment(random_item(aDataVideo.comment));
-                                        }, randomIntFromRange(60000, 130000));
-
-
-                                        //Kiểm tra xem đã xem hết video chưa
-                                        setTimeout(() => {
-                                            console.log("CHECK PAUSE");
-                                            setInterval(() => {
-                                                var elmPause = $('.ytp-play-button.ytp-button');
-                                                if (elmPause && (elmPause.attr('title') == "Phát lại" || elmPause.attr('title') == "Replay")) {
-                                                    console.log("Check Done: TRUE");
-                                                    window.location.href = random_item(aDomain);
-                                                }
-                                            }, 1000 * 60); //1phut check lại 1 lần
-                                            console.log("************");
-                                        }, 1000 * 60 * 5); //5phut thì bắt đầu check
                                     }
                                 }
                             }
@@ -1484,6 +1458,24 @@ jQuery(document).ready(function ($) {
                 }, (timeSnt + 30) * 1000); //tắt xem thông báo sau thời gian bật thông báo + 30s
             }
         }
+    }
+
+    function checkViewDone() {
+        //Kiểm tra xem đã xem hết video chưa
+        setTimeout(() => {
+            console.log("Check Done:");
+            setInterval(() => {
+                var elmPause = $('.ytp-play-button.ytp-button');
+                if (elmPause) {
+                    if (elmPause.attr('title') == "Phát lại" || elmPause.attr('title') == "Replay") {
+                        console.log("Check Done: TRUE");
+                        window.location.href = random_item(aDomain);
+                        return false;
+                    }
+                }
+            }, 1000 * 3); //3s check lại 1 lần
+            console.log("************");
+        }, 1000 * 60); //1p thì bắt đầu check
     }
 
     //Auto Subscrible
