@@ -672,8 +672,9 @@ jQuery(document).ready(function ($) {
                 }
 
                 setTimeout(function () {
-                    $(".qhFLie .U26fgb").click(); //BTN Tiep theo
-                    $("button.VfPpkd-LgbsSe").click(); //BTN Tiep theo
+                    // $(".qhFLie .U26fgb").click(); //BTN Tiep theo
+                    // $("button.VfPpkd-LgbsSe").click(); //BTN Tiep theo
+                    $("button.VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc").click(); //BTN Tiep theo
 
                     console.log("Run Fun auToLoginAccountChange In auToLoginAccount. TASK : UserName");
                     console.log("****************************");
