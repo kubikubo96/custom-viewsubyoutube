@@ -1474,7 +1474,7 @@ jQuery(document).ready(function ($) {
                         return false;
                     }
                 }
-            }, 1000 * 3); //3s check lại 1 lần
+            }, 1000 * 5); //5s check lại 1 lần
             console.log("************");
         }, 1000 * 60); //1p thì bắt đầu check
     }
