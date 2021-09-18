@@ -673,9 +673,7 @@ jQuery(document).ready(function ($) {
 
                 setTimeout(function () {
                     $(".qhFLie .U26fgb").click(); //BTN Tiep theo
-                    setTimeout(() => {
-                        $("button.VfPpkd-LgbsSe").click(); //BTN Tiep theo
-                    }, 1000);
+                    $("button.VfPpkd-LgbsSe").click(); //BTN Tiep theo
 
                     console.log("Run Fun auToLoginAccountChange In auToLoginAccount. TASK : UserName");
                     console.log("****************************");
