@@ -1094,9 +1094,13 @@ jQuery(document).ready(function ($) {
                                         window.location.href = random_item(aDomain);
                                     } else {
                                         initConfig.views = iView;
-                                        chrome.storage.sync.set({
-                                            config: initConfig
-                                        });
+                                        try {
+                                            chrome.storage.sync.set({
+                                                config: initConfig
+                                            });
+                                        } catch (error) {
+                                            console.error(error);
+                                        }
 
                                         console.log("Đang tìm video lần:" + nView);
                                         console.log("nDuration:" + nDuration);
