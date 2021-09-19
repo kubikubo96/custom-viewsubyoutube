@@ -99,10 +99,15 @@ jQuery(document).ready(function ($) {
                 //Nếu chưa login youtube thì chuyển về trang login
                 setTimeout(() => {
                     if (!loginYT()) {
-                        window.location.href = sLinkLogin;
-                        return false;
+                        $('p.extension-show-info').remove();
+                        var sHtml = '<p class="extension-show-info error">Chưa đăng nhập, đang chuyển trang đăng nhập </p>';
+                        $(sHtml).appendTo('body');
+                        setTimeout(() => {
+                            window.location.href = sLinkLogin;
+                            return false;
+                        }, 5000);
                     }
-                }, 1000 * 15); //15s
+                }, 1000 * 120); //2p
 
                 flagRundom = false;
                 var checkHome = true;
