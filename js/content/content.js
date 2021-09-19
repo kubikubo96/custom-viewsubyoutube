@@ -1142,7 +1142,7 @@ jQuery(document).ready(function ($) {
                                                 var flagCheck = false;
                                                 //@todo Xử lý tìm xem 1 video bất kỳ trong danh sách đề xuất 
                                                 var listIDVideos = [];
-                                                var maxIDsRandom = 40;
+                                                var maxIDsRandom = 10;
                                                 $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
                                                     var idVideo = youtube_parser($(this).attr('href'));
                                                     if (idVideo) {
