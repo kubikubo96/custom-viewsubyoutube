@@ -431,7 +431,18 @@ jQuery(document).ready(function ($) {
                                             }
                                             if (idVideoGet != false && idVideoGet == sVideoID) {
                                                 flag = true;
-                                                $(this)[0].click();
+                                                if ($(this)[0]) {
+                                                    $(this)[0].click();
+                                                }
+                                                if ($(this)) {
+                                                    $(this).click();
+                                                }
+
+                                                //Chuyển hướng về trang google nếu lỗi
+                                                setTimeout(() => {
+                                                    window.location.href = 'https://' + sGo + '/';
+                                                }, 1000 * 10);
+
                                                 return;
                                             }
                                         });
@@ -476,7 +487,7 @@ jQuery(document).ready(function ($) {
                             window.location.href = random_item(aDomain);
                         }
                     } else {
-                        console.log("Nếu checkDetail = Undefine ==> Vào đây:");
+                        console.log("Nếu checkDetail != Undefine ==> Vào đây:");
                         console.log("*********************");
                         setTimeout(function () {
                             var nDuration = '';
