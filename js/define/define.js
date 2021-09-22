@@ -21,7 +21,7 @@ var initConfigDefine = {
     'ipserver': '',
     'views': 1,
     'pause': 'yes',
-    'autoremovecache': 'no',
+    'autoremovecache': 'yes',
     'timechangeemail': 120, //phút
     'search_bing': 'yes',
     'search_google': 'yes',
