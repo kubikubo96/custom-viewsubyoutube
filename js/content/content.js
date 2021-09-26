@@ -98,157 +98,212 @@ jQuery(document).ready(function ($) {
 
                 //Nếu chưa login youtube thì chuyển về trang login
                 setTimeout(() => {
-                    if (!loginYT()) {
-                        $('p.extension-show-info').remove();
-                        var sHtml = '<p class="extension-show-info error">Chưa đăng nhập, đang chuyển trang đăng nhập </p>';
-                        $(sHtml).appendTo('body');
-                        setTimeout(() => {
-                            window.location.href = sLinkLogin;
-                            return false;
-                        }, 5000);
+                    var currentUrl = window.location.href;
+                    if (currentUrl == 'https://www.youtube.com/') {
+                        if (!loginYT()) {
+                            $('p.extension-show-info').remove();
+                            var sHtml = '<p class="extension-show-info error">Chưa đăng nhập, đang chuyển trang đăng nhập </p>';
+                            $(sHtml).appendTo('body');
+                            setTimeout(() => {
+                                window.location.href = sLinkLogin;
+                                return false;
+                            }, 5000);
+                        }
                     }
                 }, 1000 * 120); //2p
 
                 flagRundom = false;
                 var checkHome = true;
 
-                /*================= START Detail Video =================*/
-                var checkDetailVideo = youtube_parser(sUrlFull);
-                if (checkDetailVideo != false && checkDetailVideo != '') {
-                    checkHome = false;
-                    setTimeout(function () {
-                        if ($(".extension-show-info.viewvideo").length) {
-                        } else {
-                            var nDuration = '';
-                            $.each(config.data, function (key, val) {
-                                if (val.videoID == checkDetailVideo) {
-                                    nDuration = val.duration;
-                                }
-                            });
+                var randomSearch = random_item([1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
+                console.log("randomSearch:" + randomSearch);
+                console.log("*****************");
+                var currentUrl = window.location.href;
+                if (randomSearch == 1 && currentUrl == 'https://www.youtube.com/') {
+                    autoScrollBrowser();
 
-                            if (nDuration == '') {
-                                nDuration = 300;
-                            }
+                    $('p.extension-show-info').remove();
+                    var sHtml = '<p class="extension-show-info">Đang tìm video bất kỳ của Akuradio trong đề xuất </p>';
+                    $(sHtml).appendTo('body');
 
-                            console.log("Run Fun viewXem when Domain == Youtube");
+                    var configGetIds = {
+                        "url": urlGetIDs,
+                        "method": "GET",
+                    };
+                    var listIds = dIDs;
+                    $.ajax(configGetIds)
+                        .done(function (ids) {
+                            console.log("Get IDs API Success");
                             console.log("*********************");
-                            viewXem(parseInt(nDuration) + parseInt(randomIntFromRange(10, 50)));
-                        }
-                    }, randomIntFromRange(4000, 7000));
-                }
-                /*================= END Detail Video =================*/
+                            if (ids.length > 0) {
+                                listIds = ids;
+                            }
+                        })
 
-                /*================= START Find video =================*/
-                var checkSearch = getUrlParameter('search_query');
-                console.log("Start find video in YOUTUBE");
-                console.log("*********************");
-                if (checkSearch != undefined && checkSearch != '') {
-                    checkHome = false;
+                    setTimeout(() => {
 
-                    var sTitle = $('#search-form input#search').val();
-                    if ($("#contents a.ytd-thumbnail").length && sTitle != '') {
-                        var sVideoID = '';
-                        var nDuration = 300;
+                        checkFound = false;
+                        /*================= START Find video in suggest page home youtube =================*/
 
-                        if (config.data != '') {
-                            $.each(config.data, function (key, val) {
-                                if (val.videoTitle == sTitle) {
-                                    sVideoID = val.videoID;
-                                    nDuration = val.duration;
-                                }
-                            });
-                        }
+                        $("#contents a#thumbnail").each(function () {
+                            var idVideo = youtube_parser($(this).attr('href'));
+                            if (listIds.includes(idVideo)) {
+                                checkFound = true;
+                                $(this)[0].click();
 
-                        if (sVideoID != '') {
-                            console.log("sVideoID:" + sVideoID);
-                            $('p.extension-show-info').remove();
-                            var sHtml = '<p class="extension-show-info">Đang tìm Video có ID: ' + sVideoID + '</p>';
-                            $(sHtml).appendTo('body');
+                                viewXem(parseInt(randomIntFromRange(800, 1500)) + parseInt(randomIntFromRange(10, 50)));
 
-                            console.log("Run Fun autoScrollBrowser when Find Video");
-                            autoScrollBrowser();
+                                return false
+                            }
+                        });
 
-                            setTimeout(function () {
-                                var check = false;
-                                $("#contents a.ytd-thumbnail").each(function (i, obj) {
-                                    if ($(this).attr('href') != undefined) {
-                                        var idVideoGet = youtube_parser($(this).attr('href'));
-                                        if (idVideoGet != false && idVideoGet == sVideoID) {
-                                            console.log("idVideoGet == sVideoID");
-                                            check = true;
+                        setTimeout(() => {
+                            if (checkFound == false) {
+                                window.location.href = 'https://' + sGo;
+                            }
+                        }, 1000 * 30);
 
-                                            $(this).find('.no-transition').click();
+                    }, 1000 * 50);
 
-                                            viewXem(parseInt(nDuration) + parseInt(randomIntFromRange(10, 50)));
-
-                                            return false;
-                                        }
+                } else {
+                    /*================= START Detail Video =================*/
+                    var checkDetailVideo = youtube_parser(sUrlFull);
+                    if (checkDetailVideo != false && checkDetailVideo != '') {
+                        checkHome = false;
+                        setTimeout(function () {
+                            if ($(".extension-show-info.viewvideo").length) {
+                            } else {
+                                var nDuration = '';
+                                $.each(config.data, function (key, val) {
+                                    if (val.videoID == checkDetailVideo) {
+                                        nDuration = val.duration;
                                     }
                                 });
 
-                                setTimeout(function () {
-                                    if (check == false) {
-                                        window.location.href = 'https://' + sYB;
+                                if (nDuration == '') {
+                                    nDuration = 300;
+                                }
+
+                                console.log("Run Fun viewXem when Domain == Youtube");
+                                console.log("*********************");
+                                viewXem(parseInt(nDuration) + parseInt(randomIntFromRange(10, 50)));
+                            }
+                        }, randomIntFromRange(4000, 7000));
+                    }
+                    /*================= END Detail Video =================*/
+                    /*================= START Find video in form search =================*/
+                    var checkSearch = getUrlParameter('search_query');
+                    console.log("Start find video in YOUTUBE");
+                    console.log("*********************");
+                    if (checkSearch != undefined && checkSearch != '') {
+                        checkHome = false;
+
+                        var sTitle = $('#search-form input#search').val();
+                        if ($("#contents a.ytd-thumbnail").length && sTitle != '') {
+                            var sVideoID = '';
+                            var nDuration = 300;
+
+                            if (config.data != '') {
+                                $.each(config.data, function (key, val) {
+                                    if (val.videoTitle == sTitle) {
+                                        sVideoID = val.videoID;
+                                        nDuration = val.duration;
                                     }
-                                }, 1500);
-                            }, randomIntFromRange(12000, 18000));
+                                });
+                            }
+
+                            if (sVideoID != '') {
+                                console.log("sVideoID:" + sVideoID);
+                                $('p.extension-show-info').remove();
+                                var sHtml = '<p class="extension-show-info">Đang tìm Video có ID: ' + sVideoID + '</p>';
+                                $(sHtml).appendTo('body');
+
+                                console.log("Run Fun autoScrollBrowser when Find Video");
+                                autoScrollBrowser();
+
+                                setTimeout(function () {
+                                    var check = false;
+                                    $("#contents a.ytd-thumbnail").each(function (i, obj) {
+                                        if ($(this).attr('href') != undefined) {
+                                            var idVideoGet = youtube_parser($(this).attr('href'));
+                                            if (idVideoGet != false && idVideoGet == sVideoID) {
+                                                console.log("idVideoGet == sVideoID");
+                                                check = true;
+
+                                                $(this).find('.no-transition').click();
+
+                                                viewXem(parseInt(nDuration) + parseInt(randomIntFromRange(10, 50)));
+
+                                                return false;
+                                            }
+                                        }
+                                    });
+
+                                    setTimeout(function () {
+                                        if (check == false) {
+                                            window.location.href = 'https://' + sYB;
+                                        }
+                                    }, 1500);
+                                }, randomIntFromRange(12000, 18000));
+                            } else {
+                                window.location.href = 'https://' + sYB;
+                            }
                         } else {
                             window.location.href = 'https://' + sYB;
                         }
-                    } else {
-                        window.location.href = 'https://' + sYB;
+                        console.log("***********************");
                     }
-                    console.log("***********************");
-                }
-                /*================= END Find video =================*/
+                    /*================= END Find video =================*/
 
-                if (sUrlFull == 'https://' + sYB + '/' || checkHome == true) {
-                    if (config.account != '' && config.account != null && readCookie('vtyoutubeaccounts') == null) {
-                        flagLogin = true;
 
-                        if (config.autoremovecache == 'yes') {
-                            console.log("In clear cache trình duyệt");
-                            console.log("***********************");
-                            $('p.extension-show-info').remove();
-                            var sHtml = '<p class="extension-show-info">Đang xóa cache trình duyệt...</p>';
-                            $(sHtml).appendTo('body');
+                    if (sUrlFull == 'https://' + sYB + '/' || checkHome == true) {
+                        if (config.account != '' && config.account != null && readCookie('vtyoutubeaccounts') == null) {
+                            flagLogin = true;
 
-                            flagRundom = false;
+                            if (config.autoremovecache == 'yes') {
+                                console.log("In clear cache trình duyệt");
+                                console.log("***********************");
+                                $('p.extension-show-info').remove();
+                                var sHtml = '<p class="extension-show-info">Đang xóa cache trình duyệt...</p>';
+                                $(sHtml).appendTo('body');
 
-                            var date = new Date();
-                            var seconds = Math.round(date.getTime() / 1000);
-                            var sTime = seconds.toString();
-                            document.title = sTime;
+                                flagRundom = false;
 
-                            chrome.runtime.sendMessage({
-                                task: "clearAllCache",
-                                time: sTime,
-                            });
+                                var date = new Date();
+                                var seconds = Math.round(date.getTime() / 1000);
+                                var sTime = seconds.toString();
+                                document.title = sTime;
 
-                            setTimeout(function () {
+                                chrome.runtime.sendMessage({
+                                    task: "clearAllCache",
+                                    time: sTime,
+                                });
+
+                                setTimeout(function () {
+                                    createCookie('vtyoutubeaccounts', 'yes', config.timechangeemail);
+                                }, 10000);
+                            } else {
                                 createCookie('vtyoutubeaccounts', 'yes', config.timechangeemail);
-                            }, 10000);
-                        } else {
-                            createCookie('vtyoutubeaccounts', 'yes', config.timechangeemail);
-                            return false;
-                        }
-                    }
-
-                    if (flagLogin == false) {
-                        var nRandom = random_item([1, 1, 3, 1, 1, 3, 1, 1, 2]);
-
-                        if (nRandom == 1) {
-                            autoSearchData('youtube');
+                                return false;
+                            }
                         }
 
-                        if (nRandom == 2) {
-                            setTimeout(function () {
-                                randomHomeYT();
-                            }, randomIntFromRange(5000, 10000));
-                        }
+                        if (flagLogin == false) {
+                            var nRandom = random_item([1, 1, 3, 1, 1, 3, 1, 1, 2]);
 
-                        if (nRandom == 3) {
-                            autoRedrectRandomLink();
+                            if (nRandom == 1) {
+                                autoSearchData('youtube');
+                            }
+
+                            if (nRandom == 2) {
+                                setTimeout(function () {
+                                    randomHomeYT();
+                                }, randomIntFromRange(5000, 10000));
+                            }
+
+                            if (nRandom == 3) {
+                                autoRedrectRandomLink();
+                            }
                         }
                     }
                 }
@@ -612,7 +667,14 @@ jQuery(document).ready(function ($) {
                         if ($('#search-form input#search').length) {
                             $('#search-form input#search').bind('autotyped', function () {
                                 setTimeout(function () {
-                                    $("#search-icon-legacy").click();
+                                    try {
+                                        document.getElementById('search-form').submit();
+                                    } catch (error) {
+                                        console.log(error);
+                                    }
+                                    // if($("#search-icon-legacy")) {
+                                    //     $("#search-icon-legacy").click();
+                                    // }
                                 }, randomIntFromRange(800, 2200));
                             }).autotype(sTtitle, { delay: randomIntFromRange(80, 200) });
                         } else {
@@ -634,7 +696,7 @@ jQuery(document).ready(function ($) {
             if (flagCheck == true) {
                 window.location.href = random_item(aDomain);
             }
-        }, 65000);
+        }, 1000 * 100);
     }
 
     //Login account
@@ -1154,36 +1216,68 @@ jQuery(document).ready(function ($) {
                                                 });
                                                 window.location.href = random_item(aDomain);
                                             } else {
+                                                var configGetIds = {
+                                                    "url": urlGetIDs,
+                                                    "method": "GET",
+                                                };
+                                                var listIds = dIDs;
+                                                $.ajax(configGetIds)
+                                                    .done(function (ids) {
+                                                        console.log("Get IDs API Success");
+                                                        console.log("*********************");
+                                                        if (ids.length > 0) {
+                                                            listIds = ids;
+                                                        }
+                                                    })
                                                 var flagCheck = false;
                                                 //@todo Xử lý tìm xem 1 video bất kỳ trong danh sách đề xuất 
                                                 var listIDVideos = [];
                                                 var maxIDsRandom = 10;
-                                                $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
-                                                    var idVideo = youtube_parser($(this).attr('href'));
-                                                    if (idVideo) {
-                                                        listIDVideos.push(idVideo);
-                                                    }
-                                                    if (listIDVideos.length > maxIDsRandom) {
-                                                        return false;
-                                                    }
-                                                });
-                                                console.log("listIDVideos:");
-                                                console.log(listIDVideos);
-                                                var anyID = random_item(listIDVideos);
-                                                console.log("anyID:" + anyID);
-                                                console.log("******************");
-                                                $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
-                                                    var idVideo = youtube_parser($(this).attr('href'));
-                                                    if (idVideo && idVideo == anyID) {
-                                                        flagCheck = true;
+                                                setTimeout(() => {
+                                                    $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
+                                                        var idVideo = youtube_parser($(this).attr('href'));
+                                                        if (idVideo) {
+                                                            listIDVideos.push(idVideo);
+                                                        }
+                                                        if (listIDVideos.length > maxIDsRandom) {
+                                                            return false;
+                                                        }
+                                                    });
+                                                    console.log("listIDVideos:");
+                                                    console.log(listIDVideos);
+                                                    var anyID = random_item(listIDVideos);
+                                                    console.log("anyID:" + anyID);
+                                                    console.log("******************");
+                                                    var sRandomView = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0];
+                                                    if (random_item(sRandomView) == 1) {
+                                                        $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
+                                                            var idVideo = youtube_parser($(this).attr('href'));
+                                                            if (listIds.includes(idVideo)) {
+                                                                flagCheck = true;
 
-                                                        $(this)[0].click();
+                                                                $(this)[0].click();
 
-                                                        viewXem();
+                                                                viewXem(parseInt(randomIntFromRange(800, 1500)) + parseInt(randomIntFromRange(10, 50)));
 
-                                                        return false
+                                                                return false
+                                                            }
+                                                        });
+                                                    } else {
+                                                        $("#related ytd-watch-next-secondary-results-renderer .ytd-watch-next-secondary-results-renderer #thumbnail").each(function () {
+                                                            var idVideo = youtube_parser($(this).attr('href'));
+                                                            if (idVideo && idVideo == anyID) {
+                                                                flagCheck = true;
+
+                                                                $(this)[0].click();
+
+                                                                viewXem();
+
+                                                                return false
+                                                            }
+                                                        });
                                                     }
-                                                });
+
+                                                }, 5000);
 
                                                 setTimeout(function () {
                                                     console.log("flagCheck:" + flagCheck);
@@ -1196,7 +1290,7 @@ jQuery(document).ready(function ($) {
 
                                                         window.location.href = random_item(aDomain);
                                                     }
-                                                }, 10000);
+                                                }, 15000);
                                             }
                                         }, 3700);
                                     }
